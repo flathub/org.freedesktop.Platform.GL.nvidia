@@ -1,0 +1,342 @@
+diff --git a/gio/Makefile.am b/gio/Makefile.am
+index 44ade08..757f924 100644
+--- a/gio/Makefile.am
++++ b/gio/Makefile.am
+@@ -400,6 +400,8 @@ libgio_2_0_la_SOURCES =		\
+ 	gmountoperation.c 	\
+ 	gnativevolumemonitor.c 	\
+ 	gnativevolumemonitor.h 	\
++	gnativesocketaddress.c	\
++	gnativesocketaddress.h	\
+ 	gnetworkaddress.c	\
+ 	gnetworking.c		\
+ 	gnetworkingprivate.h	\
+diff --git a/gio/giotypes.h b/gio/giotypes.h
+index 53f8cc9..372e67c 100644
+--- a/gio/giotypes.h
++++ b/gio/giotypes.h
+@@ -103,6 +103,7 @@ typedef struct _GIcon                         GIcon; /* Dummy typedef */
+ typedef struct _GInetAddress                  GInetAddress;
+ typedef struct _GInetAddressMask              GInetAddressMask;
+ typedef struct _GInetSocketAddress            GInetSocketAddress;
++typedef struct _GNativeSocketAddress          GNativeSocketAddress;
+ typedef struct _GInputStream                  GInputStream;
+ typedef struct _GInitable                     GInitable;
+ typedef struct _GIOModule                     GIOModule;
+diff --git a/gio/gnativesocketaddress.c b/gio/gnativesocketaddress.c
+new file mode 100644
+index 0000000..54db922
+--- /dev/null
++++ b/gio/gnativesocketaddress.c
+@@ -0,0 +1,152 @@
++/* GIO - GLib Input, Output and Streaming Library
++ *
++ * Copyright (C) 2008 Christian Kellner, Samuel Cormier-Iijima
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General
++ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
++ *
++ * Authors: Christian Kellner <gicmo@gnome.org>
++ *          Samuel Cormier-Iijima <sciyoshi@gmail.com>
++ */
++
++#include <config.h>
++#include <glib.h>
++#include <string.h>
++
++#include "gnativesocketaddress.h"
++#include "gnetworkingprivate.h"
++#include "gioerror.h"
++#include "glibintl.h"
++
++
++/**
++ * SECTION:gnativesocketaddress
++ * @short_description: Native GSocketAddress
++ * @include: gio/gio.h
++ *
++ * An socket address of some unknown native type.
++ */
++
++/**
++ * GNativeSocketAddress:
++ *
++ * An socket address, corresponding to a general struct
++ * sockadd address of a type not otherwise handled by glib.
++ */
++
++struct _GNativeSocketAddressPrivate
++{
++  struct sockaddr *sockaddr;
++  gsize sockaddr_len;
++};
++
++G_DEFINE_TYPE_WITH_PRIVATE (GNativeSocketAddress, g_native_socket_address, G_TYPE_SOCKET_ADDRESS)
++
++static void
++g_native_socket_address_dispose (GObject *object)
++{
++  GNativeSocketAddress *address = G_NATIVE_SOCKET_ADDRESS (object);
++
++  g_clear_pointer (&(address->priv->sockaddr), g_free);
++
++  G_OBJECT_CLASS (g_native_socket_address_parent_class)->dispose (object);
++}
++
++static GSocketFamily
++g_native_socket_address_get_family (GSocketAddress *address)
++{
++  GNativeSocketAddress *addr;
++
++  g_return_val_if_fail (G_IS_NATIVE_SOCKET_ADDRESS (address), 0);
++
++  addr = G_NATIVE_SOCKET_ADDRESS (address);
++
++  return addr->priv->sockaddr->sa_family;
++}
++
++static gssize
++g_native_socket_address_get_native_size (GSocketAddress *address)
++{
++  GNativeSocketAddress *addr;
++
++  g_return_val_if_fail (G_IS_NATIVE_SOCKET_ADDRESS (address), 0);
++
++  addr = G_NATIVE_SOCKET_ADDRESS (address);
++
++  return addr->priv->sockaddr_len;
++}
++
++static gboolean
++g_native_socket_address_to_native (GSocketAddress  *address,
++                                   gpointer         dest,
++                                   gsize            destlen,
++                                   GError         **error)
++{
++  GNativeSocketAddress *addr;
++
++  g_return_val_if_fail (G_IS_NATIVE_SOCKET_ADDRESS (address), FALSE);
++
++  addr = G_NATIVE_SOCKET_ADDRESS (address);
++
++  if (destlen < addr->priv->sockaddr_len)
++    {
++      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_NO_SPACE,
++                           _("Not enough space for socket address"));
++      return FALSE;
++    }
++
++  memcpy (dest, addr->priv->sockaddr, addr->priv->sockaddr_len);
++  return TRUE;
++}
++
++static void
++g_native_socket_address_class_init (GNativeSocketAddressClass *klass)
++{
++  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
++  GSocketAddressClass *gsocketaddress_class = G_SOCKET_ADDRESS_CLASS (klass);
++
++  gobject_class->dispose = g_native_socket_address_dispose;
++
++  gsocketaddress_class->get_family = g_native_socket_address_get_family;
++  gsocketaddress_class->to_native = g_native_socket_address_to_native;
++  gsocketaddress_class->get_native_size = g_native_socket_address_get_native_size;
++}
++
++static void
++g_native_socket_address_init (GNativeSocketAddress *address)
++{
++  address->priv = g_native_socket_address_get_instance_private (address);
++}
++
++/**
++ * g_native_socket_address_new:
++ * @address: a #GNativeAddress
++ * @port: a port number
++ *
++ * Creates a new #GNativeSocketAddress for @address and @port.
++ *
++ * Returns: a new #GNativeSocketAddress
++ *
++ * Since: 2.22
++ */
++GSocketAddress *
++g_native_socket_address_new (gpointer        native,
++                             gsize           len)
++{
++  GNativeSocketAddress *addr;
++
++  addr = g_object_new (G_TYPE_NATIVE_SOCKET_ADDRESS, NULL);
++  addr->priv->sockaddr = g_memdup (native, len);
++  addr->priv->sockaddr_len = len;
++  return G_SOCKET_ADDRESS (addr);
++}
+diff --git a/gio/gnativesocketaddress.h b/gio/gnativesocketaddress.h
+new file mode 100644
+index 0000000..a008fda
+--- /dev/null
++++ b/gio/gnativesocketaddress.h
+@@ -0,0 +1,65 @@
++/* GIO - GLib Input, Output and Streaming Library
++ *
++ * Copyright (C) 2008 Christian Kellner, Samuel Cormier-Iijima
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General
++ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
++ *
++ * Authors: Christian Kellner <gicmo@gnome.org>
++ *          Samuel Cormier-Iijima <sciyoshi@gmail.com>
++ */
++
++#ifndef __G_NATIVE_SOCKET_ADDRESS_H__
++#define __G_NATIVE_SOCKET_ADDRESS_H__
++
++#if !defined (__GIO_GIO_H_INSIDE__) && !defined (GIO_COMPILATION)
++#error "Only <gio/gio.h> can be included directly."
++#endif
++
++#include <gio/gsocketaddress.h>
++
++G_BEGIN_DECLS
++
++#define G_TYPE_NATIVE_SOCKET_ADDRESS         (g_native_socket_address_get_type ())
++#define G_NATIVE_SOCKET_ADDRESS(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), G_TYPE_NATIVE_SOCKET_ADDRESS, GNativeSocketAddress))
++#define G_NATIVE_SOCKET_ADDRESS_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), G_TYPE_NATIVE_SOCKET_ADDRESS, GNativeSocketAddressClass))
++#define G_IS_NATIVE_SOCKET_ADDRESS(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), G_TYPE_NATIVE_SOCKET_ADDRESS))
++#define G_IS_NATIVE_SOCKET_ADDRESS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), G_TYPE_NATIVE_SOCKET_ADDRESS))
++#define G_NATIVE_SOCKET_ADDRESS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), G_TYPE_NATIVE_SOCKET_ADDRESS, GNativeSocketAddressClass))
++
++typedef struct _GNativeSocketAddressClass   GNativeSocketAddressClass;
++typedef struct _GNativeSocketAddressPrivate GNativeSocketAddressPrivate;
++
++struct _GNativeSocketAddress
++{
++  GSocketAddress parent_instance;
++
++  /*< private >*/
++  GNativeSocketAddressPrivate *priv;
++};
++
++struct _GNativeSocketAddressClass
++{
++  GSocketAddressClass parent_class;
++};
++
++GLIB_AVAILABLE_IN_ALL
++GType           g_native_socket_address_get_type        (void) G_GNUC_CONST;
++
++GLIB_AVAILABLE_IN_ALL
++GSocketAddress *g_native_socket_address_new            (gpointer        native,
++                                                        gsize           len);
++
++G_END_DECLS
++
++#endif /* __G_NATIVE_SOCKET_ADDRESS_H__ */
+diff --git a/gio/gnetworkmonitornetlink.c b/gio/gnetworkmonitornetlink.c
+index 21a7ad5..b9ff011 100644
+--- a/gio/gnetworkmonitornetlink.c
++++ b/gio/gnetworkmonitornetlink.c
+@@ -293,14 +293,13 @@ read_netlink_messages (GSocket      *socket,
+   GNetworkMonitorNetlink *nl = user_data;
+   GInputVector iv;
+   gssize len;
+-  GSocketControlMessage **cmsgs = NULL;
+-  gint num_cmsgs = 0, i, flags;
++  gint flags;
+   GError *error = NULL;
+-  GCredentials *creds;
+-  uid_t sender;
++  GSocketAddress *addr;
+   struct nlmsghdr *msg;
+   struct rtmsg *rtmsg;
+   struct rtattr *attr;
++  struct sockaddr_nl source_sockaddr;
+   gsize attrlen;
+   guint8 *dest, *gateway, *oif;
+   gboolean retval = TRUE;
+@@ -322,8 +321,8 @@ read_netlink_messages (GSocket      *socket,
+ 
+   iv.buffer = g_malloc (len);
+   iv.size = len;
+-  len = g_socket_receive_message (nl->priv->sock, NULL, &iv, 1,
+-                                  &cmsgs, &num_cmsgs, NULL, NULL, &error);
++  len = g_socket_receive_message (nl->priv->sock, &addr, &iv, 1,
++                                  NULL, NULL, NULL, NULL, &error);
+   if (len < 0)
+     {
+       g_warning ("Error on netlink socket: %s", error->message);
+@@ -333,12 +332,17 @@ read_netlink_messages (GSocket      *socket,
+       return FALSE;
+     }
+ 
+-  if (num_cmsgs != 1 || !G_IS_UNIX_CREDENTIALS_MESSAGE (cmsgs[0]))
+-    goto done;
++  if (!g_socket_address_to_native (addr, &source_sockaddr, sizeof (source_sockaddr), &error))
++    {
++      g_warning ("Error on netlink socket: %s", error->message);
++      g_error_free (error);
++      if (nl->priv->dump_networks)
++        finish_dump (nl);
++      return FALSE;
++    }
+ 
+-  creds = g_unix_credentials_message_get_credentials (G_UNIX_CREDENTIALS_MESSAGE (cmsgs[0]));
+-  sender = g_credentials_get_unix_user (creds, NULL);
+-  if (sender != 0)
++  /* If the sender port id is 0 (not fakeable) then the message is from the kernel */
++  if (source_sockaddr.nl_pid != 0)
+     goto done;
+ 
+   msg = (struct nlmsghdr *) iv.buffer;
+@@ -420,10 +424,6 @@ read_netlink_messages (GSocket      *socket,
+     }
+ 
+  done:
+-  for (i = 0; i < num_cmsgs; i++)
+-    g_object_unref (cmsgs[i]);
+-  g_free (cmsgs);
+-
+   g_free (iv.buffer);
+ 
+   if (!retval && nl->priv->dump_networks)
+diff --git a/gio/gsocketaddress.c b/gio/gsocketaddress.c
+index 676d94a..d0caf33 100644
+--- a/gio/gsocketaddress.c
++++ b/gio/gsocketaddress.c
+@@ -26,6 +26,7 @@
+ #include "gsocketaddress.h"
+ #include "ginetaddress.h"
+ #include "ginetsocketaddress.h"
++#include "gnativesocketaddress.h"
+ #include "gnetworkingprivate.h"
+ #include "gproxyaddress.h"
+ #include "gproxyaddressenumerator.h"
+@@ -299,7 +300,7 @@ g_socket_address_new_from_native (gpointer native,
+     }
+ #endif
+ 
+-  return NULL;
++  return g_native_socket_address_new (native, len);
+ }
+ 
+ 

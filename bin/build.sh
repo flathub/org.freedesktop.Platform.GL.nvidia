@@ -10,7 +10,7 @@ XDG_APP_HELPER=`which xdg-app-helper 2> /dev/null`
 LINUX_USER_CHROOT=`which linux-user-chroot 2> /dev/null`
 
 declare -x LC_ALL=en_US.utf8
-declare -x HOME=/app/packages
+declare -x HOME=/app/buildhome
 unset CFLAGS
 unset CXXFLAGS
 unset LDFLAGS

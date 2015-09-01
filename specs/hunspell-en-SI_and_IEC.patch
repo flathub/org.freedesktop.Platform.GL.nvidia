@@ -1,0 +1,78 @@
+--- wordlist/scowl/r/special/abbreviations	2008-11-29 23:02:41.000000000 +0000
++++ wordlist/scowl/r/special/abbreviations	2010-07-30 11:18:33.000000000 +0100
+@@ -2,6 +2,11 @@
+ AI
+ ATM
+ BTW
++EB
++Eb
++Ei
++EiB
++Eib
+ EULA
+ EULAs
+ FAQ
+@@ -13,27 +18,63 @@
+ GB
+ GHz
+ GUI
++Gb
++Gi
++GiB
++Gib
+ HTML
+ HTTP
++IEC
+ IMHO
+ IMNSHO
+ IMO
+ ISO
++JEDEC
++KB
++Kb
++Ki
++KiB
++Kib
+ MB
+ MP3
+ MP3s
+ Mb
++Mi
++MiB
++Mib
+ OTOH
++PB
++Pb
++Pi
++PiB
++Pib
+ RFC
+ ROFL
+ RTFM
++TB
++Tb
++Ti
++TiB
++Tib
+ URL
+ USB
+ WWW
+ WYSIWYG
+ XML
++YB
++Yb
+ YMMV
++Yi
++YiB
++Yib
++ZB
++Zb
++Zi
++ZiB
++Zib
+ cf
++kB
++kb
+ pp
+ resp
+ vs

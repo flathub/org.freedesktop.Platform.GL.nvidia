@@ -1,0 +1,43 @@
+Error.cpp:28:44: error: declaration of ‘virtual const char* {anonymous}::_object_error_category::name() const’ has a different exception specifier
+ const char *_object_error_category::name() const {
+                                            ^
+Error.cpp:23:15: error: from previous declaration ‘virtual const char* {anonymous}::_object_error_category::name() const noexcept (true)’
+   const char* name() const LLVM_NOEXCEPT override;
+               ^
+
+diff -up llvm.src/lib/Object/Error.cpp.jx llvm.src/lib/Object/Error.cpp
+--- llvm.src/lib/Object/Error.cpp.jx	2014-06-13 11:36:17.000000000 -0400
++++ llvm.src/lib/Object/Error.cpp	2014-08-11 13:11:46.135014527 -0400
+@@ -25,7 +25,7 @@ public:
+ };
+ }
+
+-const char *_object_error_category::name() const {
++const char *_object_error_category::name() const LLVM_NOEXCEPT {
+   return "llvm.object";
+ }
+
+diff -up llvm.src/tools/llvm-readobj/Error.cpp.jx llvm.src/tools/llvm-readobj/Error.cpp
+--- llvm.src/tools/llvm-readobj/Error.cpp.jx	2014-06-13 11:36:17.000000000 -0400
++++ llvm.src/tools/llvm-readobj/Error.cpp	2014-08-11 13:49:16.624287424 -0400
+@@ -24,7 +24,7 @@ public:
+ };
+ } // namespace
+
+-const char *_readobj_error_category::name() const {
++const char *_readobj_error_category::name() const LLVM_NOEXCEPT {
+   return "llvm.readobj";
+ }
+
+diff -up llvm.src/tools/obj2yaml/Error.cpp.jx llvm.src/tools/obj2yaml/Error.cpp
+--- llvm.src/tools/obj2yaml/Error.cpp.jx	2014-06-13 11:36:17.000000000 -0400
++++ llvm.src/tools/obj2yaml/Error.cpp	2014-08-11 14:04:05.841996088 -0400
+@@ -20,7 +20,7 @@ public:
+ };
+ } // namespace
+
+-const char *_obj2yaml_error_category::name() const { return "obj2yaml"; }
++const char *_obj2yaml_error_category::name() const LLVM_NOEXCEPT { return "obj2yaml"; }
+
+ std::string _obj2yaml_error_category::message(int ev) const {
+   switch (static_cast<obj2yaml_error>(ev)) {

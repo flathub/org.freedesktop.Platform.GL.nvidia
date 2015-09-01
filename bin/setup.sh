@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir -p packages/noarch
-mkdir -p packages/x86_64
+mkdir -p packages/RPMS/noarch
+mkdir -p packages/RPMS/x86_64
 
 bin/setup_root.sh $1
 bin/build.sh smart channel -y --add mydb type=rpm-sys name="RPM Database"

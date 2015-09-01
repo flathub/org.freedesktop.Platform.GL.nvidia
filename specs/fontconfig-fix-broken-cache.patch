@@ -1,0 +1,158 @@
+From f44bfad235e63bb792c38e16ae1fbd281ec1453b Mon Sep 17 00:00:00 2001
+From: Akira TAGOH <akira@tagoh.org>
+Date: Thu, 5 Jun 2014 19:06:02 +0900
+Subject: [PATCH] Workaround another race condition issue
+
+See https://bugzilla.redhat.com/show_bug.cgi?id=921706
+---
+ src/fccache.c | 24 +++++++++++++++++++++++-
+ src/fcdir.c   | 30 ++++++++++++++++++++++++------
+ src/fcint.h   |  7 ++++++-
+ 3 files changed, 53 insertions(+), 8 deletions(-)
+
+diff --git a/src/fccache.c b/src/fccache.c
+index 5173e0b..085bd72 100644
+--- a/src/fccache.c
++++ b/src/fccache.c
+@@ -545,6 +545,26 @@ FcCacheTimeValid (FcCache *cache, struct stat *dir_stat)
+     return cache->checksum == (int) dir_stat->st_mtime;
+ }
+ 
++static FcBool
++FcCacheDirsValid (FcCache *cache)
++{
++    FcStrSet *dirs = FcStrSetCreate ();
++    FcBool ret = FcFalse;
++
++    if (!dirs)
++	goto bail;
++    if (!FcDirScanOnly (dirs, FcCacheDir (cache)))
++	goto bail1;
++    ret = cache->dirs_count == dirs->num;
++    if (FcDebug () & FC_DBG_CACHE)
++	printf ("%s: cache: %d, fs: %d\n", FcCacheDir (cache), cache->dirs_count, dirs->num);
++
++bail1:
++    FcStrSetDestroy (dirs);
++bail:
++    return ret;
++}
++
+ /*
+  * Map a cache file into memory
+  */
+@@ -559,7 +579,8 @@ FcDirCacheMapFd (int fd, struct stat *fd_stat, struct stat *dir_stat)
+     cache = FcCacheFindByStat (fd_stat);
+     if (cache)
+     {
+-	if (FcCacheTimeValid (cache, dir_stat))
++	if (FcCacheTimeValid (cache, dir_stat) &&
++	    FcCacheDirsValid (cache))
+ 	    return cache;
+ 	FcDirCacheUnload (cache);
+ 	cache = NULL;
+@@ -611,6 +632,7 @@ FcDirCacheMapFd (int fd, struct stat *fd_stat, struct stat *dir_stat)
+ 	cache->version < FC_CACHE_CONTENT_VERSION ||
+ 	cache->size != (intptr_t) fd_stat->st_size ||
+ 	!FcCacheTimeValid (cache, dir_stat) ||
++	!FcCacheDirsValid (cache) ||
+ 	!FcCacheInsert (cache, fd_stat))
+     {
+ 	if (allocated)
+diff --git a/src/fcdir.c b/src/fcdir.c
+index 3bcd0b8..49259c1 100644
+--- a/src/fcdir.c
++++ b/src/fcdir.c
+@@ -164,7 +164,8 @@ FcDirScanConfig (FcFontSet	*set,
+ 		 FcBlanks	*blanks,
+ 		 const FcChar8	*dir,
+ 		 FcBool		force, /* XXX unused */
+-		 FcConfig	*config)
++		 FcConfig	*config,
++		 FcBool		scanOnly)
+ {
+     DIR			*d;
+     struct dirent	*e;
+@@ -180,7 +181,7 @@ FcDirScanConfig (FcFontSet	*set,
+     if (!set && !dirs)
+ 	return FcTrue;
+ 
+-    if (!blanks)
++    if (!blanks && !scanOnly)
+ 	blanks = FcConfigGetBlanks (config);
+ 
+     /* freed below */
+@@ -233,7 +234,17 @@ FcDirScanConfig (FcFontSet	*set,
+      * Scan file files to build font patterns
+      */
+     for (i = 0; i < files->num; i++)
+-	FcFileScanConfig (set, dirs, blanks, files->strs[i], config);
++    {
++	if (scanOnly)
++	{
++	    if (FcFileIsDir (files->strs[i]))
++		FcStrSetAdd (dirs, files->strs[i]);
++	}
++	else
++	{
++	    FcFileScanConfig (set, dirs, blanks, files->strs[i], config);
++	}
++    }
+ 
+ bail2:
+     FcStrSetDestroy (files);
+@@ -257,7 +268,14 @@ FcDirScan (FcFontSet	    *set,
+     if (cache || !force)
+ 	return FcFalse;
+ 
+-    return FcDirScanConfig (set, dirs, blanks, dir, force, FcConfigGetCurrent ());
++    return FcDirScanConfig (set, dirs, blanks, dir, force, FcConfigGetCurrent (), FcFalse);
++}
++
++FcBool
++FcDirScanOnly (FcStrSet		*dirs,
++	       const FcChar8	*dir)
++{
++    return FcDirScanConfig (NULL, dirs, NULL, dir, FcTrue, NULL, FcTrue);
+ }
+ 
+ /*
+@@ -288,7 +306,7 @@ FcDirCacheScan (const FcChar8 *dir, FcConfig *config)
+     /*
+      * Scan the dir
+      */
+-    if (!FcDirScanConfig (set, dirs, NULL, dir, FcTrue, config))
++    if (!FcDirScanConfig (set, dirs, NULL, dir, FcTrue, config, FcFalse))
+ 	goto bail2;
+ 
+     /*
+@@ -330,7 +348,7 @@ FcDirCacheRescan (const FcChar8 *dir, FcConfig *config)
+     /*
+      * Scan the dir
+      */
+-    if (!FcDirScanConfig (NULL, dirs, NULL, dir, FcTrue, config))
++    if (!FcDirScanConfig (NULL, dirs, NULL, dir, FcTrue, config, FcFalse))
+ 	goto bail1;
+     /*
+      * Rebuild the cache object
+diff --git a/src/fcint.h b/src/fcint.h
+index 3d41b0c..a1b147f 100644
+--- a/src/fcint.h
++++ b/src/fcint.h
+@@ -849,7 +849,12 @@ FcDirScanConfig (FcFontSet	*set,
+ 		 FcBlanks	*blanks,
+ 		 const FcChar8	*dir,
+ 		 FcBool		force,
+-		 FcConfig	*config);
++		 FcConfig	*config,
++		 FcBool		scanOnly);
++
++FcPrivate FcBool
++FcDirScanOnly (FcStrSet		*dirs,
++	       const FcChar8	*dir);
+ 
+ /* fcfont.c */
+ FcPrivate int
+-- 
+1.9.0
+
