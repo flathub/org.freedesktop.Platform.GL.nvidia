@@ -8,7 +8,7 @@ for i in $USR/bin/*; do
     echo -n "/usr/bin/$j /bin/$j /sbin/$j "
 done
 
-echo $USR/lib/* | /usr/lib/rpm/find-provides | tr '\n' ' '
+for lib in echo $USR/lib/*; do echo $lib | /usr/lib/rpm/find-provides | tr '\n' ' '; done
 if [ -d $USR/lib/perl5 ]; then
     find $USR/lib/perl5/ -type f | /usr/lib/rpm/perl.prov | tr '\n' ' '
 fi

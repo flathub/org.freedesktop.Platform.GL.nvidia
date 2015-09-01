@@ -18,7 +18,7 @@ for spec in $SPECS; do
     for i in $SOURCES; do
         if [ -e  specs/`basename $i` ]; then
             echo "packages/SOURCES/`basename $i`: specs/`basename $i`";
-            echo -e "\tcp -f specs/`basename $i` packages/SOURCES/\n";
+            echo -e "\tcp -fa specs/`basename $i` packages/SOURCES/\n";
         else
             echo "packages/SOURCES/`basename $i`:";
             echo -e "\twget -P packages/SOURCES/ $i\n";
@@ -31,7 +31,7 @@ for spec in $SPECS; do
     SPEC_PATCHES=
     for i in $PATCHES; do
         echo "packages/SOURCES/`basename $i`: specs/`basename $i`";
-        echo -e "\tcp -f specs/`basename $i` packages/SOURCES/\n";
+        echo -e "\tcp -fa specs/`basename $i` packages/SOURCES/\n";
         SPEC_DEPENDENCIES="$SPEC_DEPENDENCIES packages/SOURCES/`basename $i`";
     done
 
