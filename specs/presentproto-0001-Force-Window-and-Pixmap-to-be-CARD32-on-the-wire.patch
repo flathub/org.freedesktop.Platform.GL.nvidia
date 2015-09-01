@@ -1,0 +1,41 @@
+From 8405ee4552565825d776e6a8963d33d9cd9cddf0 Mon Sep 17 00:00:00 2001
+From: Adam Jackson <ajax@redhat.com>
+Date: Wed, 11 Dec 2013 13:25:06 -0500
+Subject: [PATCH presentproto 1/4] Force Window and Pixmap to be CARD32 on the
+ wire
+
+If you don't do this then the client libs on 64-bit machines see them as
+XIDs, which are 64-bit wide (sigh), which ruins the wire encoding and
+nothing works.
+
+Reviewed-by: Jasper St. Pierre <jstpierre@mecheye.net>
+Signed-off-by: Adam Jackson <ajax@redhat.com>
+---
+ presentproto.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/presentproto.h b/presentproto.h
+index 8303a94..ee65fa4 100644
+--- a/presentproto.h
++++ b/presentproto.h
+@@ -25,6 +25,8 @@
+ 
+ #include <X11/extensions/presenttokens.h>
+ 
++#define Window CARD32
++#define Pixmap CARD32
+ #define Region CARD32
+ #define XSyncFence CARD32
+ #define EventID CARD32
+@@ -235,6 +237,8 @@ typedef struct {
+ 
+ #define sz_xPresentRedirectNotify 104
+ 
++#undef Window
++#undef Pixmap
+ #undef Region
+ #undef XSyncFence
+ #undef EventID
+-- 
+1.9.0
+
