@@ -1,0 +1,87 @@
+From 7f8f9a36ef901f31279c385caf960a22daeb33fe Mon Sep 17 00:00:00 2001
+From: "Owen W. Taylor" <otaylor@fishsoup.net>
+Date: Fri, 9 May 2014 18:21:05 -0400
+Subject: [PATCH] Fix XNextRequest() after direct usage of XCB
+
+When XCB owns the X socket, dpy->request is not updated, so
+NextRequest() and XNextRequest() return the wrong value. There's
+nothing we can do to fix NextRequest() while retaining ABI compat,
+but change XNextRequest() to grab the socket back from XCB,
+updating dpy->request.
+
+Signed-off-by: Owen W. Taylor <otaylor@fishsoup.net>
+Reviewed-by: Uli Schlachter <psychon@znc.in>
+Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+---
+ src/Macros.c  | 14 +++++++++++++-
+ src/Xxcbint.h |  2 ++
+ src/xcb_io.c  | 11 +++++++++++
+ 3 files changed, 26 insertions(+), 1 deletion(-)
+
+diff --git a/src/Macros.c b/src/Macros.c
+index cfc083a..394a764 100644
+--- a/src/Macros.c
++++ b/src/Macros.c
+@@ -30,6 +30,7 @@ in this Software without prior written authorization from The Open Group.
+ #include "Xlibint.h"
+ #define XUTIL_DEFINE_FUNCTIONS
+ #include "Xutil.h"
++#include "Xxcbint.h"
+ 
+ /*
+  * This file makes full definitions of routines for each macro.
+@@ -135,9 +136,20 @@ int XBitmapPad(Display *dpy) { return (BitmapPad(dpy)); }
+ 
+ int XImageByteOrder(Display *dpy) { return (ImageByteOrder(dpy)); }
+ 
++/* XNextRequest() differs from the rest of the functions here because it is
++ * no longer a macro wrapper - when libX11 is being used mixed together
++ * with direct use of xcb, the next request field of the Display structure will
++ * not be updated. We can't fix the NextRequest() macro in any easy way,
++ * but we can at least make XNextRequest() do the right thing.
++ */
+ unsigned long XNextRequest(Display *dpy)
+ {
+-    return (NextRequest(dpy));
++    unsigned long next_request;
++    LockDisplay(dpy);
++    next_request = _XNextRequest(dpy);
++    UnlockDisplay(dpy);
++
++    return next_request;
+ }
+ 
+ unsigned long XLastKnownRequestProcessed(Display *dpy)
+diff --git a/src/Xxcbint.h b/src/Xxcbint.h
+index a8c9a67..bf41c23 100644
+--- a/src/Xxcbint.h
++++ b/src/Xxcbint.h
+@@ -46,4 +46,6 @@ typedef struct _X11XCBPrivate {
+ int _XConnectXCB(Display *dpy, _Xconst char *display, int *screenp);
+ void _XFreeX11XCBStructure(Display *dpy);
+ 
++unsigned long _XNextRequest(Display *dpy);
++
+ #endif /* XXCBINT_H */
+diff --git a/src/xcb_io.c b/src/xcb_io.c
+index 727c6c7..5987329 100644
+--- a/src/xcb_io.c
++++ b/src/xcb_io.c
+@@ -774,3 +774,14 @@ void _XEatDataWords(Display *dpy, unsigned long n)
+ 		dpy->xcb->reply_consumed = dpy->xcb->reply_length;
+ 	_XFreeReplyData(dpy, False);
+ }
++
++unsigned long
++_XNextRequest(Display *dpy)
++{
++    /* This will update dpy->request. The assumption is that the next thing
++     * that the application will do is make a request so there's little
++     * overhead.
++     */
++    require_socket(dpy);
++    return NextRequest(dpy);
++}
+-- 
+2.0.0
+
