@@ -35,6 +35,8 @@ BuildRequires: SDL2_image
 BuildRequires: SDL2_net
 BuildRequires: SDL2_ttf
 BuildRequires: SDL2_mixer
+BuildRequires: hunspell
+BuildRequires: hunspell-en
 
 Requires: freedesktop-platform-base
 

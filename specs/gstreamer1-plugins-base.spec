@@ -16,7 +16,6 @@ BuildRequires: gstreamer1-dev
 BuildRequires: gobject-introspection-dev
 BuildRequires: libXv-dev
 BuildRequires: orc-dev
-BuildRequires: pango-dev
 
 %description
 GStreamer is a streaming media framework, based on graphs of filters which
@@ -95,7 +94,6 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 # Remove rpath.
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/libgstximagesink.so
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/libgstvideotestsrc.so
-chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/libgstpango.so
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/libgstvorbis.so
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/libgstogg.so
 chrpath --delete $RPM_BUILD_ROOT%{_libdir}/gstreamer-%{majorminor}/libgstaudiorate.so
@@ -174,7 +172,6 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/gst-play-1.0
 
 # base plugins with dependencies
 %{_libdir}/gstreamer-%{majorminor}/libgstogg.so
-%{_libdir}/gstreamer-%{majorminor}/libgstpango.so
 %{_libdir}/gstreamer-%{majorminor}/libgsttheora.so
 %{_libdir}/gstreamer-%{majorminor}/libgstvorbis.so
 %{_libdir}/gstreamer-%{majorminor}/libgstximagesink.so

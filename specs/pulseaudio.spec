@@ -11,7 +11,6 @@ Source0:        http://freedesktop.org/software/pulseaudio/releases/pulseaudio-%
 
 Requires: freedesktop-platform-base
 BuildRequires:  glib2-dev
-BuildRequires:  gtk2-dev
 BuildRequires:  xorg-x11-proto-dev
 BuildRequires:  libXtst-dev
 BuildRequires:  libXi-dev
