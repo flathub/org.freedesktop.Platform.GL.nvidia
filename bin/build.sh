@@ -29,8 +29,8 @@ unset PYTHONPATH
 unset XDG_CONFIG_DIRS
 unset XDG_DATA_DIRS
 declare -x PATH="/usr/bin:/app/packages/bin"
-if test -d packages/.ccache; then
-    declare -x PATH="/app/packages/bin/ccache:$PATH"
+if test -d buildhome/.ccache; then
+    declare -x PATH="/app/buildhome/bin/ccache:$PATH"
 fi
 
 echo "builduser:x:`id  -u`:`id -u`:Build user:/app/packages:/sbin/nologin" >> $ROOT/usr/etc/passwd
