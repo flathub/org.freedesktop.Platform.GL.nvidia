@@ -1,3 +1,5 @@
+NULL=
+
 SDK_BASE_IMAGE=$(IMAGEDIR)/freedesktop-contents-sdk-$(ARCH)-$(BASE_HASH).tar.gz
 PLATFORM_BASE_IMAGE=$(IMAGEDIR)/freedesktop-contents-platform-$(ARCH)-$(BASE_HASH).tar.gz
 NOARCH=packages/RPMS/noarch
@@ -73,5 +75,3 @@ untag:
 	./untag.sh repo $(ID).Sdk $(ARCH) $(VERSION) $(EXTRA_NAME)
 	./untag.sh repo $(ID).Debug $(ARCH) $(VERSION) $(EXTRA_NAME)
 	./untag.sh repo $(ID).DebugSrc $(ARCH) $(VERSION) $(EXTRA_NAME)
-
--include rpm-dependencies.P

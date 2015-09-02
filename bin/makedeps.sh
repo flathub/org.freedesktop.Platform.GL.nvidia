@@ -16,9 +16,9 @@ for spec in $SPECS; do
 
     SOURCES=`rpmspec -P $spec | grep "^Source.*:" | awk '{ print $2 }' /dev/stdin`
     for i in $SOURCES; do
-        if [ -e  specs/`basename $i` ]; then
-            echo "packages/SOURCES/`basename $i`: specs/`basename $i`";
-            echo -e "\tcp -fa specs/`basename $i` packages/SOURCES/\n";
+        if [ -e  `dirname $spec`/`basename $i` ]; then
+            echo "packages/SOURCES/`basename $i`: `dirname $spec`/`basename $i`";
+            echo -e "\tcp -fa `dirname $spec`/`basename $i` packages/SOURCES/\n";
         else
             echo "packages/SOURCES/`basename $i`:";
             echo -e "\twget -P packages/SOURCES/ $i\n";
@@ -30,8 +30,8 @@ for spec in $SPECS; do
     PATCHES=`rpmspec -P $spec | grep "^Patch.*:" | awk '{ print $2 }' /dev/stdin`
     SPEC_PATCHES=
     for i in $PATCHES; do
-        echo "packages/SOURCES/`basename $i`: specs/`basename $i`";
-        echo -e "\tcp -fa specs/`basename $i` packages/SOURCES/\n";
+        echo "packages/SOURCES/`basename $i`: `dirname $spec`/`basename $i`";
+        echo -e "\tcp -fa `dirname $spec`/`basename $i` packages/SOURCES/\n";
         SPEC_DEPENDENCIES="$SPEC_DEPENDENCIES packages/SOURCES/`basename $i`";
     done
 

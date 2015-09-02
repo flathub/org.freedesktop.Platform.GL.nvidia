@@ -23,8 +23,7 @@ $(SDK_BASE_IMAGE) $(PLATFORM_BASE_IMAGE) images:
 	 git checkout $(BASE_HASH) && \
 	 make)
 
-NULL=
-
 ALL_SPECS = $(wildcard specs/*.spec)
 
 include Makefile.inc
+-include rpm-dependencies.P
