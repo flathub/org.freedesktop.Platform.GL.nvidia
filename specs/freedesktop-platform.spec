@@ -1,5 +1,5 @@
 Name:           freedesktop-platform
-Version:        0.1
+Version:        1.2
 Release:        1%{?dist}
 Summary:        Freedesktop platform
 
