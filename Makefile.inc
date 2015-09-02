@@ -19,7 +19,7 @@ $(NOARCH)/freedesktop-platform-base-0.1-1.sdk.noarch.rpm:	packages/base_provides
 
 $(NOARCH)/freedesktop-sdk-base-0.1-1.sdk.noarch.rpm:	packages/base_sdk_provides
 
-packages/platform-packages: $(NOARCH)/$(NAME)-platform-$(VERSION)-1.sdk.noarch.rpm $(NOARCH)/$freedesktop-platform-base-0.1-1.sdk.noarch.rpm
+packages/platform-packages: $(NOARCH)/$(NAME)-platform-$(VERSION)-1.sdk.noarch.rpm $(NOARCH)/freedesktop-platform-base-0.1-1.sdk.noarch.rpm
 	bin/setup.sh $(SDK_BASE_IMAGE)
 	rm -f packages/platform-packages
 	bin/build.sh bin/list_packages.sh $(NAME)-platform > packages/platform-packages
@@ -54,5 +54,24 @@ $(NAME)-$(VERSION)-debug.tar.gz $(NAME)-$(VERSION)-debug-src.tar.gz: $(NOARCH)/$
 
 repo:
 	ostree  init --mode=archive-z2 --repo=repo
+
+commit-platform: repo $(NAME)-$(VERSION)-platform.tar.gz  $(NAME)-$(VERSION)-platform-rpmdb.tar.gz
+	bin/commit.sh repo $(NAME)-$(VERSION)-platform.tar.gz $(NAME)-$(VERSION)-platform-rpmdb.tar.gz metadata.platform $(ID).Platform$(EXTRA_NAME) $(ARCH) $(VERSION)
+
+commit-sdk: repo $(NAME)-$(VERSION)-sdk.tar.gz $(NAME)-$(VERSION)-sdk-rpmdb.tar.gz
+	bin/commit.sh repo $(NAME)-$(VERSION)-sdk.tar.gz $(NAME)-$(VERSION)-sdk-rpmdb.tar.gz metadata.sdk $(ID).Sdk$(EXTRA_NAME) $(ARCH) $(VERSION)
+
+commit-debug: repo $(NAME)-$(VERSION)-debug.tar.gz $(NAME)-$(VERSION)-debug-src.tar.gz
+	bin/simple-commit.sh repo $(NAME)-$(VERSION)-debug.tar.gz $(ID).Debug$(EXTRA_NAME) $(ARCH) $(VERSION)
+	bin/simple-commit.sh repo $(NAME)-$(VERSION)-debug-src.tar.gz $(ID).DebugSrc$(EXTRA_NAME) $(ARCH) $(VERSION)
+
+commit: commit-sdk commit-platform commit-debug
+	echo done
+
+untag:
+	./untag.sh repo $(ID).Platform $(ARCH) $(VERSION) $(EXTRA_NAME)
+	./untag.sh repo $(ID).Sdk $(ARCH) $(VERSION) $(EXTRA_NAME)
+	./untag.sh repo $(ID).Debug $(ARCH) $(VERSION) $(EXTRA_NAME)
+	./untag.sh repo $(ID).DebugSrc $(ARCH) $(VERSION) $(EXTRA_NAME)
 
 -include rpm-dependencies.P

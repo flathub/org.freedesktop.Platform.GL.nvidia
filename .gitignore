@@ -2,3 +2,9 @@ packages
 build
 freedesktop-sdk-base
 rpm-dependencies.P
+repo
+freedesktop-*-platform-rpmdb.tar.gz
+freedesktop-*-platform.tar.gz
+freedesktop-*-sdk-rpmdb.tar.gz
+freedesktop-*-sdk.tar.gz
+buildhome/.cache

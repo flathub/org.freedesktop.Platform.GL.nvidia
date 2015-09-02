@@ -1,0 +1,23 @@
+[Runtime]
+name=org.freedesktop.Sdk/x86_64/1.2
+runtime=org.freedesktop.Platform/x86_64/1.2
+sdk=org.freedesktop.Sdk/x86_64/1.2
+
+[Extension org.freedesktop.Sdk.GL]
+directory=lib/GL
+
+[Extension org.freedesktop.Platform.Timezones]
+directory=share/zoneinfo
+
+[Extension org.freedesktop.Sdk.Locale]
+directory=share/runtime/locale
+subdirectories=true
+
+[Extension org.freedesktop.Debug]
+directory=lib/debug
+
+[Extension org.freedesktop.DebugSrc]
+directory=src/debug
+
+[Environment]
+GI_TYPELIB_PATH=/app/lib/girepository-1.0

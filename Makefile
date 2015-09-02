@@ -1,4 +1,5 @@
 NAME=freedesktop
+ID=org.freedesktop
 VERSION=1.2
 ARCH=x86_64
 IMAGEDIR=freedesktop-sdk-base/images/$(ARCH)
@@ -27,4 +28,3 @@ NULL=
 ALL_SPECS = $(wildcard specs/*.spec)
 
 include Makefile.inc
-
