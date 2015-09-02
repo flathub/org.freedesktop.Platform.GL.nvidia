@@ -17,16 +17,13 @@ Source0:  http://xorg.freedesktop.org/archive/individual/proto/bigreqsproto-1.1.
 Source1:  http://xorg.freedesktop.org/archive/individual/proto/compositeproto-0.4.2.tar.bz2
 Source2:  http://xorg.freedesktop.org/archive/individual/proto/damageproto-1.2.1.tar.bz2
 Source3:  http://xorg.freedesktop.org/archive/individual/proto/dmxproto-2.3.1.tar.bz2
-Source31: http://xorg.freedesktop.org/archive/individual/proto/dri2proto-2.8.tar.bz2
-Source33: http://xorg.freedesktop.org/pub/individual/proto/dri3proto-1.0.tar.bz2
 Source4:  http://xorg.freedesktop.org/archive/individual/proto/evieext-1.1.1.tar.bz2
 Source5:  http://xorg.freedesktop.org/archive/individual/proto/fixesproto-5.0.tar.bz2
 Source7:  http://xorg.freedesktop.org/archive/individual/proto/fontsproto-2.1.3.tar.bz2
 Source8:  http://xorg.freedesktop.org/archive/individual/proto/glproto-1.4.17.tar.bz2
 Source9:  http://xorg.freedesktop.org/archive/individual/proto/inputproto-2.3.1.tar.bz2
-Source10: http://xorg.freedesktop.org/archive/individual/proto/kbproto-1.0.6.tar.bz2
-Source32: http://xorg.freedesktop.org/archive/individual/proto/presentproto-1.0.tar.bz2
-Source13: http://xorg.freedesktop.org/archive/individual/proto/randrproto-1.4.0.tar.bz2
+Source10: http://xorg.freedesktop.org/archive/individual/proto/kbproto-1.0.7.tar.bz2
+Source13: http://xorg.freedesktop.org/archive/individual/proto/randrproto-1.5.0.tar.bz2
 Source14: http://xorg.freedesktop.org/archive/individual/proto/recordproto-1.14.2.tar.bz2
 Source15: http://xorg.freedesktop.org/archive/individual/proto/renderproto-0.11.1.tar.bz2
 Source16: http://xorg.freedesktop.org/archive/individual/proto/resourceproto-1.2.0.tar.bz2
@@ -40,11 +37,13 @@ Source24: http://xorg.freedesktop.org/archive/individual/proto/xf86driproto-2.1.
 Source25: http://xorg.freedesktop.org/archive/individual/proto/xf86miscproto-0.9.3.tar.bz2
 Source27: http://xorg.freedesktop.org/archive/individual/proto/xf86vidmodeproto-2.3.1.tar.bz2
 Source28: http://xorg.freedesktop.org/archive/individual/proto/xineramaproto-1.2.1.tar.bz2
-Source29: http://xorg.freedesktop.org/archive/individual/proto/xproto-7.0.26.tar.bz2
+Source29: http://xorg.freedesktop.org/archive/individual/proto/xproto-7.0.28.tar.bz2
 Source30: http://xorg.freedesktop.org/archive/individual/proto/xproxymanagementprotocol-1.0.3.tar.bz2
+Source31: http://xorg.freedesktop.org/archive/individual/proto/dri2proto-2.8.tar.bz2
+Source32: http://xorg.freedesktop.org/archive/individual/proto/presentproto-1.0.tar.bz2
+Source33: http://xorg.freedesktop.org/pub/individual/proto/dri3proto-1.0.tar.bz2
 
 Patch1: presentproto-0001-Force-Window-and-Pixmap-to-be-CARD32-on-the-wire.patch
-Patch2: randrproto-0001-Add-a-GUID-property.patch
 
 BuildRequires: freedesktop-sdk-base
 BuildRequires: xorg-x11-util-macros
@@ -64,11 +63,6 @@ X.Org X11 Protocol headers
 pushd presentproto-*
 %patch1 -p1
 popd
-
-pushd randrproto-*
-%patch2 -p1
-popd
-
 
 %build
 

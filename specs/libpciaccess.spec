@@ -1,5 +1,5 @@
 Name:           libpciaccess
-Version:        0.13.2
+Version:        0.13.4
 Release:        1%{?dist}
 Summary:        PCI access library
 
@@ -9,8 +9,7 @@ URL:            http://gitweb.freedesktop.org/?p=xorg/lib/libpciaccess.git
 
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
 
-Patch1:		libpciaccess-sysfs.patch
-Patch2:		libpciaccess-rom-size.patch
+Patch1:		libpciaccess-rom-size.patch
 
 BuildRequires: freedesktop-sdk-base
 BuildRequires: xorg-x11-util-macros
@@ -29,7 +28,7 @@ Development package for libpciaccess.
 
 %prep
 %setup -q -n %{name}-%{?gitdate:%{gitdate}}%{!?gitdate:%{version}}
-%patch2 -p1 -b .rom-size
+%patch1 -p1 -b .rom-size
 
 %build
 autoreconf -v --install

@@ -3,7 +3,7 @@
 %global llvmdocdir() %{_docdir}/%1
 
 Name:           llvm
-Version:        3.6.0
+Version:        3.6.2
 Release:        1%{?dist}
 Summary:        The Low Level Virtual Machine
 

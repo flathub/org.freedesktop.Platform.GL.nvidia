@@ -1,5 +1,5 @@
 Name:		orc
-Version:	0.4.23
+Version:	0.4.24
 Release:	1%{?dist}
 Summary:	The Oil Run-time Compiler
 

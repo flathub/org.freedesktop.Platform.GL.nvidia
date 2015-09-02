@@ -1,10 +1,10 @@
 Summary: Direct Rendering Manager runtime library
 Name: libepoxy
-Version: 1.2
+Version: 1.3.1
 Release: 1%{?dist}
 License: MIT
 URL: http://github.com/anholt/libepoxy
-Source0: https://github.com/anholt/libepoxy/archive/v%{version}.tar.gz
+Source0: https://github.com/anholt/libepoxy/releases/download/v%{version}/libepoxy-%{version}.tar.bz2
 BuildRequires: freedesktop-sdk-base
 BuildRequires: mesa-libGL-dev
 BuildRequires: mesa-libEGL-dev

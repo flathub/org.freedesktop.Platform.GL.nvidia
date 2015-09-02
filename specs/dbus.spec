@@ -7,7 +7,7 @@
 
 Summary: D-BUS message bus
 Name: dbus
-Version: 1.8.16
+Version: 1.10.0
 Release: 1%{?dist}
 URL: http://www.freedesktop.org/software/dbus/
 #VCS: git:git://git.freedesktop.org/git/dbus/dbus
@@ -111,8 +111,6 @@ install -pm 644 -t %{buildroot}%{_pkgdocdir} \
 %dir %{_pkgdocdir}
 %dir %{_sysconfdir}/dbus-1
 %config %{_sysconfdir}/dbus-1/*.conf
-%dir %{_sysconfdir}/dbus-1/system.d
-%dir %{_sysconfdir}/dbus-1/session.d
 %ghost %dir %{_localstatedir}/run/dbus
 %dir %{_localstatedir}/lib/dbus/
 /bin/dbus-daemon
@@ -121,10 +119,14 @@ install -pm 644 -t %{buildroot}%{_pkgdocdir} \
 /bin/dbus-run-session
 /bin/dbus-monitor
 /bin/dbus-uuidgen
+/bin/dbus-test-tool
+/bin/dbus-update-activation-environment
 %dir %{_datadir}/dbus-1
 %{_datadir}/dbus-1/services
 %{_datadir}/dbus-1/system-services
 %{_datadir}/dbus-1/interfaces
+%{_datadir}/dbus-1/session.conf
+%{_datadir}/dbus-1/system.conf
 %dir /%{_lib}/dbus-1
 # See doc/system-activation.txt in source tarball for the rationale
 # behind these permissions

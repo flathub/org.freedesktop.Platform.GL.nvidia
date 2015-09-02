@@ -1,6 +1,6 @@
 Summary: X.Org X11 libxkbfile runtime library
 Name: libxkbfile
-Version: 1.0.8
+Version: 1.0.9
 Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries

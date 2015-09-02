@@ -4,7 +4,7 @@
 
 Summary: A free and portable font rendering engine
 Name: freetype
-Version: 2.5.5
+Version: 2.6
 Release: 1%{?dist}
 License: (FTL or GPLv2+) and BSD and MIT and Public Domain and zlib with acknowledgement
 Group: System Environment/Libraries

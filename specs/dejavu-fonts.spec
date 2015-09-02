@@ -4,7 +4,7 @@
 %global _fontconfig_confdir %{_sysconfdir}/fonts/conf.d
 
 Name:    %{fontname}-fonts
-Version: 2.34
+Version: 2.35
 Release: 1%{?alphatag}%{?dist}
 Summary: DejaVu fonts
 

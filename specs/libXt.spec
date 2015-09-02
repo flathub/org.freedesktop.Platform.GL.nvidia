@@ -2,7 +2,7 @@
 
 Summary: X.Org X11 libXt runtime library
 Name: libXt
-Version: 1.1.4
+Version: 1.1.5
 Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries

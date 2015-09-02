@@ -1,6 +1,6 @@
 Summary: Shared MIME information database
 Name: shared-mime-info
-Version: 1.3
+Version: 1.4
 Release: 1%{?dist}
 License: GPLv2+
 Group: System Environment/Base

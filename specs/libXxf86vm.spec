@@ -1,6 +1,6 @@
 Summary: X.Org X11 libXxf86vm runtime library
 Name: libXxf86vm
-Version: 1.1.3
+Version: 1.1.4
 Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries

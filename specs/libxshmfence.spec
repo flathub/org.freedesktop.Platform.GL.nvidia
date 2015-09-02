@@ -1,5 +1,5 @@
 Name:           libxshmfence
-Version:        1.1
+Version:        1.2
 Release:        1%{?dist}
 Summary:        X11 shared memory fences
 

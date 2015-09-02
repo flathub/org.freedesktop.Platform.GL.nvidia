@@ -1,5 +1,5 @@
 Name:           wayland
-Version:        1.7.0
+Version:        1.8.1
 Release:        1%{?dist}
 Summary:        Wayland Compositor Infrastructure
 
@@ -99,6 +99,7 @@ find $RPM_BUILD_ROOT -name \*.la | xargs rm -f
 %{_bindir}/wayland-scanner
 %{_includedir}/wayland-util.h
 %{_includedir}/wayland-egl.h
+%{_includedir}/wayland-egl-core.h
 %{_includedir}/wayland-version.h
 %{_datadir}/aclocal/wayland-scanner.m4
 %{_libdir}/pkgconfig/wayland-scanner.pc

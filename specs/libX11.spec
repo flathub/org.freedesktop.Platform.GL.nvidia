@@ -1,6 +1,6 @@
 Summary: Core X11 protocol client library
 Name: libX11
-Version: 1.6.2
+Version: 1.6.3
 Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries
@@ -8,8 +8,6 @@ URL: http://www.x.org
 
 Source0: http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
 
-Patch0: 0001-Fix-XNextRequest-after-direct-usage-of-XCB.patch
-Patch2: dont-forward-keycode-0.patch
 BuildRequires: freedesktop-sdk-base
 BuildRequires: xorg-x11-util-macros
 BuildRequires: xorg-x11-proto-dev
@@ -40,8 +38,6 @@ X.Org X11 libX11 development package
 
 %prep
 %setup -q -n libX11-%{version}
-%patch0 -p1 -b .xcb
-%patch2 -p1 -b .dont-forward-keycode-0
 
 %build
 # sodding libtool

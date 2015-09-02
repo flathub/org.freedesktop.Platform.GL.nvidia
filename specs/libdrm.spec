@@ -1,6 +1,6 @@
 Summary: Direct Rendering Manager runtime library
 Name: libdrm
-Version: 2.4.61
+Version: 2.4.64
 Release: 1%{?dist}
 License: MIT
 Group: System Environment/Libraries
@@ -57,6 +57,8 @@ done
 %endif
 %{_libdir}/libdrm_radeon.so.1
 %{_libdir}/libdrm_radeon.so.1.0.1
+%{_libdir}/libdrm_amdgpu.so.1
+%{_libdir}/libdrm_amdgpu.so.1.0.0
 %{_libdir}/libdrm_nouveau.so.2
 %{_libdir}/libdrm_nouveau.so.2.0.0
 %{_libdir}/libkms.so.1
@@ -86,6 +88,7 @@ done
 %{_includedir}/libdrm/radeon_surface.h
 %{_includedir}/libdrm/r600_pci_ids.h
 %{_includedir}/libdrm/nouveau.h
+%{_includedir}/libdrm/amdgpu.h
 %{_includedir}/libdrm/*_drm.h
 %{_includedir}/libkms
 %{_libdir}/libdrm.so
@@ -93,6 +96,7 @@ done
 %{_libdir}/libdrm_intel.so
 %endif
 %{_libdir}/libdrm_radeon.so
+%{_libdir}/libdrm_amdgpu.so
 %{_libdir}/libdrm_nouveau.so
 %{_libdir}/libkms.so
 %{_libdir}/pkgconfig/libdrm.pc
@@ -100,6 +104,7 @@ done
 %{_libdir}/pkgconfig/libdrm_intel.pc
 %endif
 %{_libdir}/pkgconfig/libdrm_radeon.pc
+%{_libdir}/pkgconfig/libdrm_amdgpu.pc
 %{_libdir}/pkgconfig/libdrm_nouveau.pc
 %{_libdir}/pkgconfig/libkms.pc
 
