@@ -17,6 +17,8 @@ Patch0:		%{name}-sleep-less.patch
 
 BuildRequires:  freedesktop-sdk-base
 BuildRequires:	freetype-dev
+# Really we only need /usr/share/fonts, or the tests fails
+BuildRequires:	gnu-free-fonts
 
 Requires(pre):	freetype
 
