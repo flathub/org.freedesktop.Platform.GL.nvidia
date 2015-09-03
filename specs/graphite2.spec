@@ -1,5 +1,5 @@
 Name:           graphite2
-Version:        1.3.1
+Version:        1.2.4
 Release:        1%{?dist}
 Summary:        Font rendering capabilities for complex non-Roman writing systems
 Group:          Development/Tools
