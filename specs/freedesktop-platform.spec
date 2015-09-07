@@ -37,6 +37,7 @@ BuildRequires: SDL2_ttf
 BuildRequires: SDL2_mixer
 BuildRequires: hunspell
 BuildRequires: hunspell-en
+BuildRequires: harfbuzz
 
 Requires: freedesktop-platform-base
 
