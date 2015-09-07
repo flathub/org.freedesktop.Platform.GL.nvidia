@@ -22,6 +22,7 @@ Requires: dbus-dev
 Requires: desktop-file-utils
 Requires: fontconfig-dev
 Requires: freetype-dev
+Requires: geoclue2-dev
 Requires: glib2-dev
 Requires: gobject-introspection-dev
 Requires: graphite2-dev
@@ -31,7 +32,10 @@ Requires: gstreamer1-plugins-base-tools
 Requires: gtk-doc-stub
 Requires: harfbuzz-dev
 Requires: hunspell-dev
+Requires: itstool
+Requires: json-glib-dev
 Requires: llvm-dev
+Requires: libsoup-dev
 Requires: libICE-dev
 Requires: libX11-dev
 Requires: libXScrnSaver-dev

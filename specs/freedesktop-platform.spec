@@ -38,6 +38,7 @@ BuildRequires: SDL2_mixer
 BuildRequires: hunspell
 BuildRequires: hunspell-en
 BuildRequires: harfbuzz
+BuildRequires: geoclue2
 
 Requires: freedesktop-platform-base
 
@@ -49,6 +50,8 @@ Requires: dejavu-fonts
 Requires: desktop-file-utils
 Requires: fontconfig
 Requires: glib2
+Requires: glib-networking
+Requires: libsoup
 Requires: gnu-free-fonts
 Requires: gobject-introspection
 Requires: google-crosextra-caladea-fonts
@@ -61,6 +64,8 @@ Requires: harfbuzz-icu
 Requires: hicolor-icon-theme
 Requires: hunspell
 Requires: hunspell-en
+Requires: json-glib
+Requires: libsoup
 Requires: libICE
 Requires: libSM
 Requires: libX11
