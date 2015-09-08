@@ -60,6 +60,7 @@ Requires: libepoxy-dev
 Requires: libproxy-dev
 Requires: libwayland-client-dev
 Requires: libwayland-cursor-dev
+Requires: libwayland-server-dev
 Requires: libxcb-dev
 Requires: libxkbcommon-dev
 Requires: libxkbcommon-x11-dev
