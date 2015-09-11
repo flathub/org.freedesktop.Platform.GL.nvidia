@@ -41,6 +41,7 @@ BuildRequires: hunspell-en
 BuildRequires: harfbuzz
 BuildRequires: geoclue2
 BuildRequires: shared-mime-info
+BuildRequires: libXcomposite
 
 Requires: freedesktop-platform-base
 
