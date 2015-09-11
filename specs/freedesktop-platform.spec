@@ -40,6 +40,7 @@ BuildRequires: hunspell
 BuildRequires: hunspell-en
 BuildRequires: harfbuzz
 BuildRequires: geoclue2
+BuildRequires: shared-mime-info
 
 Requires: freedesktop-platform-base
 
