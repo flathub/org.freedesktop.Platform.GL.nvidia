@@ -8,3 +8,7 @@ freedesktop-*-platform.tar.gz
 freedesktop-*-sdk-rpmdb.tar.gz
 freedesktop-*-sdk.tar.gz
 buildhome/.cache
+buildhome/.ccache
+buildhome/.bash_history
+buildhome/.lesshst
+buildhome/.python-history
