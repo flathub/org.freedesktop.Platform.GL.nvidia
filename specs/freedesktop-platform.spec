@@ -23,6 +23,7 @@ BuildRequires: hicolor-icon-theme
 BuildRequires: libICE-dev
 BuildRequires: libXpm
 BuildRequires: libXv
+BuildRequires: libXft
 BuildRequires: libXxf86vm-dev
 BuildRequires: libepoxy-dev
 BuildRequires: liberation-fonts
