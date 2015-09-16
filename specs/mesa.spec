@@ -186,6 +186,9 @@ for I in libEGL.so.1 libGLESv2.so.2 libGL.so.1 libwayland-egl.so.1; do \
     rm $RPM_BUILD_ROOT%{_libdir}/GL/$B; \
 done
 
+# libgbm does not depend on GL and should not be replaced with it, so move it out
+mv $RPM_BUILD_ROOT%{_libdir}/GL/libgbm.so* $RPM_BUILD_ROOT%{_libdir}
+
 # libvdpau opens the versioned name, don't bother including the unversioned
 rm -f $RPM_BUILD_ROOT%{_libdir}/vdpau/*.so
 
@@ -309,12 +312,12 @@ find $RPM_BUILD_ROOT -name \*.la | xargs rm -f
 %files libgbm
 %defattr(-,root,root,-)
 %doc docs/COPYING
-%{_libdir}/GL/libgbm.so.1
-%{_libdir}/GL/libgbm.so.1.*
+%{_libdir}/libgbm.so.1
+%{_libdir}/libgbm.so.1.*
 
 %files libgbm-dev
 %defattr(-,root,root,-)
-%{_libdir}/GL/libgbm.so
+%{_libdir}/libgbm.so
 %{_includedir}/gbm.h
 %{_libdir}/pkgconfig/gbm.pc
 
