@@ -11,13 +11,6 @@ BuildArch: noarch
 
 Provides: freedesktop-sdk-base %(if [ -e /app/packages/base_sdk_provides ]; then cat /app/packages/base_sdk_provides; fi)
 
-%if %{__isa_bits} == 64
-%define provides_suffix (64bit)
-%endif
-
-# There is a bug in find_prov.sh which missed this provides:
-Provides: libsndfile.so.1(libsndfile.so.1.0)%{?provides_suffix}
-
 %description
 The base sdk files
 

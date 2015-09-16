@@ -1,8 +1,6 @@
 #!/bin/sh
 
-USR=`mktemp -d`
-
-tar -C $USR -xf $1
+USR=$1
 
 export LC_ALL=C
 for i in $USR/bin/*; do
@@ -22,5 +20,3 @@ fi
 if [ -d $USR/lib/pkgconfig/ ]; then
     find $USR/lib/pkgconfig/ -type f -or -type l | /usr/lib/rpm/pkgconfigdeps.sh -P | tr '\n' ' '
 fi
-
-rm -rf $USR

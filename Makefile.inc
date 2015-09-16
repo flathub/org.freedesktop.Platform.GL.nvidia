@@ -12,13 +12,21 @@ rpm-dependencies.P: $(ALL_SPECS) bin/makedeps.sh $(SDK_BASE_IMAGE)
 	bin/clear_root.sh
 
 packages/base_provides: $(PLATFORM_BASE_IMAGE)
+	rm -rf packages/base
+	mkdir -p packages/base
+	tar -C packages/base -xf $(PLATFORM_BASE_IMAGE)
 	bin/setup.sh $(SDK_BASE_IMAGE)
-	bin/build.sh bin/find_prov_tar.sh $(PLATFORM_BASE_IMAGE) > packages/base_provides
+	bin/build.sh bin/find_prov.sh packages/base $(PLATFORM_BASE_IMAGE) > packages/base_provides
+	rm -rf packages/base
 	bin/clear_root.sh
 
 packages/base_sdk_provides: $(SDK_BASE_IMAGE)
+	rm -rf packages/sdk
+	mkdir -p packages/sdk
+	tar -C packages/sdk -xf $(SDK_BASE_IMAGE)
 	bin/setup.sh $(SDK_BASE_IMAGE)
-	bin/build.sh bin/find_prov_tar.sh $(SDK_BASE_IMAGE) > packages/base_sdk_provides
+	bin/build.sh bin/find_prov.sh packages/sdk > packages/base_sdk_provides
+	rm -rf packages/sdk
 	bin/clear_root.sh
 
 $(NOARCH)/freedesktop-platform-base-0.1-1.sdk.noarch.rpm:	packages/base_provides
