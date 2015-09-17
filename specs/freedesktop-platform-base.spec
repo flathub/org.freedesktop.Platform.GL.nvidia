@@ -10,6 +10,13 @@ BuildArch: noarch
 # Yocto builds without the normal find-provides, we supply those provides in the freedesktop-platform-base package
 Provides: freedesktop-platform-base %(if [ -e /app/packages/base_provides ]; then cat /app/packages/base_provides; fi)
 
+%if %{__isa_bits} == 64
+%define provides_suffix (64bit)
+%endif
+
+# There is a bug in /usr/lib/rpm/find-provides which missed this provides:
+Provides: libsndfile.so.1(libsndfile.so.1.0)%{?provides_suffix}
+
 %description
 The base platform files
 
