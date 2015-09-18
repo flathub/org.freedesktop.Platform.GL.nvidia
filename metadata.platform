@@ -15,3 +15,4 @@ subdirectories=true
 
 [Environment]
 GI_TYPELIB_PATH=/app/lib/girepository-1.0
+LD_LIBRARY_PATH=/app/lib:/usr/lib/GL

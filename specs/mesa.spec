@@ -149,16 +149,15 @@ export CXXFLAGS="$RPM_OPT_FLAGS -fno-rtti -fno-exceptions"
 %endif
 
 %configure \
-    --libdir=%{_libdir}/GL \
     %{?asm_flags} \
     --disable-selinux \
     --disable-osmesa \
-    --with-dri-driverdir=%{_libdir}/GL/dri \
+    --with-dri-driverdir=%{_libdir}/dri \
     --enable-egl \
     --disable-gles1 \
     --enable-gles2 \
     --disable-xvmc \
-    --with-egl-platforms=x11,drm,wayland \
+    --with-egl-platforms=x11,drm,surfaceless,wayland \
     --enable-shared-glapi \
     --enable-gbm \
     --disable-opencl \
@@ -175,19 +174,6 @@ make %{?_smp_mflags} MKDEP=/bin/true
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
-
-# We moved everything into a GL subdir to allow easy override
-# Need to set up symlinks and otherwise clean this up a bit
-mv -f $RPM_BUILD_ROOT%{_libdir}/GL/pkgconfig $RPM_BUILD_ROOT%{_libdir}
-for I in libEGL.so.1 libGLESv2.so.2 libGL.so.1 libwayland-egl.so.1; do \
-    ln -s GL/$I $RPM_BUILD_ROOT%{_libdir}/$I; \
-    B=`echo $I | sed "s/\\.[0-9]$//"`; \
-    ln -s $I $RPM_BUILD_ROOT%{_libdir}/$B; \
-    rm $RPM_BUILD_ROOT%{_libdir}/GL/$B; \
-done
-
-# libgbm does not depend on GL and should not be replaced with it, so move it out
-mv $RPM_BUILD_ROOT%{_libdir}/GL/libgbm.so* $RPM_BUILD_ROOT%{_libdir}
 
 # libvdpau opens the versioned name, don't bother including the unversioned
 rm -f $RPM_BUILD_ROOT%{_libdir}/vdpau/*.so
@@ -220,52 +206,43 @@ find $RPM_BUILD_ROOT -name \*.la | xargs rm -f
 %defattr(-,root,root,-)
 %doc docs/COPYING
 %{_libdir}/libGL.so.1
-%{_libdir}/GL/libGL.so.1
-%{_libdir}/GL/libGL.so.1.*
+%{_libdir}/libGL.so.1.*
 
 %files libEGL
 %defattr(-,root,root,-)
 %doc docs/COPYING
 %{_libdir}/libEGL.so.1
-%{_libdir}/GL/libEGL.so.1
-%{_libdir}/GL/libEGL.so.1.*
+%{_libdir}/libEGL.so.1.*
 
 %files libGLES
 %defattr(-,root,root,-)
 %doc docs/COPYING
 %{_libdir}/libGLESv2.so.2
-%{_libdir}/GL/libGLESv2.so.2
-%{_libdir}/GL/libGLESv2.so.2.*
+%{_libdir}/libGLESv2.so.2.*
 
 %files filesystem
 %defattr(-,root,root,-)
-%dir %{_libdir}/GL
-%dir %{_libdir}/GL/dri
+%dir %{_libdir}/dri
 
 %files libglapi
-%{_libdir}/GL/libglapi.so.0
-%{_libdir}/GL/libglapi.so.0.*
+%{_libdir}/libglapi.so.0
+%{_libdir}/libglapi.so.0.*
 
 %files dri-drivers
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/drirc
-%{_libdir}/GL/dri/nouveau_vieux_dri.so
-#%{_libdir}/GL/dri/radeon_dri.so
-#%{_libdir}/GL/dri/r200_dri.so
-#%{_libdir}/GL/dri/r300_dri.so
-#%{_libdir}/GL/dri/r600_dri.so
-#%{_libdir}/GL/dri/radeonsi_dri.so
+%{_libdir}/dri/nouveau_vieux_dri.so
 %ifarch %{ix86} x86_64
-%{_libdir}/GL/dri/i915_dri.so
-%{_libdir}/GL/dri/i965_dri.so
+%{_libdir}/dri/i915_dri.so
+%{_libdir}/dri/i965_dri.so
 %endif
-%{_libdir}/GL/dri/nouveau_dri.so
-%{_libdir}/GL/dri/vmwgfx_dri.so
-%{_libdir}/GL/dri/kms_swrast_dri.so
-%{_libdir}/GL/dri/swrast_dri.so
-%{_libdir}/GL/dri/r300_dri.so
-%{_libdir}/GL/dri/r600_dri.so
-%{_libdir}/GL/dri/radeonsi_dri.so
+%{_libdir}/dri/nouveau_dri.so
+%{_libdir}/dri/vmwgfx_dri.so
+%{_libdir}/dri/kms_swrast_dri.so
+%{_libdir}/dri/swrast_dri.so
+%{_libdir}/dri/r300_dri.so
+%{_libdir}/dri/r600_dri.so
+%{_libdir}/dri/radeonsi_dri.so
 
 %files libGL-dev
 %defattr(-,root,root,-)
@@ -280,7 +257,7 @@ find $RPM_BUILD_ROOT -name \*.la | xargs rm -f
 %{_includedir}/GL/internal/dri_interface.h
 %{_libdir}/pkgconfig/dri.pc
 %{_libdir}/libGL.so
-%{_libdir}/GL/libglapi.so
+%{_libdir}/libglapi.so
 %{_libdir}/pkgconfig/gl.pc
 
 %files libEGL-dev
@@ -325,8 +302,8 @@ find $RPM_BUILD_ROOT -name \*.la | xargs rm -f
 %defattr(-,root,root,-)
 %doc docs/COPYING
 %{_libdir}/libwayland-egl.so.1
-%{_libdir}/GL/libwayland-egl.so.1
-%{_libdir}/GL/libwayland-egl.so.1.*
+%{_libdir}/libwayland-egl.so.1
+%{_libdir}/libwayland-egl.so.1.*
 
 %files libwayland-egl-dev
 %defattr(-,root,root,-)

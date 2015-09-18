@@ -127,9 +127,12 @@ Meta package for Freedesktop platform dependencies
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/
 touch $RPM_BUILD_ROOT%{_sysconfdir}/machine-id
 
+mkdir -p $RPM_BUILD_ROOT%{_libdir}/GL
+
 %files
 %doc
 %{_sysconfdir}/machine-id
+%dir %{_libdir}/GL
 
 %changelog
 * Fri Nov  7 2014 Alexander Larsson <alexl@redhat.com>

@@ -3,7 +3,7 @@ name=org.freedesktop.Sdk/x86_64/1.2
 runtime=org.freedesktop.Platform/x86_64/1.2
 sdk=org.freedesktop.Sdk/x86_64/1.2
 
-[Extension org.freedesktop.Sdk.GL]
+[Extension org.freedesktop.Platform.GL]
 directory=lib/GL
 
 [Extension org.freedesktop.Platform.Timezones]
@@ -21,3 +21,4 @@ directory=src/debug
 
 [Environment]
 GI_TYPELIB_PATH=/app/lib/girepository-1.0
+LD_LIBRARY_PATH=/app/lib:/usr/lib/GL
