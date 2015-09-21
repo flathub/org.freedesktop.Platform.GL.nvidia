@@ -42,6 +42,9 @@ BuildRequires: harfbuzz
 BuildRequires: geoclue2
 BuildRequires: shared-mime-info
 BuildRequires: libXcomposite
+BuildRequires: libvdpau
+BuildRequires: libva
+BuildRequires: libva-vdpau-driver
 
 Requires: freedesktop-platform-base
 
@@ -99,6 +102,9 @@ Requires: libxcb
 Requires: libxkbcommon
 Requires: libxkbcommon-x11
 Requires: libxshmfence
+Requires: libvdpau
+Requires: libva
+Requires: libva-vdpau-driver
 Requires: mesa-dri-drivers
 Requires: mesa-libEGL
 Requires: mesa-libGL

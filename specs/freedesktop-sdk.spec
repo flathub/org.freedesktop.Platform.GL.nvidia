@@ -36,6 +36,8 @@ Requires: itstool
 Requires: json-glib-dev
 Requires: llvm-dev
 Requires: libsoup-dev
+Requires: libvdpau-dev
+Requires: libva-dev
 Requires: libICE-dev
 Requires: libX11-dev
 Requires: libXScrnSaver-dev
