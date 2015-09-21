@@ -1,0 +1,12 @@
+diff -up llvm-3.7.0.src/include/llvm/CodeGen/CommandFlags.h.dma llvm-3.7.0.src/include/llvm/CodeGen/CommandFlags.h
+--- llvm-3.7.0.src/include/llvm/CodeGen/CommandFlags.h.dma	2015-09-15 15:01:41.570871134 +1000
++++ llvm-3.7.0.src/include/llvm/CodeGen/CommandFlags.h	2015-09-15 15:01:53.642191476 +1000
+@@ -21,7 +21,7 @@
+ #include "llvm/IR/Intrinsics.h"
+ #include "llvm/IR/Module.h"
+ #include "llvm/MC/MCTargetOptionsCommandFlags.h"
+-#include "llvm//MC/SubtargetFeature.h"
++#include "llvm/MC/SubtargetFeature.h"
+ #include "llvm/Support/CodeGen.h"
+ #include "llvm/Support/CommandLine.h"
+ #include "llvm/Support/Host.h"

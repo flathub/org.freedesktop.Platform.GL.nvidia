@@ -3,7 +3,7 @@
 %global llvmdocdir() %{_docdir}/%1
 
 Name:           llvm
-Version:        3.6.2
+Version:        3.7.0
 Release:        1%{?dist}
 Summary:        The Low Level Virtual Machine
 
@@ -15,6 +15,9 @@ URL:            http://llvm.org/
 Source0:        http://llvm.org/releases/%{version}/llvm-%{version}.src.tar.xz
 Source1:        http://llvm.org/releases/%{version}/cfe-%{version}.src.tar.xz
 Source2:        http://llvm.org/releases/%{version}/compiler-rt-%{version}.src.tar.xz
+
+# there is a double slash in an include, it breaks debugedit
+Patch0:         fix-broken-include-path.patch
 
 BuildRequires: freedesktop-sdk-base
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -115,12 +118,18 @@ rm -rf tools/clang tools/lldb projects/compiler-rt
 mv cfe-*/ tools/clang
 mv compiler-rt-*/ projects/compiler-rt
 
+%patch0 -p1
+
 # fix library paths
 sed -i 's|/lib /usr/lib $lt_ld_extra|%{_libdir} $lt_ld_extra|' configure
 sed -i 's|(PROJ_prefix)/lib|(PROJ_prefix)/%{_lib}/%{name}|g' Makefile.config.in
 sed -i 's|/lib\>|/%{_lib}/%{name}|g' tools/llvm-config/llvm-config.cpp
 
 %build
+
+mkdir build
+cd build
+ln -s ../configure .
 
 # Decrease debuginfo verbosity to reduce memory consumption even more
 CFLAGS="%(echo %{optflags} | sed 's/-g/-g1/')"; export CFLAGS ;
@@ -163,7 +172,6 @@ export CXX=g++
   --enable-libffi \
   --enable-ltdl-install \
   \
-  --with-c-include-dirs=%{_includedir}:$(echo %{_prefix}/lib/gcc/%{_target_cpu}*/*/include) \
   --with-optimize-option=-O3 \
   ac_cv_prog_XML2CONFIG=""
 
@@ -171,7 +179,9 @@ make %{?_smp_mflags} REQUIRES_RTTI=1 VERBOSE=1
 #make REQUIRES_RTTI=1 VERBOSE=1
 
 %install
+cd build
 make install DESTDIR=%{buildroot} PROJ_docsdir=/moredocs
+cd -
 
 # you have got to be kidding me
 rm -f %{buildroot}%{_bindir}/{FileCheck,count,not}
