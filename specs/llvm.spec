@@ -234,6 +234,12 @@ for f in LICENSE.TXT NOTES.txt README.txt CODE_OWNERS.TXT; do
   cp tools/clang/$f %{buildroot}%{llvmdocdir clang}/
 done
 
+# Workaround clang not finding gcc headers/libs
+for f in %{_includedir}/c++/4.9.2/x86_64-freedesktop-linux %{_libdir}/gcc/gcc/x86_64-freedesktop-linux %{_libdir}/gcc/x86_64-freedesktop-linux %{_libdir}/x86_64-freedesktop-linux %{_prefix}/x86_64-freedesktop-linux; do
+  mkdir -p `dirname %{buildroot}$f`
+  ln -s x86_64-freedesktop-linux %{buildroot}$f-gnu
+done
+
 # delete the rest of installed documentation (because it's bad)
 rm -rf %{buildroot}/moredocs
 
@@ -301,6 +307,12 @@ make -k check LIT_ARGS="-v -j4" | tee %{buildroot}%{llvmdocdir %{name}-dev}/test
 %{_bindir}/clang*
 %{_bindir}/c-index-test
 %{_prefix}/lib/clang
+# Workaround clang not finding gcc headers/libs
+%{_includedir}/c++/4.9.2/x86_64-freedesktop-linux-gnu
+%{_libdir}/gcc/gcc/x86_64-freedesktop-linux-gnu
+%{_libdir}/gcc/x86_64-freedesktop-linux-gnu
+%{_libdir}/x86_64-freedesktop-linux-gnu
+%{_prefix}/x86_64-freedesktop-linux-gnu
 
 %files -n clang-libs
 %{_libdir}/%{name}/libclang.so
