@@ -45,6 +45,7 @@ BuildRequires: libXcomposite
 BuildRequires: libvdpau
 BuildRequires: libva
 BuildRequires: libva-vdpau-driver
+BuildRequires: xdg-user-dirs
 
 Requires: freedesktop-platform-base
 
@@ -114,6 +115,7 @@ Requires: pulseaudio-libs
 Requires: pulseaudio-libs-glib2
 Requires: shared-mime-info
 Requires: xkeyboard-config
+Requires: xdg-user-dirs
 Requires: SDL2
 Requires: SDL2_image
 Requires: SDL2_net
