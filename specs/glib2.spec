@@ -2,13 +2,12 @@
 
 Summary: A library of handy utility functions
 Name: glib2
-Version: 2.44.1
+Version: 2.46.0
 Release: 1%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 #VCS: git:git://git.gnome.org/glib
 Source: http://download.gnome.org/sources/glib/%{release_version}/glib-%{version}.tar.xz
-Patch0:		gio-netlink.patch
 
 BuildRequires: freedesktop-sdk-base
 
@@ -29,7 +28,6 @@ The glib2-dev package includes the header files for the GLib library.
 
 %prep
 %setup -q -n glib-%{version}
-%patch0 -p1 -b .gio-netlink
 
 %build
 # Support builds of both git snapshots and tarballs packed with autogoo

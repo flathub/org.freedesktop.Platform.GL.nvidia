@@ -1,7 +1,7 @@
 %global release_version %%(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name: libsoup
-Version: 2.50.0
+Version: 2.52.0
 Release: 1%{?dist}
 License: LGPLv2
 Group: Development/Libraries
@@ -41,7 +41,7 @@ you to develop applications that use the libsoup library.
 %setup -q
 
 %build
-%configure --disable-static
+%configure --disable-static --disable-vala
 
 # Omit unused direct shared library dependencies.
 sed --in-place --expression 's! -shared ! -Wl,--as-needed\0!g' libtool
