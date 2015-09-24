@@ -14,6 +14,11 @@ all: $(NAME)-$(VERSION)-platform.tar.gz $(NAME)-$(VERSION)-sdk.tar.gz
 
 debug: $(NAME)-$(VERSION)-debug.tar.gz
 
+ALL_SPECS = $(wildcard specs/*.spec)
+
+include Makefile.inc
+-include rpm-dependencies.P
+
 $(SDK_BASE_IMAGE) $(PLATFORM_BASE_IMAGE) images:
 	if test ! -d freedesktop-sdk-base; then \
 		git clone git://anongit.freedesktop.org/xdg-app/freedesktop-sdk-base;\
@@ -22,8 +27,3 @@ $(SDK_BASE_IMAGE) $(PLATFORM_BASE_IMAGE) images:
 	 git fetch origin && \
 	 git checkout $(BASE_HASH) && \
 	 make)
-
-ALL_SPECS = $(wildcard specs/*.spec)
-
-include Makefile.inc
--include rpm-dependencies.P
