@@ -114,7 +114,7 @@ Requires: mesa-dri-drivers
 Requires: mesa-libEGL
 Requires: mesa-libGL
 Requires: mesa-libwayland-egl
-Requires: orc-dev
+Requires: orc
 Requires: pulseaudio-libs
 Requires: pulseaudio-libs-glib2
 Requires: shared-mime-info
