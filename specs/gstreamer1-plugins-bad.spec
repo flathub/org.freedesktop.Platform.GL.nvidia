@@ -35,8 +35,7 @@ is not of good enough quality.
 %package dev
 Summary:        Development files for the GStreamer media framework "bad" plug-ins
 Requires:       %{name} = %{version}-%{release}
-Requires:       gstreamer1-plugins-base-devel
-
+Requires:       gstreamer1-plugins-base-dev
 
 %description dev
 GStreamer is a streaming media framework, based on graphs of elements which
@@ -211,4 +210,3 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %changelog
 * Mon Sep 28 2015 Alexander Larsson <alexl@redhat.com> - 1.6.0-1
 - Initial version
-

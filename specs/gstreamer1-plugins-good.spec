@@ -127,15 +127,10 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 %{_libdir}/gstreamer-%{majorminor}/libgstpng.so
 %{_libdir}/gstreamer-%{majorminor}/libgstpulse.so
 %{_libdir}/gstreamer-%{majorminor}/libgstrtpmanager.so
-#%{_libdir}/gstreamer-%{majorminor}/libgstshout2.so
 %{_libdir}/gstreamer-%{majorminor}/libgstsouphttpsrc.so
 %{_libdir}/gstreamer-%{majorminor}/libgstspeex.so
-#%{_libdir}/gstreamer-%{majorminor}/libgsttaglib.so
 %{_libdir}/gstreamer-%{majorminor}/libgstvideo4linux2.so
 %{_libdir}/gstreamer-%{majorminor}/libgstvpx.so
-#%{_libdir}/gstreamer-%{majorminor}/libgstwavpack.so
-#%{_libdir}/gstreamer-%{majorminor}/libgstdv.so
-#%{_libdir}/gstreamer-%{majorminor}/libgst1394.so
 
 %changelog
 * Mon Sep 28 2015 Alexander Larsson <alexl@redhat.com> - 1.6.0-1
