@@ -1,7 +1,7 @@
 %global         majorminor      1.0
 
 Name:           gstreamer1
-Version:        1.4.5
+Version:        1.6.0
 Release:        1%{?dist}
 Summary:        GStreamer streaming media framework runtime
 
@@ -112,6 +112,11 @@ install -m0644 -D %{SOURCE2} $RPM_BUILD_ROOT%{_rpmconfigdir}/fileattrs/gstreamer
 %{_bindir}/gst-launch-%{majorminor}
 %{_bindir}/gst-typefind-%{majorminor}
 
+%{_datadir}/bash-completion/completions/gst-inspect-%{majorminor}
+%{_datadir}/bash-completion/completions/gst-launch-%{majorminor}
+%{_datadir}/bash-completion/helpers/gst
+%{_datadir}/bash-completion/helpers/gst-completion-helper-%{majorminor}
+
 %{_rpmconfigdir}/gstreamer1.prov
 %{_rpmconfigdir}/fileattrs/gstreamer1.attr
 
@@ -131,6 +136,7 @@ install -m0644 -D %{SOURCE2} $RPM_BUILD_ROOT%{_rpmconfigdir}/fileattrs/gstreamer
 %{_includedir}/gstreamer-%{majorminor}/gst/check/*.h
 %{_includedir}/gstreamer-%{majorminor}/gst/controller/*.h
 %{_includedir}/gstreamer-%{majorminor}/gst/net/*.h
+%{_libdir}/gstreamer-%{majorminor}/include/gst
 
 %{_libdir}/libgstreamer-%{majorminor}.so
 %{_libdir}/libgstbase-%{majorminor}.so

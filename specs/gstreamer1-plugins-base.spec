@@ -1,7 +1,7 @@
 %global         majorminor      1.0
 
 Name:           gstreamer1-plugins-base
-Version:        1.4.5
+Version:        1.6.0
 Release:        1%{?dist}
 Summary:        GStreamer streaming media framework base plugins
 
@@ -144,7 +144,6 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/gst-play-1.0
 %{_libdir}/girepository-1.0/GstAudio-%{majorminor}.typelib
 %{_libdir}/girepository-1.0/GstFft-%{majorminor}.typelib
 %{_libdir}/girepository-1.0/GstPbutils-%{majorminor}.typelib
-%{_libdir}/girepository-1.0/GstRiff-%{majorminor}.typelib
 %{_libdir}/girepository-1.0/GstRtp-%{majorminor}.typelib
 %{_libdir}/girepository-1.0/GstRtsp-%{majorminor}.typelib
 %{_libdir}/girepository-1.0/GstSdp-%{majorminor}.typelib
@@ -191,6 +190,7 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/gst-play-1.0
 %dir %{_includedir}/gstreamer-%{majorminor}/gst/allocators
 %{_includedir}/gstreamer-%{majorminor}/gst/allocators/allocators.h
 %{_includedir}/gstreamer-%{majorminor}/gst/allocators/gstdmabuf.h
+%{_includedir}/gstreamer-%{majorminor}/gst/allocators/gstfdmemory.h
 %dir %{_includedir}/gstreamer-%{majorminor}/gst/app
 %{_includedir}/gstreamer-%{majorminor}/gst/app/app.h
 %{_includedir}/gstreamer-%{majorminor}/gst/app/gstappsink.h
@@ -239,10 +239,12 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/gst-play-1.0
 %{_includedir}/gstreamer-%{majorminor}/gst/riff/riff-read.h
 %dir %{_includedir}/gstreamer-%{majorminor}/gst/rtp
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtcpbuffer.h
+%{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtp-enumtypes.h
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtpbaseaudiopayload.h
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtpbasedepayload.h
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtpbasepayload.h
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtpbuffer.h
+%{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtpdefs.h
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtphdrext.h
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/gstrtppayloads.h
 %{_includedir}/gstreamer-%{majorminor}/gst/rtp/rtp.h
@@ -279,14 +281,19 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/gst-play-1.0
 %{_includedir}/gstreamer-%{majorminor}/gst/video/gstvideoutils.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/navigation.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-blend.h
-%{_includedir}/gstreamer-%{majorminor}/gst/video/video-overlay-composition.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-chroma.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-color.h
+%{_includedir}/gstreamer-%{majorminor}/gst/video/video-converter.h
+%{_includedir}/gstreamer-%{majorminor}/gst/video/video-dither.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-enumtypes.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-event.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-format.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-frame.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-info.h
+%{_includedir}/gstreamer-%{majorminor}/gst/video/video-multiview.h
+%{_includedir}/gstreamer-%{majorminor}/gst/video/video-overlay-composition.h
+%{_includedir}/gstreamer-%{majorminor}/gst/video/video-resampler.h
+%{_includedir}/gstreamer-%{majorminor}/gst/video/video-scaler.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video-tile.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/video.h
 %{_includedir}/gstreamer-%{majorminor}/gst/video/videoorientation.h
@@ -312,7 +319,6 @@ chrpath --delete $RPM_BUILD_ROOT%{_bindir}/gst-play-1.0
 %{_datadir}/gir-1.0/GstAudio-%{majorminor}.gir
 %{_datadir}/gir-1.0/GstFft-%{majorminor}.gir
 %{_datadir}/gir-1.0/GstPbutils-%{majorminor}.gir
-%{_datadir}/gir-1.0/GstRiff-%{majorminor}.gir
 %{_datadir}/gir-1.0/GstRtp-%{majorminor}.gir
 %{_datadir}/gir-1.0/GstRtsp-%{majorminor}.gir
 %{_datadir}/gir-1.0/GstSdp-%{majorminor}.gir
