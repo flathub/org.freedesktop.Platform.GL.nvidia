@@ -29,6 +29,7 @@ Requires: graphite2-dev
 Requires: gstreamer1-dev
 Requires: gstreamer1-plugins-base-dev
 Requires: gstreamer1-plugins-base-tools
+Requires: gstreamer1-plugins-bad-dev
 Requires: gtk-doc-stub
 Requires: harfbuzz-dev
 Requires: hunspell-dev

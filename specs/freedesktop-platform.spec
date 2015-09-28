@@ -19,6 +19,8 @@ BuildRequires: google-crosextra-caladea-fonts
 BuildRequires: google-crosextra-carlito-fonts
 BuildRequires: gstreamer1
 BuildRequires: gstreamer1-plugins-base
+BuildRequires: gstreamer1-plugins-good
+BuildRequires: gstreamer1-plugins-bad
 BuildRequires: hicolor-icon-theme
 BuildRequires: libICE-dev
 BuildRequires: libXpm
@@ -66,6 +68,8 @@ Requires: google-crosextra-carlito-fonts
 Requires: graphite2
 Requires: gstreamer1
 Requires: gstreamer1-plugins-base
+Requires: gstreamer1-plugins-good
+Requires: gstreamer1-plugins-bad
 Requires: harfbuzz
 Requires: harfbuzz-icu
 Requires: hicolor-icon-theme
