@@ -83,7 +83,7 @@ commit: commit-sdk commit-platform commit-debug
 	echo done
 
 untag:
-	./untag.sh repo $(ID).Platform $(ARCH) $(VERSION) $(EXTRA_NAME)
-	./untag.sh repo $(ID).Sdk $(ARCH) $(VERSION) $(EXTRA_NAME)
-	./untag.sh repo $(ID).Debug $(ARCH) $(VERSION) $(EXTRA_NAME)
-	./untag.sh repo $(ID).DebugSrc $(ARCH) $(VERSION) $(EXTRA_NAME)
+	bin/untag.sh repo $(ID).Platform $(ARCH) $(VERSION) $(EXTRA_NAME)
+	bin/untag.sh repo $(ID).Sdk $(ARCH) $(VERSION) $(EXTRA_NAME)
+	bin/untag.sh repo $(ID).Debug $(ARCH) $(VERSION) $(EXTRA_NAME)
+	bin/untag.sh repo $(ID).DebugSrc $(ARCH) $(VERSION) $(EXTRA_NAME)
