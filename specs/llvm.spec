@@ -18,7 +18,6 @@ Source2:        http://llvm.org/releases/%{version}/compiler-rt-%{version}.src.t
 
 # there is a double slash in an include, it breaks debugedit
 Patch0:         fix-broken-include-path.patch
-Patch1:         llvm-3.7.0-dynamic-linker.patch
 
 BuildRequires: freedesktop-sdk-base
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -120,10 +119,6 @@ rm -rf tools/clang tools/lldb projects/compiler-rt
 
 mv cfe-*/ tools/clang
 mv compiler-rt-*/ projects/compiler-rt
-
-cd tools/clang
-%patch1 -p1
-cd -
 
 # fix library paths
 sed -i 's|/lib /usr/lib $lt_ld_extra|%{_libdir} $lt_ld_extra|' configure
