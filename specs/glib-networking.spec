@@ -1,7 +1,7 @@
 %global release_version %%(echo %{version} | awk -F. '{print $1"."$2}')
 
 Name:           glib-networking
-Version:        2.46.0
+Version:        2.46.1
 Release:        1%{?dist}
 Summary:        Networking support for GLib
 

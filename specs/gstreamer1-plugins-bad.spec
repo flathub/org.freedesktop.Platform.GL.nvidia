@@ -2,7 +2,7 @@
 %global         _gobject_introspection  1.31.1
 
 Name:           gstreamer1-plugins-bad
-Version:        1.6.0
+Version:        1.6.1
 Release:        1%{?dist}
 Summary:        GStreamer streaming media framework "bad" plugins
 
