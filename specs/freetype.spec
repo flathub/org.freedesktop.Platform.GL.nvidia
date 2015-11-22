@@ -4,14 +4,12 @@
 
 Summary: A free and portable font rendering engine
 Name: freetype
-Version: 2.6
+Version: 2.6.1
 Release: 1%{?dist}
 License: (FTL or GPLv2+) and BSD and MIT and Public Domain and zlib with acknowledgement
 Group: System Environment/Libraries
 URL: http://www.freetype.org
 Source:  http://download.savannah.gnu.org/releases/freetype/freetype-%{version}.tar.bz2
-
-Patch0:   0001-cff-Don-t-use-hmtx-table-for-LSB-45520.patch
 
 Patch21:  freetype-2.3.0-enable-spr.patch
 
@@ -51,8 +49,6 @@ FreeType.
 
 %prep
 %setup -q
-
-%patch0  -p1 -b .hmtx-table
 
 %if %{?_with_subpixel_rendering:1}%{!?_with_subpixel_rendering:0}
 %patch21  -p1 -b .enable-spr
