@@ -1,6 +1,6 @@
 Summary:	A 2D graphics library
 Name:		cairo
-Version:	1.14.2
+Version:	1.14.4
 Release:	1%{?dist}
 URL:		http://cairographics.org
 #VCS:		git:git://git.freedesktop.org/git/cairo
