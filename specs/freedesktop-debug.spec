@@ -10,6 +10,7 @@ BuildArch: noarch
 BuildRequires: freedesktop-sdk
 
 Requires: cairo-debuginfo
+Requires: cups-debuginfo
 Requires: dbus-debuginfo
 Requires: fontconfig-debuginfo
 Requires: freetype-debuginfo

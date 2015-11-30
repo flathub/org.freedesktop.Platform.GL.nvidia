@@ -54,11 +54,13 @@ BuildRequires: xcb-util-keysyms
 BuildRequires: xcb-util-renderutil
 BuildRequires: xcb-util
 BuildRequires: xcb-util-wm
+BuildRequires: cups
 
 Requires: freedesktop-platform-base
 
 Requires: cairo
 Requires: cairo-gobject
+Requires: cups
 Requires: dbus
 Requires: dbus-libs
 Requires: dejavu-fonts

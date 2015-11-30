@@ -16,6 +16,7 @@ Requires: freedesktop-sdk-base
 
 Requires: cairo-dev
 Requires: cairo-gobject-dev
+Requires: cups-dev
 Requires: clang-dev
 Requires: clang-analyzer
 Requires: dbus-dev
