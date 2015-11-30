@@ -48,6 +48,12 @@ BuildRequires: libvdpau
 BuildRequires: libva
 BuildRequires: libva-vdpau-driver
 BuildRequires: xdg-user-dirs
+BuildRequires: xcb-util-cursor
+BuildRequires: xcb-util-image
+BuildRequires: xcb-util-keysyms
+BuildRequires: xcb-util-renderutil
+BuildRequires: xcb-util
+BuildRequires: xcb-util-wm
 
 Requires: freedesktop-platform-base
 
@@ -120,6 +126,12 @@ Requires: pulseaudio-libs-glib2
 Requires: shared-mime-info
 Requires: xkeyboard-config
 Requires: xdg-user-dirs
+Requires: xcb-util-cursor
+Requires: xcb-util-image
+Requires: xcb-util-keysyms
+Requires: xcb-util-renderutil
+Requires: xcb-util
+Requires: xcb-util-wm
 Requires: SDL2
 Requires: SDL2_image
 Requires: SDL2_net

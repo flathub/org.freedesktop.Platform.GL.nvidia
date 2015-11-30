@@ -75,6 +75,12 @@ Requires: pixman-dev
 Requires: pulseaudio-libs-dev
 Requires: xkeyboard-config-dev
 Requires: xorg-x11-util-macros
+Requires: xcb-util-cursor-dev
+Requires: xcb-util-dev
+Requires: xcb-util-image-dev
+Requires: xcb-util-keysyms-dev
+Requires: xcb-util-renderutil-dev
+Requires: xcb-util-wm-dev
 Requires: SDL2-dev
 Requires: SDL2_image-dev
 Requires: SDL2_net-dev
