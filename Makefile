@@ -3,7 +3,7 @@ ID=org.freedesktop
 VERSION=1.2
 ARCH=x86_64
 IMAGEDIR=freedesktop-sdk-base/images/$(ARCH)
-BASE_HASH=aa1b462fa0d32e8c4b2d44a128b16c5d0ead00e3
+BASE_HASH=52853d3961aeba5e24cfb251422c2d0842340039
 
 EXTRA_NAME=
 DELTAS=
