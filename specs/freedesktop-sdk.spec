@@ -71,6 +71,7 @@ Requires: libxkbcommon-x11-dev
 Requires: mesa-libEGL-dev
 Requires: mesa-libGL-dev
 Requires: mesa-libwayland-egl-dev
+Requires: libgbm-dev
 Requires: orc-dev
 Requires: pixman-dev
 Requires: pulseaudio-libs-dev
