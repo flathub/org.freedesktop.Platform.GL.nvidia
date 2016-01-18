@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 BUILD=`pwd`/build
 CHROOT=$BUILD/chroot
