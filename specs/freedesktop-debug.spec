@@ -74,6 +74,7 @@ ln -s /app/lib/debug $RPM_BUILD_ROOT%{_libdir}/debug/app
 %files
 %doc
 %{_libdir}/debug
+%{_libdir}/debug/app
 
 %changelog
 * Fri Nov  7 2014 Alexander Larsson <alexl@redhat.com>

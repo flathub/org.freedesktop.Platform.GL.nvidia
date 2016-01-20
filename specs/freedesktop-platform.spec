@@ -166,6 +166,7 @@ ln -s /app/lib/debug $RPM_BUILD_ROOT%{_libdir}/debug/app
 %doc
 %{_sysconfdir}/machine-id
 %dir %{_libdir}/GL
+%{_libdir}/debug/app
 
 %changelog
 * Fri Nov  7 2014 Alexander Larsson <alexl@redhat.com>
