@@ -38,6 +38,8 @@ Requires: hunspell-dev
 Requires: itstool
 Requires: json-glib-dev
 Requires: llvm-dev
+Requires: libappstream-glib-dev
+Requires: libappstream-glib-builder-dev
 Requires: libsoup-dev
 Requires: libvdpau-dev
 Requires: libva-dev

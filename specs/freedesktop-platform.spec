@@ -23,6 +23,7 @@ BuildRequires: gstreamer1-plugins-base
 BuildRequires: gstreamer1-plugins-good
 BuildRequires: gstreamer1-plugins-bad
 BuildRequires: hicolor-icon-theme
+BuildRequires: libappstream-glib
 BuildRequires: libICE-dev
 BuildRequires: libXpm
 BuildRequires: libXv
