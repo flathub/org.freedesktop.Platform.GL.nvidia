@@ -27,6 +27,7 @@ Requires: geoclue2-dev
 Requires: glib2-dev
 Requires: gobject-introspection-dev
 Requires: graphite2-dev
+Requires: gdk-pixbuf2-dev
 Requires: gstreamer1-dev
 Requires: gstreamer1-plugins-base-dev
 Requires: gstreamer1-plugins-base-tools

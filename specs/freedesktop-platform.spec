@@ -17,6 +17,7 @@ BuildRequires: gnu-free-fonts
 BuildRequires: gobject-introspection
 BuildRequires: google-crosextra-caladea-fonts
 BuildRequires: google-crosextra-carlito-fonts
+BuildRequires: gdk-pixbuf2
 BuildRequires: gstreamer1
 BuildRequires: gstreamer1-plugins-base
 BuildRequires: gstreamer1-plugins-good
@@ -68,6 +69,7 @@ Requires: desktop-file-utils
 Requires: fontconfig
 Requires: glib2
 Requires: glib-networking
+Requires: gdk-pixbuf2
 Requires: libsoup
 Requires: gnu-free-fonts
 Requires: gobject-introspection

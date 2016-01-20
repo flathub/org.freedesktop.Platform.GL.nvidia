@@ -14,7 +14,7 @@ BuildRequires: freedesktop-sdk-base
 BuildRequires:  gstreamer1-dev
 BuildRequires:  gstreamer1-plugins-base-dev
 
-#BuildRequires:  gdk-pixbuf2-dev
+BuildRequires:  gdk-pixbuf2-dev
 BuildRequires:  libsoup-dev
 BuildRequires:  libX11-dev
 BuildRequires:  libXext-dev
@@ -121,7 +121,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 # gstreamer-plugins with external dependencies but in the main package
 %{_libdir}/gstreamer-%{majorminor}/libgstflac.so
-#%{_libdir}/gstreamer-%{majorminor}/libgstgdkpixbuf.so
+%{_libdir}/gstreamer-%{majorminor}/libgstgdkpixbuf.so
 %{_libdir}/gstreamer-%{majorminor}/libgstjpeg.so
 %{_libdir}/gstreamer-%{majorminor}/libgstossaudio.so
 %{_libdir}/gstreamer-%{majorminor}/libgstpng.so
