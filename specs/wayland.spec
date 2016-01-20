@@ -9,6 +9,7 @@ URL:            http://%{name}.freedesktop.org/
 Source0:        http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 
 BuildRequires: freedesktop-sdk-base
+BuildRequires: wayland-protocols-dev
 
 %description
 Wayland is a protocol for a compositor to talk to its clients as well as a C
