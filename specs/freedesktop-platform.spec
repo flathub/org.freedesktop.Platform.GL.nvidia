@@ -155,6 +155,11 @@ touch $RPM_BUILD_ROOT%{_sysconfdir}/machine-id
 
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/GL
 
+# This is not strictly needed for the platform, but its nice to have
+# this link here anyway so app debuginfo works
+mkdir -p $RPM_BUILD_ROOT%{_libdir}/debug
+ln -s /app/lib/debug $RPM_BUILD_ROOT%{_libdir}/debug/app
+
 %files
 %doc
 %{_sysconfdir}/machine-id

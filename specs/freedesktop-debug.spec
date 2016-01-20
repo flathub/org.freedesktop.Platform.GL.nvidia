@@ -69,6 +69,7 @@ Meta package for debug info
 %install
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/rpm/
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/debug
+ln -s /app/lib/debug $RPM_BUILD_ROOT%{_libdir}/debug/app
 
 %files
 %doc
