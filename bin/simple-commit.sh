@@ -13,7 +13,7 @@ mkdir -p build/commit
 echo "extracting ${TAR}"
 tar xf ${TAR} -C build/commit
 
-COMMIT_ARGS="--repo=${REPO} --owner-uid=0 --owner-gid=0 --no-xattrs"
+COMMIT_ARGS="--generate-sizes --repo=${REPO} --owner-uid=0 --owner-gid=0 --no-xattrs"
 if [ "x${GPG_KEY}" != "x" ]; then
     COMMIT_ARGS="${COMMIT_ARGS} --gpg-sign=${GPG_KEY}"
 fi

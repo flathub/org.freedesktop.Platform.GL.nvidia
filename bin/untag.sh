@@ -6,7 +6,7 @@ export ARCH=$3
 export VERSION=$4
 export TAG=$5
 
-COMMIT_ARGS="--repo=${REPO}"
+COMMIT_ARGS="--generate-sizes --repo=${REPO}"
 if [ "x${GPG_KEY}" != "x" ]; then
     COMMIT_ARGS="${COMMIT_ARGS} --gpg-sign=${GPG_KEY}"
 fi
