@@ -1,11 +1,10 @@
 Summary:   Library for AppStream metadata
 Name:      libappstream-glib
-Version:   0.5.6
+Version:   0.5.7
 Release:   1%{?dist}
 License:   LGPLv2+
 URL:       http://people.freedesktop.org/~hughsient/appstream-glib/
 Source0:   http://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-%{version}.tar.xz
-Patch0:    appstream-glib-0.5.6-less-deps.patch
 BuildRequires: freedesktop-sdk-base
 BuildRequires: glib2-dev
 BuildRequires: gobject-introspection-dev
@@ -42,15 +41,13 @@ GLib headers and libraries for appstream-builder.
 
 %prep
 %setup -q -n appstream-glib-%{version}
-%patch0 -p1
 
 %build
-
-autoreconf --force --install
 
 %configure \
         --disable-gtk-doc \
         --disable-man \
+        --disable-fonts \
         --disable-firmware \
         --disable-dep11 \
         --disable-static \
@@ -64,7 +61,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 %__rm -f %{buildroot}%{_libdir}/libappstream-glib*.la
 %__rm -f %{buildroot}%{_libdir}/libappstream-builder*.la
-%__rm -f %{buildroot}%{_libdir}/asb-plugins-4/*.la
+%__rm -f %{buildroot}%{_libdir}/asb-plugins-5/*.la
 
 %find_lang appstream-glib
 
@@ -79,6 +76,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{_libdir}/libappstream-glib.so.8*
 %{_libdir}/girepository-1.0/*.typelib
 %{_bindir}/appstream-util
+%{_bindir}/appstream-compose
 %dir %{_datadir}/bash-completion/completions/
 %{_datadir}/bash-completion/completions/appstream-util
 
@@ -98,7 +96,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %doc COPYING
 %{_bindir}/appstream-builder
 %{_datadir}/bash-completion/completions/appstream-builder
-%{_libdir}/asb-plugins-4/*.so
+%{_libdir}/asb-plugins-5/*.so
 %{_libdir}/libappstream-builder.so.8*
 
 %files builder-dev
