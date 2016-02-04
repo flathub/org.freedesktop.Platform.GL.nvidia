@@ -5,7 +5,7 @@
     "branch": "master",
     "runtime": "org.freedesktop.BasePlatform",
     "sdk": "org.freedesktop.BaseSdk",
-    "runtime-version": "1.2",
+    "runtime-version": "1.4",
     "writable-sdk": true,
     "sdk-extensions": [],
     "metadata": "metadata.sdk",
