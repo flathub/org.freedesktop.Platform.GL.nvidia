@@ -1,0 +1,11 @@
+--- a/configure.ac.pthread	2016-02-01 16:07:19.640980915 +0100
++++ b/configure.ac	2016-02-01 16:07:21.132963219 +0100
+@@ -51,7 +51,7 @@
+ 
+ # Checks for pkg-config packages
+ PKG_CHECK_MODULES(XCBPROTO, xcb-proto >= 1.11)
+-NEEDED="pthread-stubs xau >= 0.99.2"
++NEEDED="xau >= 0.99.2"
+ PKG_CHECK_MODULES(NEEDED, $NEEDED)
+ 
+ have_xdmcp="no"
