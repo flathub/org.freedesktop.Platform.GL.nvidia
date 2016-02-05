@@ -1484,7 +1484,8 @@
                             "--disable-oss",
                             "--disable-sndio",
                             "--disable-libudev",
-                            "--enable-video-wayland"],
+                            "--enable-video-wayland",
+                            "--enable-wayland-shared=no"],
             "sources": [
                  {
                      "type": "archive",
