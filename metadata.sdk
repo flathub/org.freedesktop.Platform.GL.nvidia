@@ -1,7 +1,7 @@
 [Runtime]
-name=org.freedesktop.Sdk/x86_64/1.2
-runtime=org.freedesktop.Platform/x86_64/1.2
-sdk=org.freedesktop.Sdk/x86_64/1.2
+name=org.freedesktop.Sdk
+runtime=org.freedesktop.Platform/x86_64/master
+sdk=org.freedesktop.Sdk/x86_64/master
 
 [Extension org.freedesktop.Platform.GL]
 directory=lib/GL
