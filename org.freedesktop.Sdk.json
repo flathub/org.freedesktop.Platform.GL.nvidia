@@ -20,7 +20,6 @@
     "cleanup-commands": [ "touch -d @0 /usr/share/fonts",
                           "touch -d @0 /usr/share/fonts/*",
                           "fc-cache -fs",
-                          "touch /etc/machine-id",
                           "mkdir -p /usr/lib/GL",
                           "mkdir -p /usr/lib/debug",
                           "ln -s /app/lib/debug /usr/lib/debug/app"
