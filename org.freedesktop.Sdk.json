@@ -798,6 +798,7 @@
         },
         {
             "name": "glib2",
+            "config-opts": ["--disable-gtk-doc" ],
             "cleanup-platform": [ "/share/glib-2.0/codegen",
                                   "/bin/gdbus-codegen",
                                   "/bin/glib-*",
@@ -1159,6 +1160,7 @@
         {
             "name": "harfbuzz",
             "config-opts": ["--disable-static",
+                            "--disable-gtk-doc",
                             "--with-graphite2"
                            ],
             "sources": [
@@ -1220,7 +1222,7 @@
         },
         {
             "name": "libsoup",
-            "config-opts": [ "--disable-static", "--disable-vala" ],
+            "config-opts": [ "--disable-static", "--disable-vala", "--disable-gtk-doc" ],
             "sources": [
                  {
                      "type": "archive",
@@ -1231,6 +1233,7 @@
         },
         {
             "name": "p11-kit",
+            "config-opts": ["--disable-gtk-doc" ],
             "sources": [
                 {
                     "type": "archive",
