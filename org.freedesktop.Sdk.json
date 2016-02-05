@@ -12,10 +12,12 @@
     "metadata-platform": "metadata.platform",
     "cleanup": [ "/cache",
                  "/man",
+                 "/share/doc",
                  "/share/man",
                  "/share/gtk-doc",
                  "/share/devhelp",
                  "/lib/systemd",
+                 "/lib/opkg",
                  "*.la", "*.a"],
     "cleanup-commands": [ "touch -d @0 /usr/share/fonts",
                           "touch -d @0 /usr/share/fonts/*",
@@ -28,7 +30,9 @@
                           "/share/aclocal",
                           "/share/pkgconfig",
                           "/lib/pkgconfig",
-                          "/share/vala"
+                          "/lib/cmake",
+                          "/share/vala",
+                          "/lib/python*/test"
                         ],
     "build-options" : {
         "cflags": "-O2 -g",
@@ -40,6 +44,7 @@
     "modules": [
         {
             "name": "autoconf-archive",
+            "cleanup-platform": [ "*" ],
             "sources": [
                 {
                     "type": "archive",
@@ -50,6 +55,7 @@
         },
         {
             "name": "xorg-x11-util-macros",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -60,6 +66,7 @@
         },
         {
             "name": "xorg-x11-proto-bigreqs",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -70,6 +77,7 @@
         },
         {
             "name": "xorg-x11-proto-composite",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -80,6 +88,7 @@
         },
         {
             "name": "xorg-x11-proto-damage",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -90,6 +99,7 @@
         },
         {
             "name": "xorg-x11-proto-dmx",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -100,6 +110,7 @@
         },
         {
             "name": "xorg-x11-proto-evieext",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -110,6 +121,7 @@
         },
         {
             "name": "xorg-x11-proto-fixes",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -120,6 +132,7 @@
         },
         {
             "name": "xorg-x11-proto-fonts",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -130,6 +143,7 @@
         },
         {
             "name": "xorg-x11-proto-gl",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -140,6 +154,7 @@
         },
         {
             "name": "xorg-x11-proto-input",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -150,6 +165,7 @@
         },
         {
             "name": "xorg-x11-proto-kb",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -160,6 +176,7 @@
         },
         {
             "name": "xorg-x11-proto-randr",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -170,6 +187,7 @@
         },
         {
             "name": "xorg-x11-proto-record",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -180,6 +198,7 @@
         },
         {
             "name": "xorg-x11-proto-render",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -190,6 +209,7 @@
         },
         {
             "name": "xorg-x11-proto-resource",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -200,6 +220,7 @@
         },
         {
             "name": "xorg-x11-proto-scrnsaver",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -210,6 +231,7 @@
         },
         {
             "name": "xorg-x11-proto-video",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -220,6 +242,7 @@
         },
         {
             "name": "xorg-x11-proto-xcmisc",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -230,6 +253,7 @@
         },
         {
             "name": "xorg-x11-proto-xext",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -240,6 +264,7 @@
         },
         {
             "name": "xorg-x11-proto-xf86bigfont",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -250,6 +275,7 @@
         },
         {
             "name": "xorg-x11-proto-xf86dga",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -260,6 +286,7 @@
         },
         {
             "name": "xorg-x11-proto-xf86dri",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -270,6 +297,7 @@
         },
         {
             "name": "xorg-x11-proto-xf86misc",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -280,6 +308,7 @@
         },
         {
             "name": "xorg-x11-proto-xf86vidmode",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -290,6 +319,7 @@
         },
         {
             "name": "xorg-x11-proto-xinerama",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -300,6 +330,7 @@
         },
         {
             "name": "xorg-x11-proto-x",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -310,6 +341,7 @@
         },
         {
             "name": "xorg-x11-proto-xproxymanagement",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -320,6 +352,7 @@
         },
         {
             "name": "xorg-x11-proto-dri2",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -330,6 +363,7 @@
         },
         {
             "name": "xorg-x11-proto-present",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -340,6 +374,7 @@
         },
         {
             "name": "xorg-x11-proto-dri3",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -350,6 +385,7 @@
         },
         {
             "name": "xorg-x11-xtrans-devel",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -370,6 +406,7 @@
         },
         {
             "name": "xcb-proto",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -722,6 +759,7 @@
             "name": "freetype",
             /* TODO: Patches from specfile? */
             "config-opts": [ "--disable-static", "--with-zlib=yes", "--with-bzip2=yes", "--with-png=yes", "--with-harfbuzz=no" ],
+            "cleanup-platform": [ "/bin/freetype-config" ],
             "sources": [
                  {
                      "type": "archive",
@@ -760,6 +798,13 @@
         },
         {
             "name": "glib2",
+            "cleanup-platform": [ "/share/glib-2.0/codegen",
+                                  "/bin/gdbus-codegen",
+                                  "/bin/glib-*",
+                                  "/bin/gobject-query",
+                                  "/bin/gresource",
+                                  "/bin/gtester*"
+                               ],
             "sources": [
                  {
                      "type": "archive",
@@ -798,6 +843,7 @@
                 "cflags": "-O2 -g1",
                 "cxxflags": "-O2 -g1"
             },
+            "cleanup-platform": ["/bin/llvm-*"],
             "config-opts": [
                 "-DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG",
                 "-DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG",
@@ -856,6 +902,7 @@
                 "-DCLANG_INCLUDE_TESTS:BOOL=OFF",
                 "-DCLANG_PLUGIN_SUPPORT:BOOL=ON",
                 "-DCLANG_BUILD_EXAMPLES:BOOL=OFF"],
+            "cleanup-platform": [ "*" ],
             "sources": [
                 {
                     "type": "archive",
@@ -866,6 +913,7 @@
         },
         {
             "name": "wayland-protocols",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -877,6 +925,7 @@
         {
             "name": "wayland",
             "config-opts": ["--disable-static", "--disable-documentation"],
+            "cleanup-platform": [ "/bin/wayland-scanner" ],
             "sources": [
                  {
                      "type": "archive",
@@ -923,6 +972,8 @@
         },
         {
             "name": "libva",
+            "cleanup-platform": ["/bin"],
+
             "sources": [
                 {
                     "type": "archive",
@@ -979,6 +1030,14 @@
                 "--disable-bluez5",
                 "--disable-systemd"
             ],
+            "cleanup": [ "/share/pulseaudio",
+                         "/bin/pulseaudio",
+                         "/bin/start-pulseaudio-x11",
+                         "/bin/pasuspender",
+                         "/lib/pulse-*/modules",
+                         "/etc/dbus-1/system.d",
+                         "/etc/pulse/daemon.conf",
+                         "/etc/pulse/*.pa"],
             "sources": [
                  {
                      "type": "archive",
@@ -999,6 +1058,7 @@
         },
         {
             "name": "itstool",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -1009,6 +1069,7 @@
         },
         {
             "name": "desktop-file-utils",
+            "cleanup-platform": [ "*" ],
             "sources": [
                  {
                      "type": "archive",
@@ -1020,6 +1081,7 @@
         {
             "name": "shared-mime-info",
             "config-opts": ["--disable-update-mimedb"],
+            "cleanup-platform": [ "/bin/update-mime-database" ],
             "no-parallel-make": true,
             "sources": [
                  {
@@ -1062,6 +1124,7 @@
                             "--enable-gobject",
                             "--disable-gtk-doc"
                            ],
+            "cleanup-platform": ["/bin"],
             "sources": [
                  {
                      "type": "archive",
@@ -1134,6 +1197,9 @@
         {
             "name": "gobject-introspection",
             "config-opts": ["--disable-gtk-doc" ],
+            "cleanup-platform": ["/lib/gobject-introspection/giscanner",
+                                 "/share/gobject-introspection/giscanner",
+                                 "/bin"],
             "sources": [
                  {
                      "type": "archive",
@@ -1292,6 +1358,7 @@
                             "--without-x11",
                             "--without-libjasper",
                             "--with-included-loaders=png,jpeg" ],
+            "cleanup-platform": [ "/bin"],
             "sources": [
                  {
                      "type": "archive",
@@ -1304,6 +1371,7 @@
             "name": "orc",
             "config-opts": ["--disable-static",
                             "--disable-gtk-doc"],
+            "cleanup-platform": [ "/bin" ],
             "sources": [
                  {
                      "type": "archive",
@@ -1366,6 +1434,7 @@
         },
         {
             "name": "libappstream-glib",
+            "cleanup": ["/share/installed-tests"],
             "config-opts": [ "--disable-gtk-doc",
                              "--disable-man",
                              "--disable-fonts",
@@ -1455,6 +1524,7 @@
         },
         {
             "name": "cups",
+            "cleanup-platform": [ "/bin/cups-config" ],
             "config-opts": ["--disable-static",
                             "--enable-debug",
                             "--with-components=core",
@@ -1485,6 +1555,7 @@
                             "--disable-libudev",
                             "--enable-video-wayland",
                             "--enable-wayland-shared=no"],
+            "cleanup-platform": ["/bin/sdl2-config"],
             "sources": [
                  {
                      "type": "archive",
@@ -1548,9 +1619,10 @@
             "config-opts": ["--disable-gtk-doc",
                             "--disable-3g-source", "--disable-cdma-source",
                             "--disable-modem-gps-source", "--disable-nmea-source"],
-            "cleanup": [ "/share/applications", "/share/dbus-1/interfaces",
+            "cleanup": [ "/share/applications",
                          "/etc/dbus-1/system.d", "/libexec",
                          "/share/dbus-1/system-services" ],
+            "cleanup-platform": [ "/share/dbus-1/interfaces" ],
             "sources": [
                 {
                     "type": "archive",
