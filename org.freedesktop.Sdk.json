@@ -844,9 +844,6 @@
                 "cflags": "-O2 -g1",
                 "cxxflags": "-O2 -g1"
             },
-            "post-install": [
-                "ln -s x86_64-freedesktop-linux /usr/lib/x86_64-unknown-linux"
-            ],
             "config-opts": [
                 "-DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG",
                 "-DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG",
