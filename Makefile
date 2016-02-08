@@ -1,29 +1,6 @@
-NAME=freedesktop
-ID=org.freedesktop
-VERSION=1.2
-ARCH=x86_64
-IMAGEDIR=freedesktop-sdk-base/images/$(ARCH)
-BASE_HASH=6f3b71997f5030353023722d26d2aa2c2c346d75
+all: repo org.freedesktop.Sdk.json
+	rm -rf sdk
+	xdg-app-builder --ccache --require-changes --repo=repo --subject="build of org.freedesktop.Sdk, `date`" ${EXPORT_ARGS-} sdk org.freedesktop.Sdk.json
 
-EXTRA_NAME=
-DELTAS=
-GPG_KEY=
-GPG_HOME=
-
-all: $(NAME)-$(VERSION)-platform.tar.gz $(NAME)-$(VERSION)-sdk.tar.gz
-
-debug: $(NAME)-$(VERSION)-debug.tar.gz
-
-ALL_SPECS = $(wildcard specs/*.spec)
-
-include Makefile.inc
--include rpm-dependencies.P
-
-$(SDK_BASE_IMAGE) $(PLATFORM_BASE_IMAGE) images:
-	if test ! -d freedesktop-sdk-base; then \
-		git clone git://anongit.freedesktop.org/xdg-app/freedesktop-sdk-base;\
-	fi
-	(cd  freedesktop-sdk-base && \
-	 git fetch origin && \
-	 git checkout $(BASE_HASH) && \
-	 make)
+repo:
+	ostree  init --mode=archive-z2 --repo=repo
