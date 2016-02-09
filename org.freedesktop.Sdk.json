@@ -764,8 +764,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://download.savannah.gnu.org/releases/freetype/freetype-2.6.1.tar.bz2",
-                     "sha256": "2f6e9a7de3ae8e85bdd2fe237e27d868d3ba7a27495e65906455c27722dd1a17"
+                     "url": "http://downloads.sourceforge.net/project/freetype/freetype2/2.6.3/freetype-2.6.3.tar.bz2",
+                     "sha256": "371e707aa522acf5b15ce93f11183c725b8ed1ee8546d7b3af549863045863a2"
                  }
             ]
         },
