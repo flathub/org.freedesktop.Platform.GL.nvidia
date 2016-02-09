@@ -1501,6 +1501,17 @@
             ]
         },
         {
+            "name": "hyphen",
+            "config-opts": ["--disable-static"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://downloads.sourceforge.net/hunspell/hyphen-2.8.8.tar.gz",
+                    "sha256": "304636d4eccd81a14b6914d07b84c79ebb815288c76fe027b9ebff6ff24d5705"
+                }
+            ]
+        },
+        {
             "name": "json-glib",
             "config-opts": [ "--disable-static",
                              "--disable-gtk-doc" ],
