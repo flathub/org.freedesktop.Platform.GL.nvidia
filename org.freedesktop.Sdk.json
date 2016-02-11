@@ -967,8 +967,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://mesa.freedesktop.org/archive/11.1.1/mesa-11.1.1.tar.xz",
-                     "sha256": "64db074fc514136b5fb3890111f0d50604db52f0b1e94ba3fcb0fe8668a7fd20"
+                     "url": "http://mesa.freedesktop.org/archive/11.1.2/mesa-11.1.2.tar.xz",
+                     "sha256": "8f72aead896b340ba0f7a4a474bfaf71681f5d675592aec1cb7ba698e319148b"
                  }
             ]
         },
