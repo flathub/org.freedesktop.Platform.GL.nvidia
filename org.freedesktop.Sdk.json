@@ -932,8 +932,8 @@
                  {
                      "type": "archive",
                      /* TODO: Update to stable 1.10 when out */
-                     "url": "http://wayland.freedesktop.org/releases/wayland-1.9.92.tar.xz",
-                     "sha256": "e85eb28b07ffc6df2aa8c13772dcfba2ffa4c9f5307d18ea5c41c98e2e66b32b"
+                     "url": "https://wayland.freedesktop.org/releases/wayland-1.9.93.tar.xz",
+                     "sha256": "6059809e5da892645d74277de3258a9b8b8dbb92e8b012eccde4407d29d20377"
                  }
             ]
         },
