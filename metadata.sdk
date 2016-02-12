@@ -13,12 +13,6 @@ directory=share/zoneinfo
 directory=share/runtime/locale
 subdirectories=true
 
-[Extension org.freedesktop.Debug]
-directory=lib/debug
-
-[Extension org.freedesktop.DebugSrc]
-directory=src/debug
-
 [Environment]
 GI_TYPELIB_PATH=/app/lib/girepository-1.0
 GST_PLUGIN_PATH=/app/lib/gstreamer-1.0
