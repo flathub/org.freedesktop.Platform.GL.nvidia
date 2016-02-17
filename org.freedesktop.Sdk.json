@@ -1049,6 +1049,42 @@
             ]
         },
         {
+            "name": "alsa-lib",
+            "config-opts": [ "--disable-aload", "--disable-alisp", "--disable-old-symbols",
+                             "--disable-rawmidi", "--disable-instr",
+                             "--with-pcm-plugins=hw ioplug extplug"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.alsa-project.org/alsa-lib.git",
+                    "branch": "v1.1.0"
+                },
+                {
+                    "type": "script",
+                    "dest-filename": "autogen.sh",
+                    "commands": [ "autoreconf -i" ]
+                }
+            ]
+        },
+        {
+            "name": "alsa-plugins",
+            "config-opts": [ "--disable-jack", "--enable-pulseaudio", "--disable-samplerate",
+                             "--disable-avcodec", "--with-speex=no"],
+            "post-install": [ "mv /usr/share/alsa/alsa.conf.d/99-pulseaudio-default.conf.example /usr/share/alsa/alsa.conf.d/99-pulseaudio-default.conf" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.alsa-project.org/alsa-plugins.git",
+                    "branch": "v1.1.0"
+                },
+                {
+                    "type": "script",
+                    "dest-filename": "autogen.sh",
+                    "commands": [ "autoreconf -i" ]
+                }
+            ]
+        },
+        {
             "name": "libepoxy",
             "sources": [
                  {
