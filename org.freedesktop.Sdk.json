@@ -1584,7 +1584,9 @@
                             "--disable-systemd",
                             "--enable-threads",
                             "--enable-gnutls",
+                            "--libdir=/usr/lib",
                             "localedir=/usr/share/locale" ],
+            "post-install": [ "chmod u+w /usr/bin/ipptool /usr/lib/libcups.*" ],
             "sources": [
                  {
                      "type": "archive",
