@@ -1482,10 +1482,11 @@
                              "--disable-static",
                              "--disable-dependency-tracking" ],
             "sources": [
-                 {
-                     "type": "archive",
-                     "url": "http://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.5.8.tar.xz",
-                     "sha256": "c31faa2c18dde1ba5b13feece660bfa0686356181f143c3712e1edab82e94556"
+                {
+                    /* TODO: This uses master for now to get the appstream-compose icon fix, but should use a realease */
+                     "type": "git",
+                    "url": "https://github.com/hughsie/appstream-glib.git",
+                    "branch": "5d3917a7dc84851b35d214e349d643e836bb4061"
                  }
             ]
         },
