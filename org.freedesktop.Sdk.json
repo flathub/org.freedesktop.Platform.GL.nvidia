@@ -1472,6 +1472,15 @@
             ]
         },
         {
+            "name": "gtk-doc-stub",
+            "sources": [
+                 {
+                     "type": "git",
+                     "url": "git://git.gnome.org/gtk-doc-stub"
+                 }
+            ]
+        },
+        {
             "name": "libappstream-glib",
             "cleanup": ["/share/installed-tests"],
             "config-opts": [ "--disable-gtk-doc",
