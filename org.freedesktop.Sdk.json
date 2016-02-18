@@ -914,17 +914,6 @@
             ]
         },
         {
-            "name": "wayland-protocols",
-            "cleanup-platform": [ "*" ],
-            "sources": [
-                 {
-                     "type": "archive",
-                     "url": "http://wayland.freedesktop.org/releases/wayland-protocols-1.1.tar.xz",
-                     "sha256": "04d2304fa10da01c81aa7874dc09928639ea69bcd5209e1b0420c856dfae5bc5"
-                 }
-            ]
-        },
-        {
             "name": "wayland",
             "config-opts": ["--disable-static", "--disable-documentation"],
             "cleanup-platform": [ "/bin/wayland-scanner" ],
@@ -933,6 +922,17 @@
                      "type": "archive",
                      "url": "https://wayland.freedesktop.org/releases/wayland-1.10.0.tar.xz",
                      "sha256": "4bf6e790aa6f50ab3825676282ecd75850ec9c4767af96ecb7127b1f3c3d60dc"
+                 }
+            ]
+        },
+        {
+            "name": "wayland-protocols",
+            "cleanup-platform": [ "*" ],
+            "sources": [
+                 {
+                     "type": "archive",
+                     "url": "http://wayland.freedesktop.org/releases/wayland-protocols-1.1.tar.xz",
+                     "sha256": "04d2304fa10da01c81aa7874dc09928639ea69bcd5209e1b0420c856dfae5bc5"
                  }
             ]
         },
