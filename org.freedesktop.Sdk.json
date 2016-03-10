@@ -586,8 +586,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://dri.freedesktop.org/libdrm/libdrm-2.4.65.tar.bz2",
-                     "sha256": "71960ac8bde7d710992b1bc8879935e8300a870c36bd06f22412d0447e3d96c4"
+                     "url": "https://dri.freedesktop.org/libdrm/libdrm-2.4.67.tar.gz",
+                     "sha256": "4ae392513c4df30d88f10e69bf425a1dff960a5b4ccd4da621d9fc88523f7acb"
                  }
             ]
         },
@@ -757,8 +757,8 @@
             ]
         },
         {
-            "name": "freetype",
-            /* TODO: Patches from specfile? */
+            /* This is to bootstrap the harfbuzz build, it will be rebuilt later again */
+            "name": "freetype-bootstrap",
             "config-opts": [ "--disable-static", "--with-zlib=yes", "--with-bzip2=yes", "--with-png=yes", "--with-harfbuzz=no" ],
             "cleanup-platform": [ "/bin/freetype-config" ],
             "sources": [
@@ -878,8 +878,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://llvm.org/releases/3.7.1/llvm-3.7.1.src.tar.xz",
-                    "sha256": "be7794ed0cec42d6c682ca8e3517535b54555a3defabec83554dbc74db545ad5"
+                    "url": "http://llvm.org/releases/3.8.0/llvm-3.8.0.src.tar.xz",
+                    "sha256": "555b028e9ee0f6445ff8f949ea10e9cd8be0d084840e21fbbe1d31d51fc06e46"
                 }
             ]
         },
@@ -908,8 +908,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://llvm.org/releases/3.7.1/cfe-3.7.1.src.tar.xz",
-                    "sha256": "56e2164c7c2a1772d5ed2a3e57485ff73ff06c97dff12edbeea1acc4412b0674"
+                    "url": "http://llvm.org/releases/3.8.0/cfe-3.8.0.src.tar.xz",
+                    "sha256": "04149236de03cf05232d68eb7cb9c50f03062e339b68f4f8a03b650a11536cf9"
                 }
             ]
         },
@@ -931,8 +931,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://wayland.freedesktop.org/releases/wayland-protocols-1.1.tar.xz",
-                     "sha256": "04d2304fa10da01c81aa7874dc09928639ea69bcd5209e1b0420c856dfae5bc5"
+                     "url": "http://wayland.freedesktop.org/releases/wayland-protocols-1.3.tar.xz",
+                     "sha256": "6bcd0633fdf9225ef1c7d2831f542e947f7d79811c79fc37f57b2e5375ded82f"
                  }
             ]
         },
@@ -966,8 +966,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://mesa.freedesktop.org/archive/11.1.2/mesa-11.1.2.tar.xz",
-                     "sha256": "8f72aead896b340ba0f7a4a474bfaf71681f5d675592aec1cb7ba698e319148b"
+                     "url": "https://mesa.freedesktop.org/archive/11.2.0/mesa-11.2.0-rc3.tar.xz",
+                     "sha256": "a6dcf3619029a77391c398d2bc57e23316e3d96740c41e76f1bd4510e6ba8f24"
                  }
             ]
         },
@@ -978,8 +978,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://www.freedesktop.org/software/vaapi/releases/libva/libva-1.6.1.tar.bz2",
-                    "sha256": "7fa2c23fb4431ed8590a52173db18e8760fabb7321d14110c574cc8674594e2e"
+                    "url": "http://www.freedesktop.org/software/vaapi/releases/libva/libva-1.6.2.tar.bz2",
+                    "sha256": "c417f09cdeef549e54f4be5f9876026513afeac395c5be28750b431d848c8bd0"
                 }
             ]
         },
@@ -1011,8 +1011,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://dbus.freedesktop.org/releases/dbus/dbus-1.10.6.tar.gz",
-                     "sha256": "b5fefa08a77edd76cd64d872db949eebc02cf6f3f8be82e4bbc641742af5d35f"
+                     "url": "http://dbus.freedesktop.org/releases/dbus/dbus-1.10.8.tar.gz",
+                     "sha256": "baf3d22baa26d3bdd9edc587736cd5562196ce67996d65b82103bedbe1f0c014"
                  }
             ]
         },
@@ -1042,8 +1042,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://freedesktop.org/software/pulseaudio/releases/pulseaudio-6.0.tar.xz",
-                     "sha256": "b50640e0b80b1607600accfad2e45aabb79d379bf6354c9671efa2065477f6f6"
+                     "url": "http://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-8.0.tar.xz",
+                     "sha256": "690eefe28633466cfd1ab9d85ebfa9376f6b622deec6bfee5091ac9737cd1989"
                  }
             ]
         },
@@ -1123,8 +1123,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://people.freedesktop.org/~hadess/shared-mime-info-1.5.tar.xz",
-                     "sha256": "d6412840eb265bf36e61fd7b6fc6bea21b0f58cb22bed16f2ccccdd54bea4180"
+                     "url": "http://people.freedesktop.org/~hadess/shared-mime-info-1.6.tar.xz",
+                     "sha256": "b2f8f85b6467933824180d0252bbcaee523f550a8fbc95cc4391bd43c03bc34c"
                  }
             ]
         },
@@ -1188,8 +1188,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://downloads.sourceforge.net/silgraphite/graphite2-1.2.4.tgz",
-                     "sha256": "4bc3d5168029bcc0aa00eb2c973269d29407be2796ff56f9c80e10736bd8b003"
+                     "url": "http://downloads.sourceforge.net/project/silgraphite/graphite2/graphite-1.3.6.tgz",
+                     "sha256": "475e7657ac606ed8805518031729c1273cf7d9d422169ac6f7882e01d832af75"
                  }
             ]
         },
@@ -1197,13 +1197,28 @@
             "name": "harfbuzz",
             "config-opts": ["--disable-static",
                             "--disable-gtk-doc",
+                            "--with-gobject",
                             "--with-graphite2"
                            ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.1.3.tar.bz2",
-                     "sha256": "d93d7cb7979c32672e902fdfa884599e63f07f2fa5b06c66147d20c516d4b8f7"
+                     "url": "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.2.3.tar.bz2",
+                     "sha256": "8216d2404aaab7fde87be0365a90d64aa6c55928e104557cfcb37b54a096cb8c"
+                 }
+            ]
+        },
+        {
+            /* Rebuild with harfbuzz support */
+            "name": "freetype",
+            /* TODO: Patches from specfile? */
+            "config-opts": [ "--disable-static", "--with-zlib=yes", "--with-bzip2=yes", "--with-png=yes", "--with-harfbuzz=yes" ],
+            "cleanup-platform": [ "/bin/freetype-config" ],
+            "sources": [
+                 {
+                     "type": "archive",
+                     "url": "http://downloads.sourceforge.net/project/freetype/freetype2/2.6.3/freetype-2.6.3.tar.bz2",
+                     "sha256": "371e707aa522acf5b15ce93f11183c725b8ed1ee8546d7b3af549863045863a2"
                  }
             ]
         },
@@ -1414,8 +1429,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/orc/orc-0.4.24.tar.xz",
-                     "sha256": "338cd493b5247300149821c6312bdf7422a3593ae98691fc75d7e4fe727bd39b"
+                     "url": "http://gstreamer.freedesktop.org/src/orc/orc-0.4.25.tar.xz",
+                     "sha256": "c1b1d54a58f26d483f0b3881538984789fe5d5460ab8fab74a1cacbd3d1c53d1"
                  }
             ]
         },
@@ -1481,6 +1496,18 @@
             ]
         },
         {
+            "name": "json-glib",
+            "config-opts": [ "--disable-static",
+                             "--disable-gtk-doc" ],
+            "sources": [
+                 {
+                     "type": "archive",
+                     "url": "https://download.gnome.org/sources/json-glib/1.1/json-glib-1.1.2.tar.xz",
+                     "sha256": "e00f84018306e1aa234285d77b6c2b5d57c1e1d4dabc4dfc62d30b9670941bda"
+                 }
+            ]
+        },
+        {
             "name": "libappstream-glib",
             "cleanup": ["/share/installed-tests"],
             "config-opts": [ "--disable-gtk-doc",
@@ -1492,10 +1519,9 @@
                              "--disable-dependency-tracking" ],
             "sources": [
                 {
-                    /* TODO: This uses master for now to get the appstream-compose icon fix, but should use a realease */
-                     "type": "git",
-                    "url": "https://github.com/hughsie/appstream-glib.git",
-                    "branch": "5d3917a7dc84851b35d214e349d643e836bb4061"
+                     "type": "archive",
+                    "url": "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.5.11.tar.xz",
+                    "sha256": "90245f938666896d5f5c86654589808dd652f54bfe58b2fff18ca59bd4e5f329"
                  }
             ]
         },
@@ -1555,18 +1581,6 @@
                     "url": "http://downloads.sourceforge.net/hunspell/hyphen-2.8.8.tar.gz",
                     "sha256": "304636d4eccd81a14b6914d07b84c79ebb815288c76fe027b9ebff6ff24d5705"
                 }
-            ]
-        },
-        {
-            "name": "json-glib",
-            "config-opts": [ "--disable-static",
-                             "--disable-gtk-doc" ],
-            "sources": [
-                 {
-                     "type": "archive",
-                     "url": "http://download.gnome.org/sources/json-glib/1.0/json-glib-1.0.4.tar.xz",
-                     "sha256": "80f3593cb6bd13f1465828e46a9f740e2e9bd3cd2257889442b3e62bd6de05cd"
-                 }
             ]
         },
         {
@@ -1677,10 +1691,8 @@
         },
         {
             "name": "geoclue2",
-            /* TODO: Use --disable-backend when supported */
             "config-opts": ["--disable-gtk-doc",
-                            "--disable-3g-source", "--disable-cdma-source",
-                            "--disable-modem-gps-source", "--disable-nmea-source"],
+                            "--disable-backend"],
             "cleanup": [ "/share/applications",
                          "/etc/dbus-1/system.d", "/libexec",
                          "/share/dbus-1/system-services" ],
@@ -1688,8 +1700,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://www.freedesktop.org/software/geoclue/releases/2.4/geoclue-2.4.1.tar.xz",
-                    "sha256": "9a19fd00f6064d6f29e791ee28afb839431e280fed3ad851aa04a0ddae0d34d4"
+                    "url": "http://www.freedesktop.org/software/geoclue/releases/2.4/geoclue-2.4.3.tar.xz",
+                    "sha256": "ada9dba870dd79e1b21923aeda4d82b66cbda39e57978fbe3d83d356cc3c605e"
                 }
             ]
         }
