@@ -808,10 +808,11 @@
                                   "/bin/gtester*"
                                ],
             "sources": [
-                 {
+                {
+                    /* TODO: Update to final */
                      "type": "archive",
-                     "url": "http://download.gnome.org/sources/glib/2.46/glib-2.46.2.tar.xz",
-                     "sha256": "5031722e37036719c1a09163cc6cf7c326e4c4f1f1e074b433c156862bd733db"
+                     "url": "https://download.gnome.org/sources/glib/2.47/glib-2.47.6.tar.xz",
+                     "sha256": "fa40ebbbc3fc8883e1d73c4f9430e44bf3d6469a68f56d37e8f292e5671bcfae"
                  }
             ]
         },
@@ -937,6 +938,7 @@
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "mesa",
             "build-options" : {
                 "cxxflags": "-O2 -g -fno-rtti -fno-exceptions"
@@ -1248,6 +1250,7 @@
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "gobject-introspection",
             "config-opts": ["--disable-gtk-doc" ],
             "cleanup-platform": ["/lib/gobject-introspection/giscanner",
@@ -1256,29 +1259,31 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://download.gnome.org/sources/gobject-introspection/1.46/gobject-introspection-1.46.0.tar.xz",
-                     "sha256": "6658bd3c2b8813eb3e2511ee153238d09ace9d309e4574af27443d87423e4233"
+                     "url": "https://download.gnome.org/sources/gobject-introspection/1.47/gobject-introspection-1.47.1.tar.xz",
+                     "sha256": "e5f6e18a4362af9a77790422f61f52ae3a038bf3f0cc1f912ef3183c2a511593"
                  }
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "glib-networking",
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://download.gnome.org/sources/glib-networking/2.46/glib-networking-2.46.1.tar.xz",
-                     "sha256": "d5034214217f705891b6c9e719cc2c583c870bfcfdc454ebbb5e5e8940ac90b1"
+                     "url": "https://download.gnome.org/sources/glib-networking/2.47/glib-networking-2.47.90.tar.xz",
+                     "sha256": "fa82cdc3048e27cd91a54b2e9da807e1b8c5a3f70a7a3de8505e4a109d116623"
                  }
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "libsoup",
             "config-opts": [ "--disable-static", "--disable-vala", "--disable-gtk-doc" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://download.gnome.org/sources/libsoup/2.52/libsoup-2.52.2.tar.xz",
-                     "sha256": "db55628b5c7d952945bb71b236469057c8dfb8dea0c271513579c6273c2093dc"
+                     "url": "https://download.gnome.org/sources/libsoup/2.53/libsoup-2.53.90.tar.xz",
+                     "sha256": "1ce75a6cdea5cb34724772c95aa08e089a3d9224c2527458e9c5b763ed9802e3"
                  }
             ]
         },
@@ -1416,8 +1421,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://download.gnome.org/sources/gdk-pixbuf/2.32/gdk-pixbuf-2.32.3.tar.xz",
-                     "sha256": "2b6771f1ac72f687a8971e59810b8dc658e65e7d3086bd2e676e618fd541d031"
+                     "url": "https://download.gnome.org/sources/gdk-pixbuf/2.33/gdk-pixbuf-2.33.2.tar.xz",
+                     "sha256": "d91ec3ab7d0fcf998d2c38b6725655666e0767e2c462598aea003caee2455929"
                  }
             ]
         },
@@ -1435,28 +1440,31 @@
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "gstreamer",
             "config-opts": ["--disable-gtk-doc", "--enable-debug", "--disable-examples" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.6.3.tar.xz",
-                     "sha256": "22f9568d67b87cf700a111f381144bd37cb93790a77e4e331db01fe854a37f24"
+                     "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.7.90.tar.xz",
+                     "sha256": "f8c10fc4ecc3ad544aa8e761551ee4c0d9ad812cdb4a57acbfdf413919886c46"
                  }
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "gstreamer-plugins-base",
             "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.6.3.tar.xz",
-                     "sha256": "b6154f8fdba4877e95efd94610ef0ada4f0171cd12eb829a3c3c97345d9c7a75"
+                     "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.7.90.tar.xz",
+                     "sha256": "7564b8b2a8c0d78aa2c1742968bef83d35fa83a2cfc167d46a5fc4715794742c"
                  }
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "gstreamer-plugins-good",
             "config-opts": ["--disable-gtk-doc",
                             "--enable-experimental",
@@ -1470,19 +1478,20 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.6.3.tar.xz",
-                     "sha256": "24b19db70b2a83461ebddfe20033db432dadfdb5d4b54ffb1dfa0d830134a177"
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.7.90.tar.xz",
+                     "sha256": "fcbebe3cc0272a7ca4865bfbb898a7e3dc8e51948a5fca5477e68a214d172859"
                  }
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "gstreamer-plugins-bad",
             "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.6.3.tar.xz",
-                     "sha256": "971b29101d6a9c5e3fe94d99d977a227f58f0b2d29b6ca2c7f292052542b3a61"
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.7.90.tar.xz",
+                     "sha256": "01f1c168324738c543ce26b1332b0d77547c9717f3b2fde4f22a8e4ebcb06d14"
                  }
             ]
         },
@@ -1496,6 +1505,7 @@
             ]
         },
         {
+            /* TODO: Update to stable */
             "name": "json-glib",
             "config-opts": [ "--disable-static",
                              "--disable-gtk-doc" ],
