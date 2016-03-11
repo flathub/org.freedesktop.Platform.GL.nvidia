@@ -1701,8 +1701,10 @@
         },
         {
             "name": "geoclue2",
+            /* TODO: Use --disable-backend when supported (missing .pc file atm) */
             "config-opts": ["--disable-gtk-doc",
-                            "--disable-backend"],
+                            "--disable-3g-source", "--disable-cdma-source",
+                            "--disable-modem-gps-source", "--disable-nmea-source"],
             "cleanup": [ "/share/applications",
                          "/etc/dbus-1/system.d", "/libexec",
                          "/share/dbus-1/system-services" ],
