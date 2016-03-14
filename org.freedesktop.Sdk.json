@@ -419,6 +419,8 @@
         {
             "name": "libxcb",
             "rm-configure": true,
+            /* I'm getting strange python errors with parallel build: EOFError: EOF read where object expected when parsing xml desc */
+            "no-parallel-make": true,
             "config-opts": [ "--disable-static", "--enable-xkb", "--disable-xprint" ],
             "post-install": [ "sed 's,@libdir@,/usr/lib,;s,@prefix@,/usr,;s,@exec_prefix@,/usr,' pthread-stubs.pc.in > /usr/lib/pkgconfig/pthread-stubs.pc"],
             "sources": [
