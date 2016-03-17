@@ -1448,8 +1448,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.7.90.tar.xz",
-                     "sha256": "f8c10fc4ecc3ad544aa8e761551ee4c0d9ad812cdb4a57acbfdf413919886c46"
+                     "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.7.91.tar.xz",
+                     "sha256": "f45c3063a8281a69905b931e174dc5cab127894126e1b39445ce3fe392df2f08"
                  }
             ]
         },
@@ -1460,8 +1460,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.7.90.tar.xz",
-                     "sha256": "7564b8b2a8c0d78aa2c1742968bef83d35fa83a2cfc167d46a5fc4715794742c"
+                     "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.7.91.tar.xz",
+                     "sha256": "29a14b902f056141c4c0d4fc8390a9c371845b86cf9bc6ecfce026ead76c359a"
                  }
             ]
         },
@@ -1480,8 +1480,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.7.90.tar.xz",
-                     "sha256": "fcbebe3cc0272a7ca4865bfbb898a7e3dc8e51948a5fca5477e68a214d172859"
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.7.91.tar.xz",
+                     "sha256": "fed8eec07102d840eea7ad398b025670ee017a5bd85d805c272d07f3fca5d7a3"
                  }
             ]
         },
@@ -1492,8 +1492,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.7.90.tar.xz",
-                     "sha256": "01f1c168324738c543ce26b1332b0d77547c9717f3b2fde4f22a8e4ebcb06d14"
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.7.91.tar.xz",
+                     "sha256": "df8efbfd0261b214a4b20f4caae78282a8fc5143e61218f9fe03b1e74599fb2c"
                  }
             ]
         },
