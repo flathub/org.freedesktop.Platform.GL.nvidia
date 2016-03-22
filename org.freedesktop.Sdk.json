@@ -813,8 +813,8 @@
                 {
                     /* TODO: Update to final */
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/glib/2.47/glib-2.47.6.tar.xz",
-                     "sha256": "fa40ebbbc3fc8883e1d73c4f9430e44bf3d6469a68f56d37e8f292e5671bcfae"
+                     "url": "https://download.gnome.org/sources/glib/2.47/glib-2.47.92.tar.xz",
+                     "sha256": "219898ab67786de7e7537cc34a6d9af50d4731cdb1356905471d981abfd4d79a"
                  }
             ]
         },
@@ -1261,31 +1261,29 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/gobject-introspection/1.47/gobject-introspection-1.47.1.tar.xz",
-                     "sha256": "e5f6e18a4362af9a77790422f61f52ae3a038bf3f0cc1f912ef3183c2a511593"
+                     "url": "https://download.gnome.org/sources/gobject-introspection/1.47/gobject-introspection-1.47.92.tar.xz",
+                     "sha256": "c8ced38348e436222fda5e0abdc31022e8017d8732fe69da5c92285a37766ac8"
                  }
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "glib-networking",
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/glib-networking/2.47/glib-networking-2.47.90.tar.xz",
-                     "sha256": "fa82cdc3048e27cd91a54b2e9da807e1b8c5a3f70a7a3de8505e4a109d116623"
+                     "url": "https://download.gnome.org/sources/glib-networking/2.48/glib-networking-2.48.0.tar.xz",
+                     "sha256": "7a1f3312e757b97af94e2db8a1f14eb9cc018c983931ecdf3b0c54acece39024"
                  }
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "libsoup",
             "config-opts": [ "--disable-static", "--disable-vala", "--disable-gtk-doc" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/libsoup/2.53/libsoup-2.53.90.tar.xz",
-                     "sha256": "1ce75a6cdea5cb34724772c95aa08e089a3d9224c2527458e9c5b763ed9802e3"
+                     "url": "https://download.gnome.org/sources/libsoup/2.54/libsoup-2.54.0.tar.xz",
+                     "sha256": "fbf1038efb10d2ffbbb88bb46e7ce32b683fde8e566f36bcf26f7f69a550ec56"
                  }
             ]
         },
