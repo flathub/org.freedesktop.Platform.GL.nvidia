@@ -812,7 +812,7 @@
                 {
                      "type": "archive",
                      "url": "https://download.gnome.org/sources/glib/2.48/glib-2.48.0.tar.xz",
-                     "sha256": "20e69daa833725adaee53bd799de716f442bd366eed0df4de29c4b396bf420fa"
+                     "sha256": "744be6931ca914c68af98dc38ff6b0cf8381d65e335060faddfbf04c17147c34"
                  }
             ]
         },
