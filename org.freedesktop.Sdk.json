@@ -1249,7 +1249,6 @@
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "gobject-introspection",
             "config-opts": ["--disable-gtk-doc" ],
             "cleanup-platform": ["/lib/gobject-introspection/giscanner",
@@ -1258,8 +1257,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/gobject-introspection/1.47/gobject-introspection-1.47.92.tar.xz",
-                     "sha256": "c8ced38348e436222fda5e0abdc31022e8017d8732fe69da5c92285a37766ac8"
+                     "url": "https://download.gnome.org/sources/gobject-introspection/1.48/gobject-introspection-1.48.0.tar.xz",
+                     "sha256": "fa275aaccdbfc91ec0bc9a6fd0562051acdba731e7d584b64a277fec60e75877"
                  }
             ]
         },
@@ -1502,15 +1501,14 @@
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "json-glib",
             "config-opts": [ "--disable-static",
                              "--disable-gtk-doc" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/json-glib/1.1/json-glib-1.1.2.tar.xz",
-                     "sha256": "e00f84018306e1aa234285d77b6c2b5d57c1e1d4dabc4dfc62d30b9670941bda"
+                     "url": "https://download.gnome.org/sources/json-glib/1.2/json-glib-1.2.0.tar.xz",
+                     "sha256": "99d6dfbe49c08fd7529f1fe8dcb1893b810a1bb222f1e7b65f41507658b8a7d3"
                  }
             ]
         },
