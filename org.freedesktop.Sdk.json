@@ -24,7 +24,8 @@
                           "fc-cache -fs",
                           "mkdir -p /usr/lib/GL",
                           "mkdir -p /usr/lib/debug",
-                          "ln -s /app/lib/debug /usr/lib/debug/app"
+                          "ln -s /app/lib/debug /usr/lib/debug/app",
+                          "ln -s ../../run/ /usr/lib/extensions"
                         ],
     "cleanup-platform": [ "/include",
                           "/share/aclocal",
