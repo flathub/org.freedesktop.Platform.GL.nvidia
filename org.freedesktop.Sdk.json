@@ -801,7 +801,7 @@
         },
         {
             "name": "glib2",
-            "config-opts": ["--disable-gtk-doc" ],
+            "config-opts": ["--disable-gtk-doc",  "--with-pcre=system" ],
             "cleanup-platform": [ "/share/glib-2.0/codegen",
                                   "/bin/gdbus-codegen",
                                   "/bin/glib-*",
