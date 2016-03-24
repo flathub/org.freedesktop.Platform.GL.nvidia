@@ -1251,7 +1251,7 @@
         },
         {
             "name": "gobject-introspection",
-            "config-opts": ["--disable-gtk-doc" ],
+            "config-opts": ["--disable-gtk-doc", "--disable-static" ],
             "cleanup-platform": ["/lib/gobject-introspection/giscanner",
                                  "/share/gobject-introspection/giscanner",
                                  "/bin"],
@@ -1265,6 +1265,7 @@
         },
         {
             "name": "glib-networking",
+            "config-opts": ["--disable-static", "--with-libproxy"],
             "sources": [
                  {
                      "type": "archive",
