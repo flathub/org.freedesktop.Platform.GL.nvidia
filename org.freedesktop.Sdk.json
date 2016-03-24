@@ -1437,31 +1437,28 @@
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "gstreamer",
             "config-opts": ["--disable-gtk-doc", "--enable-debug", "--disable-examples" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.7.91.tar.xz",
-                     "sha256": "f45c3063a8281a69905b931e174dc5cab127894126e1b39445ce3fe392df2f08"
+                     "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.8.0.tar.xz",
+                     "sha256": "947a314a212b5d94985d89b43440dbe66b696e12bbdf9a2f78967b98d74abedc"
                  }
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "gstreamer-plugins-base",
             "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.7.91.tar.xz",
-                     "sha256": "29a14b902f056141c4c0d4fc8390a9c371845b86cf9bc6ecfce026ead76c359a"
+                     "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.0.tar.xz",
+                     "sha256": "abc0acc1d15b4b9c97c65cd9689bd6400081853b9980ea428d3c8572dd791522"
                  }
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "gstreamer-plugins-good",
             "config-opts": ["--disable-gtk-doc",
                             "--enable-experimental",
@@ -1475,20 +1472,19 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.7.91.tar.xz",
-                     "sha256": "fed8eec07102d840eea7ad398b025670ee017a5bd85d805c272d07f3fca5d7a3"
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.8.0.tar.xz",
+                     "sha256": "c20c134d47dbc238d921707a3b66da709c2b4dd89f9d267cec13d1ddf16e9f4d"
                  }
             ]
         },
         {
-            /* TODO: Update to stable */
             "name": "gstreamer-plugins-bad",
             "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.7.91.tar.xz",
-                     "sha256": "df8efbfd0261b214a4b20f4caae78282a8fc5143e61218f9fe03b1e74599fb2c"
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.8.0.tar.xz",
+                     "sha256": "116376dd1085082422e0b21b0ecd3d1cb345c469c58e32463167d4675f4ca90e"
                  }
             ]
         },
