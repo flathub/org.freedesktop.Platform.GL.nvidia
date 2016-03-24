@@ -1057,9 +1057,9 @@
                              "--with-pcm-plugins=hw ioplug extplug"],
             "sources": [
                 {
-                    "type": "git",
-                    "url": "git://git.alsa-project.org/alsa-lib.git",
-                    "branch": "v1.1.0"
+                    "type": "archive",
+                    "url": "http://pkgs.fedoraproject.org/repo/pkgs/alsa-lib/alsa-lib-1.1.0.tar.bz2/69515ca73c3c4a212ef45160dea846c1/alsa-lib-1.1.0.tar.bz2",
+                    "sha256": "dfde65d11e82b68f82e562ab6228c1fb7c78854345d3c57e2c68a9dd3dae1f15"
                 },
                 {
                     "type": "script",
@@ -1075,9 +1075,9 @@
             "post-install": [ "mv /usr/share/alsa/alsa.conf.d/99-pulseaudio-default.conf.example /usr/share/alsa/alsa.conf.d/99-pulseaudio-default.conf" ],
             "sources": [
                 {
-                    "type": "git",
-                    "url": "git://git.alsa-project.org/alsa-plugins.git",
-                    "branch": "v1.1.0"
+                    "type": "archive",
+                    "url": "http://pkgs.fedoraproject.org/repo/pkgs/alsa-plugins/alsa-plugins-1.1.0.tar.bz2/b123e42ed881b9adbc99e4040f257c39/alsa-plugins-1.1.0.tar.bz2",
+                    "sha256": "3b83c329953bef99f5fe25ae04ec4a455fe6514939f3b45a5321966652b2c9ee"
                 },
                 {
                     "type": "script",
