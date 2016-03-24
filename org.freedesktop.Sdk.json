@@ -1493,7 +1493,8 @@
             "sources": [
                  {
                      "type": "git",
-                     "url": "git://git.gnome.org/gtk-doc-stub"
+                     "url": "git://git.gnome.org/gtk-doc-stub",
+                     "branch": "1dea266593edb766d6d898c79451ef193eb17cfa"
                  }
             ]
         },
