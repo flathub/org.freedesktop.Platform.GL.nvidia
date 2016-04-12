@@ -50,8 +50,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://ftp.acc.umu.se/mirror/gnu.org/gnu/autoconf-archive/autoconf-archive-2015.09.25.tar.xz",
-                    "sha256": "7c0467a5dbd2340153bca5a477bd92fbc951d9ee3cbed92f16f6bf08ac0c350a"
+                    "url": "http://ftp.acc.umu.se/mirror/gnu.org/gnu/autoconf-archive/autoconf-archive-2016.03.20.tar.xz",
+                    "sha256": "88fb2efff640eddd28a52ae550ff5561bca3bd2bba09e1d7b0580e719875e437"
                 }
             ]
         },
@@ -779,8 +779,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://fontconfig.org/release/fontconfig-2.11.94.tar.bz2",
-                     "sha256": "d763c024df434146f3352448bc1f4554f390c8a48340cef7aa9cc44716a159df"
+                     "url": "http://fontconfig.org/release/fontconfig-2.11.95.tar.bz2",
+                     "sha256": "7b165eee7aa22dcc1557db56f58d905b6a14b32f9701c79427452474375b4c89"
                  },
                  {
                      "type": "file",
@@ -1205,8 +1205,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.2.3.tar.bz2",
-                     "sha256": "8216d2404aaab7fde87be0365a90d64aa6c55928e104557cfcb37b54a096cb8c"
+                     "url": "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-1.2.6.tar.bz2",
+                     "sha256": "7537bacccb3524df0cd2a4d5bc7e168bcc10e8171e0324f3cd522583868192c1"
                  }
             ]
         },
@@ -1279,8 +1279,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/libsoup/2.54/libsoup-2.54.0.tar.xz",
-                     "sha256": "fbf1038efb10d2ffbbb88bb46e7ce32b683fde8e566f36bcf26f7f69a550ec56"
+                     "url": "https://download.gnome.org/sources/libsoup/2.54/libsoup-2.54.0.1.tar.xz",
+                     "sha256": "ade4920166bd036e8890d04acdc135686d877670953949fa6245797c906e38e0"
                  }
             ]
         },
@@ -1418,8 +1418,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/gdk-pixbuf/2.33/gdk-pixbuf-2.33.2.tar.xz",
-                     "sha256": "d91ec3ab7d0fcf998d2c38b6725655666e0767e2c462598aea003caee2455929"
+                     "url": "https://download.gnome.org/sources/gdk-pixbuf/2.34/gdk-pixbuf-2.34.0.tar.xz",
+                     "sha256": "d55e5b383ee219bd0e23bf6ed4427d56a7db5379729a6e3e0a0e0eba9a8d8879"
                  }
             ]
         },
