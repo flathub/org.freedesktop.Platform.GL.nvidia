@@ -2,7 +2,7 @@
     "build-runtime": true,
     "id": "org.freedesktop.Sdk",
     "id-platform": "org.freedesktop.Platform",
-    "branch": "1.4",
+    "branch": "1.5",
     "runtime": "org.freedesktop.BasePlatform",
     "sdk": "org.freedesktop.BaseSdk",
     "runtime-version": "1.4",
