@@ -819,7 +819,7 @@
         },
         {
             "name": "xkeyboard-config",
-            "config-opts": [ "--enable-compat-rules" "--with-xkb-base=/usr/share/X11/xkb", "--with-xkb-rules-symlink=xorg"],
+            "config-opts": [ "--enable-compat-rules", "--with-xkb-base=/usr/share/X11/xkb", "--with-xkb-rules-symlink=xorg"],
             "sources": [
                  {
                      "type": "archive",
@@ -1370,7 +1370,7 @@
                  {
                      "type": "file",
                      "path": "30-0-google-crosextra-caladea.conf"
-                 }
+                 },
                  {
                      "type": "file",
                      "path": "google-crosextra-caladea.conf"
@@ -1560,7 +1560,7 @@
                      "url": "http://pkgs.fedoraproject.org/repo/pkgs/hunspell-en/wordlist-20121024.tar.xz/10a7ff0b2209af7d22b14b219b98c9b5/wordlist-20121024.tar.xz",
                      "strip-components": 0,
                      "sha256": "0e3e127bfa2a8068f6913949d137e75c4d025ecb9cf1748b80a8176cdee53148"
-                 }
+                 },
                  {
                      "type": "archive",
                      "strip-components": 0,
