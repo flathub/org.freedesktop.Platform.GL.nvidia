@@ -74,6 +74,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/bigreqsproto-1.1.2.tar.bz2",
                      "sha256": "462116ab44e41d8121bfde947321950370b285a5316612b8fce8334d50751b1e"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -85,6 +92,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/compositeproto-0.4.2.tar.bz2",
                      "sha256": "049359f0be0b2b984a8149c966dd04e8c58e6eade2a4a309cf1126635ccd0cfc"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -96,6 +110,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/damageproto-1.2.1.tar.bz2",
                      "sha256": "5c7c112e9b9ea8a9d5b019e5f17d481ae20f766cb7a4648360e7c1b46fc9fc5b"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -107,6 +128,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/dmxproto-2.3.1.tar.bz2",
                      "sha256": "e72051e6a3e06b236d19eed56368117b745ca1e1a27bdc50fd51aa375bea6509"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -118,6 +146,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/evieext-1.1.1.tar.bz2",
                      "sha256": "1cf74114436d99f56577a90b6438a32ba31b8128c9e63842bb179aba592733fe"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -129,6 +164,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/fixesproto-5.0.tar.bz2",
                      "sha256": "ba2f3f31246bdd3f2a0acf8bd3b09ba99cab965c7fb2c2c92b7dc72870e424ce"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -195,6 +237,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/recordproto-1.14.2.tar.bz2",
                      "sha256": "a777548d2e92aa259f1528de3c4a36d15e07a4650d0976573a8e2ff5437e7370"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -206,6 +255,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/renderproto-0.11.1.tar.bz2",
                      "sha256": "06735a5b92b20759204e4751ecd6064a2ad8a6246bb65b3078b862a00def2537"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -217,6 +273,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/resourceproto-1.2.0.tar.bz2",
                      "sha256": "3c66003a6bdeb0f70932a9ed3cf57cc554234154378d301e0c5cfa189d8f6818"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -228,6 +291,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/scrnsaverproto-1.2.2.tar.bz2",
                      "sha256": "8bb70a8da164930cceaeb4c74180291660533ad3cc45377b30a795d1b85bcd65"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -250,6 +320,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xcmiscproto-1.2.2.tar.bz2",
                      "sha256": "b13236869372256c36db79ae39d54214172677fb79e9cdc555dceec80bd9d2df"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -261,6 +338,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xextproto-7.3.0.tar.bz2",
                      "sha256": "f3f4b23ac8db9c3a9e0d8edb591713f3d70ef9c3b175970dd8823dfc92aa5bb0"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -283,6 +367,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xf86dgaproto-2.1.tar.bz2",
                      "sha256": "ac5ef65108e1f2146286e53080975683dae49fc94680042e04bd1e2010e99050"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -294,6 +385,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xf86driproto-2.1.1.tar.bz2",
                      "sha256": "9c4b8d7221cb6dc4309269ccc008a22753698ae9245a398a59df35f1404d661f"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -305,6 +403,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xf86miscproto-0.9.3.tar.bz2",
                      "sha256": "45b8ec6a4a8ca21066dce117e09dcc88539862e616e60fb391de05b36f63b095"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -316,6 +421,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xf86vidmodeproto-2.3.1.tar.bz2",
                      "sha256": "45d9499aa7b73203fd6b3505b0259624afed5c16b941bd04fcf123e5de698770"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -327,6 +439,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xineramaproto-1.2.1.tar.bz2",
                      "sha256": "977574bb3dc192ecd9c55f59f991ec1dff340be3e31392c95deff423da52485b"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -349,6 +468,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/xproxymanagementprotocol-1.0.3.tar.bz2",
                      "sha256": "7382acd8c76fa577beb622cab86cc07fafdcecbbd9b4f209bfa72976c4fd26c2"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -360,6 +486,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/proto/dri2proto-2.8.tar.bz2",
                      "sha256": "f9b55476def44fc7c459b2537d17dbc731e36ed5d416af7ca0b1e2e676f8aa04"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -503,6 +636,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/lib/libXdamage-1.1.4.tar.bz2",
                      "sha256": "7c3fe7c657e83547f4822bfde30a90d84524efb56365448768409b77f05355ad"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -646,6 +786,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/lib/libXScrnSaver-1.2.2.tar.bz2",
                      "sha256": "8ff1efa7341c7f34bcf9b17c89648d6325ddaae22e3904e091794e0b4426ce1d"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -690,6 +837,13 @@
                      "type": "archive",
                      "url": "http://xorg.freedesktop.org/archive/individual/lib/libXcomposite-0.4.4.tar.bz2",
                      "sha256": "ede250cd207d8bee4a338265c3007d7a68d5aca791b6ac41af18e9a2aeb34178"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
@@ -1564,6 +1718,13 @@
                      "type": "archive",
                      "url": "http://ftp.gnu.org/gnu/aspell/aspell-0.60.6.1.tar.gz",
                      "sha256": "f52583a83a63633701c5f71db3dc40aab87b7f76b29723aeb27941eff42df6e1"
+                 },
+                 {
+                     "type": "shell",
+                     "commands": [
+			 "cp /usr/share/gnu-config/config.sub .",
+			 "cp /usr/share/gnu-config/config.guess ."
+		     ]
                  }
             ]
         },
