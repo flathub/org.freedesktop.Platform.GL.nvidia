@@ -941,7 +941,21 @@
         {
             "name": "mesa",
             "build-options" : {
-                "cxxflags": "-O2 -g -fno-rtti -fno-exceptions"
+                "cxxflags": "-O2 -g -fno-rtti -fno-exceptions",
+		"arch" : {
+		    "i386" : {
+			"config-opts" : [
+			    "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965"
+			]
+		    },
+		    "aarch64" : {
+			"config-opts" : [
+			    "--with-gallium-drivers=svga,swrast,nouveau,freedreno,vc4",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200"
+			]
+		    }
+		}
             },
             "config-opts": [
                 "--disable-selinux",
@@ -960,9 +974,7 @@
                 "--enable-gallium-llvm",
                 "--enable-llvm-shared-libs",
                 "--enable-dri",
-                "--enable-sysfs",
-                "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
-                "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965"
+                "--enable-sysfs"
             ],
             "make-args": [ "MKDEP=/bin/true"],
             "sources": [
