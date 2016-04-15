@@ -1,0 +1,11 @@
+--- clang-1/lib/Driver/ToolChains.cpp	2016-04-15 20:36:37.825903494 +0100
++++ /home/tristan/clang-copy/lib/Driver/ToolChains.cpp	2016-04-15 20:34:02.980104915 +0100
+@@ -1418,7 +1418,7 @@ bool Generic_GCC::GCCInstallationDetecto
+   static const char *const AArch64LibDirs[] = {"/lib64", "/lib"};
+   static const char *const AArch64Triples[] = {
+       "aarch64-none-linux-gnu", "aarch64-linux-gnu", "aarch64-linux-android",
+-      "aarch64-redhat-linux"};
++      "aarch64-redhat-linux", "aarch64-unknown-linux"};
+   static const char *const AArch64beLibDirs[] = {"/lib"};
+   static const char *const AArch64beTriples[] = {"aarch64_be-none-linux-gnu",
+                                                  "aarch64_be-linux-gnu"};

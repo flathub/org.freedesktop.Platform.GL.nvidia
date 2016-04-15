@@ -912,6 +912,10 @@
                     "type": "archive",
                     "url": "http://llvm.org/releases/3.8.0/cfe-3.8.0.src.tar.xz",
                     "sha256": "04149236de03cf05232d68eb7cb9c50f03062e339b68f4f8a03b650a11536cf9"
+                 },
+                 {
+                     "type": "patch",
+                     "path": "clang-detect-aarch64-gcc.patch"
                 }
             ]
         },
