@@ -640,6 +640,7 @@
                  {
                      "type": "shell",
                      "commands": [
+			 "rm -f config.sub config.guess",
 			 "cp /usr/share/gnu-config/config.sub .",
 			 "cp /usr/share/gnu-config/config.guess ."
 		     ]
@@ -841,6 +842,7 @@
                  {
                      "type": "shell",
                      "commands": [
+			 "rm -f config.sub config.guess",
 			 "cp /usr/share/gnu-config/config.sub .",
 			 "cp /usr/share/gnu-config/config.guess ."
 		     ]
