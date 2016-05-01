@@ -1004,6 +1004,20 @@
                 "cxxflags": "-O2 -g1"
             },
             "cleanup-platform": ["/bin/llvm-*"],
+            "build-options" : {
+                "arch" : {
+		    "i386" : {
+                        "config-opts" : [
+                            "-DLLVM_HOST_TRIPLE:STRING=i586-unknown-linux-gnu"
+			]
+		    },
+		    "arm" : {
+                        "config-opts" : [
+                            "-DLLVM_HOST_TRIPLE:STRING=arm-unknown-linux-gnueabihf"
+			]
+		    }
+                }
+            },
             "config-opts": [
                 "-DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG",
                 "-DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG",
