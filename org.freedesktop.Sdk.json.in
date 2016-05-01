@@ -1105,8 +1105,21 @@
 		"arch" : {
 		    "i386" : {
 			"config-opts" : [
+                            "--build=i586-unknown-linux-gnu",
 			    "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
 			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965"
+			]
+		    },
+		    "x86_64" : {
+			"config-opts" : [
+			    "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965"
+			]
+		    },
+		    "arm" : {
+			"config-opts" : [
+			    "--with-gallium-drivers=svga,swrast,nouveau,freedreno,vc4",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200"
 			]
 		    },
 		    "aarch64" : {
