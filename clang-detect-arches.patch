@@ -1,0 +1,33 @@
+diff -rup cfe-3.8.0.src/lib/Driver/ToolChains.cpp cfe-3.8.0.src-modified/lib/Driver/ToolChains.cpp
+--- cfe-3.8.0.src/lib/Driver/ToolChains.cpp	2016-02-16 14:56:48.000000000 -0500
++++ cfe-3.8.0.src-modified/lib/Driver/ToolChains.cpp	2016-05-09 11:43:42.981145217 -0400
+@@ -1418,16 +1418,17 @@ bool Generic_GCC::GCCInstallationDetecto
+   static const char *const AArch64LibDirs[] = {"/lib64", "/lib"};
+   static const char *const AArch64Triples[] = {
+       "aarch64-none-linux-gnu", "aarch64-linux-gnu", "aarch64-linux-android",
+-      "aarch64-redhat-linux"};
++      "aarch64-redhat-linux", "aarch64-unknown-linux"};
+   static const char *const AArch64beLibDirs[] = {"/lib"};
+   static const char *const AArch64beTriples[] = {"aarch64_be-none-linux-gnu",
+                                                  "aarch64_be-linux-gnu"};
+ 
+   static const char *const ARMLibDirs[] = {"/lib"};
+-  static const char *const ARMTriples[] = {"arm-linux-gnueabi",
++  static const char *const ARMTriples[] = {"arm-linux-gnueabi", "arm-unknown-linux-gnueabi",
+                                            "arm-linux-androideabi"};
+   static const char *const ARMHFTriples[] = {"arm-linux-gnueabihf",
+-                                             "armv7hl-redhat-linux-gnueabi"};
++                                             "armv7hl-redhat-linux-gnueabi",
++                                             "arm-unknown-linux-gnueabi" };
+   static const char *const ARMebLibDirs[] = {"/lib"};
+   static const char *const ARMebTriples[] = {"armeb-linux-gnueabi",
+                                              "armeb-linux-androideabi"};
+@@ -1449,7 +1450,7 @@ bool Generic_GCC::GCCInstallationDetecto
+       "i386-linux-gnu",       "i386-redhat-linux6E",   "i686-redhat-linux",
+       "i586-redhat-linux",    "i386-redhat-linux",     "i586-suse-linux",
+       "i486-slackware-linux", "i686-montavista-linux", "i686-linux-android",
+-      "i586-linux-gnu"};
++      "i586-linux-gnu",       "i586-unknown-linux"};
+ 
+   static const char *const MIPSLibDirs[] = {"/lib"};
+   static const char *const MIPSTriples[] = {"mips-linux-gnu", "mips-mti-linux",
