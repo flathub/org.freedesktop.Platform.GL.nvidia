@@ -775,7 +775,7 @@
         {
             "name": "fontconfig",
             "config-opts": [ "--disable-static"],
-            "post-install": [ "install -m 0644 -p -T fontconfig-xdg-app.conf /etc/fonts/conf.d/50-xdg-app.conf"],
+            "post-install": [ "install -m 0644 -p -T fontconfig-flatpak.conf /etc/fonts/conf.d/50-flatpak.conf"],
             "sources": [
                  {
                      "type": "archive",
@@ -784,7 +784,7 @@
                  },
                  {
                      "type": "file",
-                     "path": "fontconfig-xdg-app.conf"
+                     "path": "fontconfig-flatpak.conf"
                  }
             ]
         },
