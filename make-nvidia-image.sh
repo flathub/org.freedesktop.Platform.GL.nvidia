@@ -26,12 +26,12 @@ rm -rf $EXTRACT_DIR
 
 cat <<EOF >$IMAGE_DIR/metadata
 [Runtime]
-name=org.freedesktop.Platform.GL/x86_64/1.2
+name=org.freedesktop.Platform.GL/x86_64/1.4
 EOF
 
 if [ ! -d ${REPO} ] ; then
     ostree  init --mode=archive-z2 --repo=${REPO}
 fi
-ostree commit --repo=${REPO} --owner-uid=0 --owner-gid=0 --no-xattrs --branch=runtime/org.freedesktop.Platform.GL/x86_64/1.2  -s "Nvidia driver ${VERSION}" $IMAGE_DIR
+ostree commit --repo=${REPO} --owner-uid=0 --owner-gid=0 --no-xattrs --branch=runtime/org.freedesktop.Platform.GL/x86_64/1.4  -s "Nvidia driver ${VERSION}" $IMAGE_DIR
 
 rm -rf $IMAGE_DIR
