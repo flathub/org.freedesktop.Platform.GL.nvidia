@@ -1,5 +1,6 @@
 # Override the arch with `make ARCH=i386`
 ARCH   ?= $(shell xdg-app --default-arch)
+REPO   ?= repo
 
 # SDK Versions setup here
 #
@@ -23,12 +24,12 @@ define subst-metadata
 	@echo "Done.";
 endef
 
-all: repo $(patsubst %,%.in,$(SUBST_FILES))
+all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
-	flatpak-builder --force-clean --ccache --require-changes --repo=repo --arch=${ARCH} \
+	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
                         --subject="build of org.freedesktop.Sdk, `date`" \
                         ${EXPORT_ARGS} sdk org.freedesktop.Sdk.json
 	rm -rf sdk
 
-repo:
-	ostree  init --mode=archive-z2 --repo=repo
+${REPO}:
+	ostree  init --mode=archive-z2 --repo=${REPO}
