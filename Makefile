@@ -1,5 +1,5 @@
 # Override the arch with `make ARCH=i386`
-ARCH   ?= $(shell xdg-app --default-arch)
+ARCH   ?= $(shell flatpak --default-arch)
 REPO   ?= repo
 
 # SDK Versions setup here
