@@ -29,7 +29,6 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
                         --subject="build of org.freedesktop.Sdk, `date`" \
                         ${EXPORT_ARGS} sdk org.freedesktop.Sdk.json
-	rm -rf sdk
 
 ${REPO}:
 	ostree  init --mode=archive-z2 --repo=${REPO}
