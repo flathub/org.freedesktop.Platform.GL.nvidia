@@ -1448,6 +1448,16 @@
             ]
         },
         {
+            "name": "gtk-doc-stub",
+            "sources": [
+                 {
+                     "type": "git",
+                     "url": "git://git.gnome.org/gtk-doc-stub",
+                     "branch": "1dea266593edb766d6d898c79451ef193eb17cfa"
+                 }
+            ]
+        },
+        {
             "name": "gobject-introspection",
             "config-opts": ["--disable-gtk-doc", "--disable-static" ],
             "cleanup-platform": ["/lib/gobject-introspection/giscanner",
@@ -1641,8 +1651,12 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.8.0.tar.xz",
-                     "sha256": "947a314a212b5d94985d89b43440dbe66b696e12bbdf9a2f78967b98d74abedc"
+                     "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.8.2.tar.xz",
+                     "sha256": "9dbebe079c2ab2004ef7f2649fa317cabea1feb4fb5605c24d40744b90918341"
+                 },
+                 {
+                     "type": "patch",
+                     "path": "gstreamer-gi-build-fix.patch"
                  }
             ]
         },
@@ -1652,8 +1666,12 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.0.tar.xz",
-                     "sha256": "abc0acc1d15b4b9c97c65cd9689bd6400081853b9980ea428d3c8572dd791522"
+                     "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.8.2.tar.xz",
+                     "sha256": "9d7109c8fb0a5dec8edb17b0053c59a46aba7ddf48dc48ea822ebbbd4339d38d"
+                 },
+                 {
+                     "type": "patch",
+                     "path": "gst-plugins-base-gi-build-fix.patch"
                  }
             ]
         },
@@ -1685,8 +1703,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.8.0.tar.xz",
-                     "sha256": "c20c134d47dbc238d921707a3b66da709c2b4dd89f9d267cec13d1ddf16e9f4d"
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.8.2.tar.xz",
+                     "sha256": "8d7549118a3b7a009ece6bb38a05b66709c551d32d2adfd89eded4d1d7a23944"
                  }
             ]
         },
@@ -1710,18 +1728,12 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.8.0.tar.xz",
-                     "sha256": "116376dd1085082422e0b21b0ecd3d1cb345c469c58e32463167d4675f4ca90e"
-                 }
-            ]
-        },
-        {
-            "name": "gtk-doc-stub",
-            "sources": [
+                     "url": "http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.8.2.tar.xz",
+                     "sha256": "d7995317530c8773ec088f94d9320909d41da61996b801ebacce9a56af493f97"
+                 },
                  {
-                     "type": "git",
-                     "url": "git://git.gnome.org/gtk-doc-stub",
-                     "branch": "1dea266593edb766d6d898c79451ef193eb17cfa"
+                     "type": "patch",
+                     "path": "gst-plugins-bad-gi-build-fix.patch"
                  }
             ]
         },
@@ -1941,6 +1953,10 @@
                     "type": "archive",
                     "url": "http://www.freedesktop.org/software/geoclue/releases/2.4/geoclue-2.4.3.tar.xz",
                     "sha256": "ada9dba870dd79e1b21923aeda4d82b66cbda39e57978fbe3d83d356cc3c605e"
+                },
+                {
+                    "type": "patch",
+                    "path": "geoclue-gi-build-fix.patch"
                 }
             ]
         }

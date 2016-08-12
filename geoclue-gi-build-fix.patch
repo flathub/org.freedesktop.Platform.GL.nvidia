@@ -1,0 +1,32 @@
+commit 0827ce8851b0d613adeecab2b29542c50aae17e0
+Author: Colin Walters <walters@verbum.org>
+Date:   Mon May 30 16:10:35 2016 -0400
+
+    lib: Define CC and other variables for g-ir-scanner
+    
+    This ensures g-ir-scanner uses the configured compiler.  Fixes the
+    build in GContinuous, which is currently somewhat broken in that
+    `/usr/bin/cc` is a cross compiler by default.  But this propagation is
+    the correct thing to do always.
+    
+    A similar patch landed in GStreamer.
+
+diff --git a/libgeoclue/Makefile.am b/libgeoclue/Makefile.am
+index 2acf711..2d40a3c 100644
+--- a/libgeoclue/Makefile.am
++++ b/libgeoclue/Makefile.am
+@@ -87,7 +87,13 @@ typelibsdir = $(libdir)/girepository-1.0
+ typelibs_DATA = Geoclue-2.0.typelib
+ 
+ Geoclue-2.0.gir: $(libgeoclue_2_la_SOURCES) $(geoclue_include_HEADERS)
+-	$(AM_V_GEN)$(INTROSPECTION_SCANNER) -v  \
++	$(AM_V_GEN) env CPPFLAGS="$(CPPFLAGS)"  \
++	    CFLAGS="$(CFLAGS)"			\
++	    LDFLAGS="$(LDFLAGS)"		\
++	    CC="$(CC)"				\
++	    PKG_CONFIG="$(PKG_CONFIG)"		\
++	    DLLTOOL="$(DLLTOOL)" 		\
++	    $(INTROSPECTION_SCANNER) -v 	\
+ 	    --warn-all                          \
+ 	    --namespace Geoclue                 \
+ 	    --identifier-prefix=GClue           \

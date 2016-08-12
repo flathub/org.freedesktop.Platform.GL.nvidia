@@ -1,0 +1,60 @@
+commit db90f4686f8058e0764ed0a7dc2fee93165385cc
+Author: Tim-Philipp Müller <tim@centricular.com>
+Date:   Tue May 24 00:55:11 2016 +0100
+
+    g-i: pass compiler env to g-ir-scanner
+    
+    It's what introspection.mak does as well. Should
+    fix spurious build failures on gnome-continuous.
+
+diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
+index f1cb9e1..3f04a51 100644
+--- a/gst-libs/gst/gl/Makefile.am
++++ b/gst-libs/gst/gl/Makefile.am
+@@ -152,6 +152,7 @@ gir_sources=$(patsubst %,$(srcdir)/%, $(libgstgl_@GST_API_VERSION@_la_SOURCES))
+ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@.la
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" GI_SCANNER_DISABLE_CACHE=yes\
+ 		GST_PLUGIN_SYSTEM_PATH_1_0="" GST_PLUGIN_PATH_1_0="" GST_REGISTRY_UPDATE=no \
++		CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CC="$(CC)" PKG_CONFIG="$(PKG_CONFIG)" DLLTOOL="$(DLLTOOL)" \
+ 		$(INTROSPECTION_SCANNER) -v --namespace GstGL \
+ 		--nsversion=@GST_API_VERSION@ \
+ 		--identifier-prefix=Gst \
+diff --git a/gst-libs/gst/insertbin/Makefile.am b/gst-libs/gst/insertbin/Makefile.am
+index 8368f41..1f8ea30 100644
+--- a/gst-libs/gst/insertbin/Makefile.am
++++ b/gst-libs/gst/insertbin/Makefile.am
+@@ -31,6 +31,7 @@ gir_sources+=$(patsubst %,$(builddir)/%, $(built_sources))
+ GstInsertBin-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstinsertbin-@GST_API_VERSION@.la
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)"  GI_SCANNER_DISABLE_CACHE=yes\
+ 		GST_PLUGIN_SYSTEM_PATH_1_0="" GST_PLUGIN_PATH_1_0="" GST_REGISTRY_UPDATE=no \
++		CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CC="$(CC)" PKG_CONFIG="$(PKG_CONFIG)" DLLTOOL="$(DLLTOOL)" \
+ 		$(INTROSPECTION_SCANNER) -v --namespace GstInsertBin \
+ 		--nsversion=@GST_API_VERSION@ \
+ 		--identifier-prefix=Gst \
+diff --git a/gst-libs/gst/mpegts/Makefile.am b/gst-libs/gst/mpegts/Makefile.am
+index cd8b8ad..aeea32e 100644
+--- a/gst-libs/gst/mpegts/Makefile.am
++++ b/gst-libs/gst/mpegts/Makefile.am
+@@ -65,6 +65,7 @@ gir_sources+=$(patsubst %,$(builddir)/%, $(built_sources))
+ GstMpegts-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstmpegts-@GST_API_VERSION@.la
+ 	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)"  GI_SCANNER_DISABLE_CACHE=yes\
+ 		GST_PLUGIN_SYSTEM_PATH_1_0="" GST_PLUGIN_PATH_1_0="" GST_REGISTRY_UPDATE=no \
++		CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CC="$(CC)" PKG_CONFIG="$(PKG_CONFIG)" DLLTOOL="$(DLLTOOL)" \
+ 		$(INTROSPECTION_SCANNER) -v --namespace GstMpegts \
+ 		--nsversion=@GST_API_VERSION@ \
+ 		--identifier-prefix=GstMpegts \
+diff --git a/gst-libs/gst/player/Makefile.am b/gst-libs/gst/player/Makefile.am
+index 00e6343..f893375 100644
+--- a/gst-libs/gst/player/Makefile.am
++++ b/gst-libs/gst/player/Makefile.am
+@@ -57,7 +57,9 @@ gir_headers=$(patsubst %,$(srcdir)/%, $(libgstplayer_HEADERS))
+ gir_sources=$(patsubst %,$(srcdir)/%, $(libgstplayer_@GST_API_VERSION@_la_SOURCES))
+ 
+ GstPlayer-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstplayer-@GST_API_VERSION@.la
+-	$(AM_V_GEN)PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
++	$(AM_V_GEN)GST_PLUGIN_SYSTEM_PATH_1_0="" GST_PLUGIN_PATH_1_0="" GST_REGISTRY_UPDATE=no GI_SCANNER_DISABLE_CACHE=yes \
++		CPPFLAGS="$(CPPFLAGS)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CC="$(CC)" PKG_CONFIG="$(PKG_CONFIG)" DLLTOOL="$(DLLTOOL)" \
++		PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" \
+ 		$(INTROSPECTION_SCANNER) -v --namespace GstPlayer \
+ 		--nsversion=@GST_API_VERSION@ \
+ 		--warn-all \
