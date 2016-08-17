@@ -968,8 +968,8 @@
             "sources": [
                 {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/glib/2.48/glib-2.48.0.tar.xz",
-                     "sha256": "744be6931ca914c68af98dc38ff6b0cf8381d65e335060faddfbf04c17147c34"
+                     "url": "https://download.gnome.org/sources/glib/2.48/glib-2.48.1.tar.xz",
+                     "sha256": "74411bff489cb2a3527bac743a51018841a56a4d896cc1e0d0d54f8166a14612"
                  }
             ]
         },
@@ -1477,8 +1477,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://download.gnome.org/sources/glib-networking/2.48/glib-networking-2.48.0.tar.xz",
-                     "sha256": "7a1f3312e757b97af94e2db8a1f14eb9cc018c983931ecdf3b0c54acece39024"
+                     "url": "https://download.gnome.org/sources/glib-networking/2.48/glib-networking-2.48.2.tar.xz",
+                     "sha256": "925c0c49d6b2b8b5695f2e33cd952d1dbb7d18d3f2f796413577719315bb3a84"
                  }
             ]
         },
