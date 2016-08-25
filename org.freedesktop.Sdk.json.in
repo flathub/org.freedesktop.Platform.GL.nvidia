@@ -1762,8 +1762,8 @@
             "sources": [
                 {
                      "type": "archive",
-                    "url": "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.5.11.tar.xz",
-                    "sha256": "90245f938666896d5f5c86654589808dd652f54bfe58b2fff18ca59bd4e5f329"
+                    "url": "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.5.18.tar.xz",
+                    "sha256": "e18c794f2c78af9906a54aacd83e509d3ae1b4bd030ca4c56b31c7a4dcc661e4"
                  }
             ]
         },
