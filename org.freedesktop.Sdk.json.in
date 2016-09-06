@@ -1442,7 +1442,7 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://libproxy.googlecode.com/files/libproxy-0.4.11.tar.gz",
+                     "url": "http://pkgs.fedoraproject.org/repo/pkgs/libproxy/libproxy-0.4.11.tar.gz/3cd1ae2a4abecf44b3f24d6639d2cd84/libproxy-0.4.11.tar.gz",
                      "sha256": "dc3f33de54163718f82b3e7c496a7de97f8862578414b8ecaad3cbfe4821864b"
                  }
             ]
