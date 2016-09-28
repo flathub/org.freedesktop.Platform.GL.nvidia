@@ -1764,7 +1764,11 @@
                      "type": "archive",
                     "url": "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.5.18.tar.xz",
                     "sha256": "e18c794f2c78af9906a54aacd83e509d3ae1b4bd030ca4c56b31c7a4dcc661e4"
-                 }
+                },
+                {
+                    "type": "patch",
+                    "path": "appstream-glib-Never-inhierit-Name-and-Comment.patch"
+                }
             ]
         },
         {
