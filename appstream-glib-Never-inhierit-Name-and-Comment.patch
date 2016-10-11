@@ -1,0 +1,29 @@
+From 6f397ae28f2fca8a8ad3dc2fdbb968fd39f70f77 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Wed, 28 Sep 2016 11:48:01 +0100
+Subject: [PATCH] Never inhierit Name and Comment when using appstream-compose
+
+This has been deprecated for some time now and causes problems when we're using
+a non-localised prefix on the installed desktop files.
+---
+ client/as-compose.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/client/as-compose.c b/client/as-compose.c
+index 5e57573..b53423f 100644
+--- a/client/as-compose.c
++++ b/client/as-compose.c
+@@ -239,6 +239,10 @@ load_desktop (const gchar *prefix,
+ 		}
+ 	}
+ 
++	/* never inherit from the desktop file (they may be prefixed) */
++	g_hash_table_remove_all (as_app_get_names (app));
++	g_hash_table_remove_all (as_app_get_comments (app));
++
+ 	return g_steal_pointer (&app);
+ }
+ 
+-- 
+2.5.5
+
