@@ -1448,12 +1448,20 @@
             ]
         },
         {
-            "name": "gtk-doc-stub",
+            "name": "gtk-doc",
             "sources": [
                  {
-                     "type": "git",
-                     "url": "git://git.gnome.org/gtk-doc-stub",
-                     "branch": "1dea266593edb766d6d898c79451ef193eb17cfa"
+                     "type": "shell",
+                     "commands": [
+                         "xmlcatalog --noout --create /etc/xml/catalog",
+                         "xmlcatalog --noout --add nextCatalog '' /etc/xml/docbook-xml.xml /etc/xml/catalog",
+                         "xmlcatalog --noout --add nextCatalog '' /etc/xml/docbook-xsl.xml /etc/xml/catalog"
+                     ]
+                 },
+                 {
+                     "type": "archive",
+                     "url": "https://download.gnome.org/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz",
+                     "sha256": "1ea46ed400e6501f975acaafea31479cea8f32f911dca4dff036f59e6464fd42"
                  }
             ]
         },
