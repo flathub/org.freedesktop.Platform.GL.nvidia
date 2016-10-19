@@ -14,7 +14,6 @@
                  "/man",
                  "/share/doc",
                  "/share/man",
-                 "/share/gtk-doc",
                  "/share/devhelp",
                  "/lib/systemd",
                  "/lib/opkg",
@@ -957,7 +956,7 @@
         },
         {
             "name": "glib2",
-            "config-opts": ["--disable-gtk-doc",  "--with-pcre=system" ],
+            "config-opts": ["--with-pcre=system" ],
             "cleanup-platform": [ "/share/glib-2.0/codegen",
                                   "/bin/gdbus-codegen",
                                   "/bin/glib-*",
@@ -1359,8 +1358,7 @@
                             "--enable-ps",
                             "--enable-pdf",
                             "--enable-tee",
-                            "--enable-gobject",
-                            "--disable-gtk-doc"
+                            "--enable-gobject"
                            ],
             "cleanup-platform": ["/bin"],
             "sources": [
@@ -1397,7 +1395,6 @@
         {
             "name": "harfbuzz",
             "config-opts": ["--disable-static",
-                            "--disable-gtk-doc",
                             "--with-gobject",
                             "--with-graphite2"
                            ],
@@ -1492,7 +1489,7 @@
         },
         {
             "name": "libsoup",
-            "config-opts": [ "--disable-static", "--disable-vala", "--disable-gtk-doc" ],
+            "config-opts": [ "--disable-static", "--disable-vala" ],
             "sources": [
                  {
                      "type": "archive",
@@ -1503,7 +1500,6 @@
         },
         {
             "name": "p11-kit",
-            "config-opts": ["--disable-gtk-doc" ],
             "sources": [
                 {
                     "type": "archive",
@@ -1627,7 +1623,6 @@
         {
             "name": "gdk-pixbuf2",
             "config-opts": ["--disable-static",
-                            "--disable-gtk-doc",
                             "--without-x11",
                             "--without-libjasper",
                             "--with-included-loaders=png,jpeg" ],
@@ -1642,8 +1637,7 @@
         },
         {
             "name": "orc",
-            "config-opts": ["--disable-static",
-                            "--disable-gtk-doc"],
+            "config-opts": ["--disable-static"],
             "cleanup-platform": [ "/bin" ],
             "sources": [
                  {
@@ -1655,7 +1649,7 @@
         },
         {
             "name": "gstreamer",
-            "config-opts": ["--disable-gtk-doc", "--enable-debug", "--disable-examples" ],
+            "config-opts": ["--enable-debug", "--disable-examples" ],
             "sources": [
                  {
                      "type": "archive",
@@ -1670,7 +1664,7 @@
         },
         {
             "name": "gstreamer-plugins-base",
-            "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
+            "config-opts": ["--enable-experimental", "--enable-orc" ],
             "sources": [
                  {
                      "type": "archive",
@@ -1699,8 +1693,7 @@
 		    }
                 }
             },
-            "config-opts": ["--disable-gtk-doc",
-                            "--enable-experimental",
+            "config-opts": ["--enable-experimental",
                             "--enable-orc" ,
                             "--disable-monoscope",
                             "--disable-aalib",
@@ -1718,7 +1711,7 @@
         },
         {
             "name": "gstreamer-plugins-bad",
-            "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
+            "config-opts": ["--enable-experimental", "--enable-orc" ],
             "build-options" : {
                 "arch" : {
                     "i386" : {
@@ -1747,8 +1740,7 @@
         },
         {
             "name": "json-glib",
-            "config-opts": [ "--disable-static",
-                             "--disable-gtk-doc" ],
+            "config-opts": [ "--disable-static"],
             "sources": [
                  {
                      "type": "archive",
@@ -1760,8 +1752,7 @@
         {
             "name": "libappstream-glib",
             "cleanup": ["/share/installed-tests"],
-            "config-opts": [ "--disable-gtk-doc",
-                             "--disable-man",
+            "config-opts": [ "--disable-man",
                              "--disable-fonts",
                              "--disable-firmware",
                              "--disable-dep11",
@@ -1953,8 +1944,7 @@
         {
             "name": "geoclue2",
             /* TODO: Use --disable-backend when supported (missing .pc file atm) */
-            "config-opts": ["--disable-gtk-doc",
-                            "--disable-3g-source", "--disable-cdma-source",
+            "config-opts": ["--disable-3g-source", "--disable-cdma-source",
                             "--disable-modem-gps-source", "--disable-nmea-source"],
             "cleanup": [ "/share/applications",
                          "/etc/dbus-1/system.d", "/libexec",
