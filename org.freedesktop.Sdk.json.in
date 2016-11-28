@@ -1538,6 +1538,23 @@
             ]
         },
         {
+            "name": "dejavu-fonts",
+            "no-autogen": true,
+            "make-args": ["NAME=dejavu", "SRCPRIO=57", "PRIO=57", "FAMILIES=sans serif sans-mono", "EXTRA_CONFS=20-unhint-small-dejavu-sans.conf 20-unhint-small-dejavu-sans-mono.conf 20-unhint-small-dejavu-serif.conf", "TTFDIR=ttf/", "CONFDIR=fontconfig/"],
+            "sources": [
+                 {
+                     "type": "archive",
+                     "url": "http://sourceforge.net/projects/dejavu/files/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2",
+                     "sha256": "fa9ca4d13871dd122f61258a80d01751d603b4d3ee14095d65453b4e846e17d7"
+                 },
+                 {
+                     "type": "file",
+                     "path": "Makefile-fonts",
+                     "dest-filename": "Makefile"
+                 }
+            ]
+        },
+        {
             "name": "liberation-fonts",
             "no-autogen": true,
             "make-args": ["NAME=liberation-fonts", "PRIO=59", "FAMILIES=sans serif mono narrow"],

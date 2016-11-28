@@ -1,19 +1,23 @@
 all:
 	install -m 0755 -d /usr/share/fonts/$(NAME)
-	install -p -m 644 *.ttf  /usr/share/fonts/$(NAME)
+	install -p -m 644 $(TTFDIR)*.ttf  /usr/share/fonts/$(NAME)
 	install -m 0755 -d /usr/share/fontconfig/conf.avail /etc/fonts/conf.d
 	for f in $(FAMILIES) ; do \
-		FILE=$(NAME)-$$f.conf; \
-		install -m 0644 -p $$FILE /usr/share/fontconfig/conf.avail/$(PRIO)-$$FILE; \
+		if [ "x$(SRCPRIO)" == "x" ] ; then \
+			FILE=$(NAME)-$$f.conf; \
+		else \
+			FILE=$(SRCPRIO)-$(NAME)-$$f.conf; \
+		fi; \
+		install -m 0644 -p $(CONFDIR)$$FILE /usr/share/fontconfig/conf.avail/$(PRIO)-$$FILE; \
 		ln -s /usr/share/fontconfig/conf.avail/$(PRIO)-$$FILE /etc/fonts/conf.d/$(PRIO)-$$FILE; \
 	done
 	if [ "x$(FAMILIES)" == "x" ] ; then \
 		FILE=$(NAME).conf; \
-		install -m 0644 -p $$FILE /usr/share/fontconfig/conf.avail/$(PRIO)-$$FILE; \
+		install -m 0644 -p $(CONFDIR)$$FILE /usr/share/fontconfig/conf.avail/$(PRIO)-$$FILE; \
 		ln -s /usr/share/fontconfig/conf.avail/$(PRIO)-$$FILE /etc/fonts/conf.d/$(PRIO)-$$FILE; \
 	fi
 	for f in $(EXTRA_CONFS) ; do \
-		install -m 0644 -p $$f /usr/share/fontconfig/conf.avail/$$f; \
+		install -m 0644 -p $(CONFDIR)$$f /usr/share/fontconfig/conf.avail/$$f; \
 		ln -s /usr/share/fontconfig/conf.avail/$$f /etc/fonts/conf.d/$$f; \
 	done
 
