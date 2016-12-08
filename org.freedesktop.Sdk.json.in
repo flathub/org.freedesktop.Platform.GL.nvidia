@@ -922,8 +922,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://downloads.sourceforge.net/project/freetype/freetype2/2.6.3/freetype-2.6.3.tar.bz2",
-                     "sha256": "371e707aa522acf5b15ce93f11183c725b8ed1ee8546d7b3af549863045863a2"
+                     "url": "http://downloads.sourceforge.net/project/freetype/freetype2/2.6.5/freetype-2.6.5.tar.bz2",
+                     "sha256": "e20a6e1400798fd5e3d831dd821b61c35b1f9a6465d6b18a53a9df4cf441acf0"
                  }
             ]
         },
@@ -1414,8 +1414,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://downloads.sourceforge.net/project/freetype/freetype2/2.6.3/freetype-2.6.3.tar.bz2",
-                     "sha256": "371e707aa522acf5b15ce93f11183c725b8ed1ee8546d7b3af549863045863a2"
+                     "url": "http://downloads.sourceforge.net/project/freetype/freetype2/2.6.5/freetype-2.6.5.tar.bz2",
+                     "sha256": "e20a6e1400798fd5e3d831dd821b61c35b1f9a6465d6b18a53a9df4cf441acf0"
                  }
             ]
         },
