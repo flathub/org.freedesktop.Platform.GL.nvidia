@@ -2018,6 +2018,16 @@
                     "path": "geoclue-gi-build-fix.patch"
                 }
             ]
+        },
+        {
+            "name": "libseccomp",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/seccomp/libseccomp/releases/download/v2.3.1/libseccomp-2.3.1.tar.gz",
+                    "sha256": "ff5bdd2168790f1979e24eaa498f8606c2f2d96f08a8dc4006a2e88affa4562b"
+                }
+            ]
         }
     ]
 }
