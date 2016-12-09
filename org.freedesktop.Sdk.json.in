@@ -1668,6 +1668,20 @@
             "name": "mpg123",
             "config-opts": [ "-with-default-audio=pulse", "--with-audio=pulse" ],
             "cleanup": [ "/bin", "/share/man" ],
+            "build-options" : {
+                "arch" : {
+                    "i386" : {
+                        "config-opts" : [
+                            "--build=i586-unknown-linux-gnu"
+                        ]
+                    },
+		    "arm" : {
+                        "config-opts" : [
+                            "--build=arm-unknown-linux-gnueabi"
+			]
+		    }
+                }
+            },
             "sources": [
                 {
                     "type": "archive",
