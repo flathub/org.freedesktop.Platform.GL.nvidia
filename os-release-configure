@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cat <<EOF > Makefile
+all:
+
+install:
+	mkdir -p ${DESTDIR}/usr/lib
+	install os-release ${DESTDIR}/usr/lib
+	mkdir -p ${DESTDIR}/usr/share/appdata
+	install org.freedesktop.Platform.appdata.xml ${DESTDIR}/usr/share/appdata
+	install org.freedesktop.Sdk.appdata.xml ${DESTDIR}/usr/share/appdata
+	appstream-compose --basename=org.freedesktop.Platform --prefix=/usr --origin=flatpak org.freedesktop.Platform
+	appstream-compose --basename=org.freedesktop.Sdk --prefix=/usr --origin=flatpak org.freedesktop.Sdk
+EOF

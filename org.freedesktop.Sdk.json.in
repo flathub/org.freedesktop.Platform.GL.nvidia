@@ -2028,6 +2028,28 @@
                     "sha256": "ff5bdd2168790f1979e24eaa498f8606c2f2d96f08a8dc4006a2e88affa4562b"
                 }
             ]
+        },
+        {
+            "name": "os-release",
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "os-release"
+                },
+                {
+                    "type": "file",
+                    "path": "org.freedesktop.Sdk.appdata.xml"
+                },
+                {
+                    "type": "file",
+                    "path": "org.freedesktop.Platform.appdata.xml"
+                },
+                {
+                    "type": "file",
+                    "path": "os-release-configure",
+                    "dest-filename": "configure"
+                }
+            ]
         }
     ]
 }
