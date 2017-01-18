@@ -1818,12 +1818,12 @@
             "sources": [
                 {
                      "type": "archive",
-                    "url": "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.5.18.tar.xz",
-                    "sha256": "e18c794f2c78af9906a54aacd83e509d3ae1b4bd030ca4c56b31c7a4dcc661e4"
+                    "url": "https://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-0.5.19.tar.xz",
+                    "sha256": "eec4cc3010c2160c12e487d9555e9aa7399540c740dcb7a66c39e9bc15c43a75"
                 },
                 {
                     "type": "patch",
-                    "path": "appstream-glib-Never-inhierit-Name-and-Comment.patch"
+                    "path": "appstream-compose-Support-appdata-with-no-desktop-fi.patch"
                 }
             ]
         },
