@@ -11,7 +11,7 @@ SDK_BRANCH=1.4
 SDK_RUNTIME_VERSION=1.4
 
 # Canned recipe for generating metadata
-SUBST_FILES=org.freedesktop.Sdk.json metadata.sdk metadata.platform os-release
+SUBST_FILES=org.freedesktop.Sdk.json metadata.sdk metadata.platform os-release org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml
 define subst-metadata
 	@echo -n "Generating files: ${SUBST_FILES}... ";
 	@for file in ${SUBST_FILES}; do 					\
