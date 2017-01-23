@@ -1242,8 +1242,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "http://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-8.0.tar.xz",
-                     "sha256": "690eefe28633466cfd1ab9d85ebfa9376f6b622deec6bfee5091ac9737cd1989"
+                     "url": "http://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-10.0.tar.xz",
+                     "sha256": "a3186824de9f0d2095ded5d0d0db0405dc73133983c2fbb37291547e37462f57"
                  }
             ]
         },
