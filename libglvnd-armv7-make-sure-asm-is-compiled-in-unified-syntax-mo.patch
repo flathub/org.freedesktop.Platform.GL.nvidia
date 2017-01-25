@@ -1,0 +1,34 @@
+From c386bd5a233ed82d51ff9200c40e97e1817881f9 Mon Sep 17 00:00:00 2001
+From: Rob Clark <robdclark@gmail.com>
+Date: Wed, 14 Dec 2016 10:44:07 -0500
+Subject: [PATCH 4/6] armv7: make sure asm is compiled in unified syntax mode
+
+The individual stub functions already have .thumb_func but if syntax is
+divided the assembler will reject the STUB_ASM_CODE.
+---
+ src/GLdispatch/vnd-glapi/entry_armv7_tsd.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c b/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c
+index 2bce0c2..0ea8902 100644
+--- a/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c
++++ b/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c
+@@ -140,6 +140,7 @@ static uint16_t BYTECODE_TEMPLATE[] =
+ 
+ __asm__(".section wtext,\"ax\"\n"
+         ".balign 4096\n"
++        ".syntax unified\n"
+        ".globl public_entry_start\n"
+        ".hidden public_entry_start\n"
+         "public_entry_start:\n");
+@@ -148,6 +149,7 @@ __asm__(".section wtext,\"ax\"\n"
+ #include "mapi_tmp.h"
+ 
+ __asm__(".balign 4096\n"
++        ".syntax divided\n"
+        ".globl public_entry_end\n"
+        ".hidden public_entry_end\n"
+         "public_entry_end:\n"
+-- 
+2.9.3
+

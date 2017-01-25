@@ -1,0 +1,37 @@
+From 07c095397bb336c2e4fbed89c6b9202730886acc Mon Sep 17 00:00:00 2001
+From: Rob Clark <robdclark@gmail.com>
+Date: Wed, 14 Dec 2016 09:35:40 -0500
+Subject: [PATCH 3/6] Fix compile errors
+
+---
+ src/GLdispatch/vnd-glapi/entry_armv7_tsd.c | 1 -
+ tests/dummy/EGL_dummy.c                    | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c b/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c
+index faec5bf..2bce0c2 100644
+--- a/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c
++++ b/src/GLdispatch/vnd-glapi/entry_armv7_tsd.c
+@@ -166,7 +166,6 @@ const int entry_stub_size = ARMV7_ENTRY_SIZE;
+ static const int TEMPLATE_OFFSET_CURRENT_TABLE     = ARMV7_BYTECODE_SIZE - 3*4;
+ static const int TEMPLATE_OFFSET_CURRENT_TABLE_GET = ARMV7_BYTECODE_SIZE - 2*4;
+ static const int TEMPLATE_OFFSET_SLOT              = ARMV7_BYTECODE_SIZE - 4;
+-static const int TEMPLATE_OFFSETS_SIZE             = 3*4;
+ 
+ void
+ entry_init_public(void)
+diff --git a/tests/dummy/EGL_dummy.c b/tests/dummy/EGL_dummy.c
+index 372e0a0..7860dce 100644
+--- a/tests/dummy/EGL_dummy.c
++++ b/tests/dummy/EGL_dummy.c
+@@ -56,7 +56,6 @@ static const char *PLATFORM_EXTENSIONS =
+     ;
+ 
+ static const char *DISPLAY_EXTENSIONS = "";
+-static const EGLint DUMMY_EGL_CONFIG_COUNT = 2;
+ 
+ typedef struct DummyEGLDisplayRec {
+     EGLenum platform;
+-- 
+2.9.3
+

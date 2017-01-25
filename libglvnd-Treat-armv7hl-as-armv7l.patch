@@ -1,0 +1,25 @@
+From ec5bd547b5fe2b82a4a72b9dbd7c0c47d41c7bde Mon Sep 17 00:00:00 2001
+From: Rob Clark <robdclark@gmail.com>
+Date: Wed, 14 Dec 2016 11:06:05 -0500
+Subject: [PATCH 5/6] Treat armv7hl as armv7l
+
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 29f90d8..9a68eb2 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -91,7 +91,7 @@ if test "x$enable_asm" = xyes; then
+             ;;
+         esac
+         ;;
+-    armv7l)
++    armv7*l)
+         asm_arch=armv7l
+         ;;
+     aarch64)
+-- 
+2.9.3
+

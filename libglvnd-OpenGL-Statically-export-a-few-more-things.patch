@@ -1,0 +1,27 @@
+From 55f564b77773e6bfcbe1fa6b1d613ea194b408ed Mon Sep 17 00:00:00 2001
+From: Adam Jackson <ajax@redhat.com>
+Date: Mon, 17 Oct 2016 16:58:56 -0400
+Subject: [PATCH] OpenGL: Statically export a few more things
+
+I'm... unsure if I like this.
+
+Signed-off-by: Adam Jackson <ajax@redhat.com>
+---
+ src/generate/genCommon.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/generate/genCommon.py b/src/generate/genCommon.py
+index 5781275..bb4e491 100644
+--- a/src/generate/genCommon.py
++++ b/src/generate/genCommon.py
+@@ -41,6 +41,7 @@ _LIBRARY_FEATURE_NAMES = {
+         "GL_VERSION_2_0", "GL_VERSION_2_1", "GL_VERSION_3_0", "GL_VERSION_3_1",
+         "GL_VERSION_3_2", "GL_VERSION_3_3", "GL_VERSION_4_0", "GL_VERSION_4_1",
+         "GL_VERSION_4_2", "GL_VERSION_4_3", "GL_VERSION_4_4", "GL_VERSION_4_5",
++        "GL_ARB_imaging", "GL_ARB_multitexture",
+     )),
+     "glesv1" : frozenset(("GL_VERSION_ES_CM_1_0", "GL_OES_point_size_array")),
+     "glesv2" : frozenset(("GL_ES_VERSION_2_0", "GL_ES_VERSION_3_0",
+-- 
+2.9.3
+

@@ -1,0 +1,25 @@
+From 2e35628e90e0b524ecadea498a2ffe06b6b5a4fc Mon Sep 17 00:00:00 2001
+From: Rob Clark <robdclark@gmail.com>
+Date: Wed, 14 Dec 2016 08:40:44 -0500
+Subject: [PATCH 2/6] Print out $host_cpu when undetected, for easier debugging
+
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index fdfaf00..29f90d8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -117,7 +117,7 @@ if test "x$enable_asm" = xyes; then
+         AC_MSG_RESULT([yes, aarch64])
+         ;;
+     *)
+-        AC_MSG_RESULT([no, platform not supported])
++        AC_MSG_RESULT([no, platform '$host_cpu' not supported])
+         ;;
+     esac
+ fi
+-- 
+2.9.3
+

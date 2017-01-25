@@ -730,8 +730,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://dri.freedesktop.org/libdrm/libdrm-2.4.67.tar.gz",
-                     "sha256": "4ae392513c4df30d88f10e69bf425a1dff960a5b4ccd4da621d9fc88523f7acb"
+                     "url": "https://dri.freedesktop.org/libdrm/libdrm-2.4.74.tar.gz",
+                     "sha256": "3c8fdf5a89826797a8060e6f3455ca22db9ae49576cfcda1c78e3e2ce59af0f1"
                  }
             ]
         },
@@ -1114,6 +1114,69 @@
             ]
         },
         {
+            "name": "vulkan",
+            "cmake": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_SKIP_RPATH:BOOL=yes",
+                "-DBUILD_VKJSON=OFF",
+                "-DCMAKE_INSTALL_SYSCONFDIR:PATH=/etc",
+                "-DBUILD_WSI_MIR_SUPPORT=OFF",
+                "-DGLSLANG_SPIRV_INCLUDE_DIR=./",
+                "-DBUILD_TESTS=OFF",
+                "-DBUILD_DEMOS=OFF",
+                "-DBUILD_LAYERS=OFF"
+            ],
+            "post-install": [
+                "mkdir -p /usr/lib/GL/vulkan/icd.d",
+                "ln -s /usr/lib/GL/vulkan /usr/etc/vulkan",
+                "mkdir -p /usr/share/vulkan/icd.d"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/archive/sdk-1.0.39.0.tar.gz",
+                    "sha256": "146efb378dc143f9dc15843b29aec8e5a0ad74161628931f0057d9517457a846"
+                }
+            ]
+        },
+        {
+            "name": "libglvnd",
+            "config-opts": [ "--disable-static", "--enable-asm", "--enable-tls" ],
+            "post-install": [
+                "mkdir -p /usr/lib/GL/glvnd/egl_vendor.d",
+                "ln -s /usr/lib/GL/glvnd /usr/etc/glvnd",
+                "mkdir -p /usr/share/glvnd/egl_vendor.d"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/NVIDIA/libglvnd.git",
+                    "branch": "dc16f8c337703ad141f83583a4004fcf42e07766"
+                },
+                {
+                    "type": "patch",
+                    "path": "libglvnd-OpenGL-Statically-export-a-few-more-things.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "libglvnd-Print-out-host_cpu-when-undetected-for-easier-debugg.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "libglvnd-Fix-compile-errors.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "libglvnd-armv7-make-sure-asm-is-compiled-in-unified-syntax-mo.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "libglvnd-Treat-armv7hl-as-armv7l.patch"
+                }
+            ]
+        },
+        {
             "name": "mesa",
             "build-options" : {
                 "cxxflags": "-O2 -g -fno-rtti -fno-exceptions",
@@ -1122,13 +1185,15 @@
 			"config-opts" : [
                             "--build=i586-unknown-linux-gnu",
 			    "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
-			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965"
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965",
+			    "--with-vulkan-drivers=intel"
 			]
 		    },
 		    "x86_64" : {
 			"config-opts" : [
 			    "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
-			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965"
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965",
+			    "--with-vulkan-drivers=intel"
 			]
 		    },
 		    "arm" : {
@@ -1146,6 +1211,7 @@
 		}
             },
             "config-opts": [
+                "--enable-libglvnd",
                 "--disable-selinux",
                 "--disable-osmesa",
                 "--with-dri-driverdir=/usr/lib/dri",
@@ -1165,12 +1231,39 @@
                 "--enable-sysfs"
             ],
             "make-args": [ "MKDEP=/bin/true"],
+            "post-install": [
+                /* Set the default driver to mesa */
+                "ln -s libEGL_mesa.so /usr/lib/libEGL_indirect.so",
+                "ln -s libEGL_mesa.so.0 /usr/lib/libEGL_indirect.so.0",
+                "ln -s libGLX_mesa.so /usr/lib/libGLX_indirect.so",
+                "ln -s libGLX_mesa.so.0 /usr/lib/libGLX_indirect.so.0"
+            ],
             "sources": [
-                 {
-                     "type": "archive",
-                     "url": "https://mesa.freedesktop.org/archive/11.2.2/mesa-11.2.2.tar.xz",
-                     "sha256": "40e148812388ec7c6d7b6657d5a16e2e8dabba8b97ddfceea5197947647bdfb4"
-                 }
+                {
+                    "type": "archive",
+                    "url": "https://mesa.freedesktop.org/archive/13.0.3/mesa-13.0.3.tar.xz",
+                    "sha256": "d9aa8be5c176d00d0cd503cb2f64a5a403ea471ec819c022581414860d7ba40e"
+                },
+                {
+                    "type": "patch",
+                    "path": "mesa-egl-glvnd-support.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "mesa-glvnd-fix-gl-dot-pc.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "mesa-Fix-linkage-against-shared-glapi.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "mesa-glapi-Link-with-glapi-when-built-shared.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "mesa-13.0-fix-radeonsi-tess.patch"
+                }
             ]
         },
         {

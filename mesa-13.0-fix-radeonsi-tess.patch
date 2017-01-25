@@ -1,0 +1,36 @@
+From 57f18623fb94891c04f3a395cfd977ea3747ee61 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marek=20Ol=C5=A1=C3=A1k?= <marek.olsak@amd.com>
+Date: Tue, 17 Jan 2017 13:45:42 +0100
+Subject: radeonsi: for the tess barrier, only use emit_waitcnt on SI and LLVM
+ 3.9+
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Cc: 17.0 13.0 <mesa-stable@lists.freedesktop.org>
+Reviewed-by: Edward O'Callaghan <funfunctor@folklore1984.net>
+Reviewed-by: Nicolai Hähnle <nicolai.haehnle@amd.com>
+
+diff --git a/src/gallium/drivers/radeonsi/si_shader.c b/src/gallium/drivers/radeonsi/si_shader.c
+index f404273..10f40a9 100644
+--- a/src/gallium/drivers/radeonsi/si_shader.c
++++ b/src/gallium/drivers/radeonsi/si_shader.c
+@@ -5440,10 +5440,13 @@ static void si_llvm_emit_barrier(const struct lp_build_tgsi_action *action,
+ 	struct si_shader_context *ctx = si_shader_context(bld_base);
+ 	struct gallivm_state *gallivm = bld_base->base.gallivm;
+ 
+-	/* The real barrier instruction isn’t needed, because an entire patch
++	/* SI only (thanks to a hw bug workaround):
++	 * The real barrier instruction isn’t needed, because an entire patch
+ 	 * always fits into a single wave.
+ 	 */
+-	if (ctx->type == PIPE_SHADER_TESS_CTRL) {
++	if (HAVE_LLVM >= 0x0309 &&
++	    ctx->screen->b.chip_class == SI &&
++	    ctx->type == PIPE_SHADER_TESS_CTRL) {
+ 		emit_waitcnt(ctx, LGKM_CNT & VM_CNT);
+ 		return;
+ 	}
+-- 
+cgit v0.10.2
+
