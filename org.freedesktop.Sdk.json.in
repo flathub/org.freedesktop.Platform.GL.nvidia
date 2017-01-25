@@ -24,7 +24,8 @@
                           "mkdir -p /usr/lib/GL",
                           "mkdir -p /usr/lib/debug",
                           "ln -s /app/lib/debug /usr/lib/debug/app",
-                          "ln -s ../../run/ /usr/lib/extensions"
+                          "ln -s ../../run/ /usr/lib/extensions",
+                          "ldconfig -C /usr/etc/ld.so.cache"
                         ],
     "cleanup-platform": [ "/include",
                           "/share/aclocal",
