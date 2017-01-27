@@ -1143,6 +1143,20 @@
         {
             "name": "libglvnd",
             "config-opts": [ "--disable-static", "--enable-asm", "--enable-tls" ],
+            "build-options" : {
+                "arch" : {
+                    "i386" : {
+                        "config-opts" : [
+                            "--build=i586-unknown-linux-gnu"
+                        ]
+                    },
+                    "arm" : {
+                        "config-opts" : [
+                            "--build=arm-unknown-linux-gnueabi"
+                        ]
+                    }
+                }
+            },
             "post-install": [
                 "mkdir -p /usr/lib/GL/glvnd/egl_vendor.d",
                 "ln -s /usr/lib/GL/glvnd /usr/etc/glvnd",
