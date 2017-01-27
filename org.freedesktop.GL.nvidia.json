@@ -1,0 +1,32 @@
+{
+    "id": "org.freedesktop.Platform.GL",
+    "branch": "1.4",
+    "runtime": "org.freedesktop.Platform",
+    "build-extension": true,
+    "sdk": "org.freedesktop.Sdk",
+    "runtime-version": "1.4",
+    "sdk-extensions": [],
+    "separate-locales": false,
+    "cleanup": [ ],
+    "modules": [
+        {
+            "name": "nvidia",
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "http://http.download.nvidia.com/XFree86/Linux-x86_64/375.26/NVIDIA-Linux-x86_64-375.26-no-compat32.run",
+                    "sha256": "9cc4abadd47165a17a4f9475e90e91d1b63de63fcc28c4e2e30e10dee845b4b2"
+                },
+                {
+                    "type": "file",
+                    "path": "nvidia-configure",
+                    "dest-filename": "configure"
+                },
+                {
+                    "type": "file",
+                    "path": "nvidia-extract"
+                }
+            ]
+        }
+    ]
+}
