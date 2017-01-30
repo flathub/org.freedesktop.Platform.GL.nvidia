@@ -1,0 +1,9 @@
+all:
+	true
+
+install:
+	mkdir -p /usr/lib/GL/bin
+	cp nvidia-apply_extra /usr/lib/GL/bin/apply_extra
+	ln -s extra /usr/lib/GL/lib
+	ln -s extra/glvnd /usr/lib/GL/glvnd
+	ln -s extra/vulkan /usr/lib/GL/vulkan
