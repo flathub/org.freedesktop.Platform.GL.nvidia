@@ -14,7 +14,9 @@
         "--extension=org.freedesktop.Platform.GStreamer=subdirectories",
         "--env=GI_TYPELIB_PATH=/app/lib/girepository-1.0",
         "--env=GST_PLUGIN_SYSTEM_PATH=/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/gstreamer-1.0",
-        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/GL"
+        "--env=LD_LIBRARY_PATH=/app/lib:/usr/lib/GL",
+        "--sdk=org.freedesktop.Sdk//@@SDK_BRANCH@@",
+        "--runtime=org.freedesktop.Platform//@@SDK_BRANCH@@"
     ],
     "cleanup": [ "/cache",
                  "/man",
