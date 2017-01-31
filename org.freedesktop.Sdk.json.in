@@ -738,8 +738,8 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://dri.freedesktop.org/libdrm/libdrm-2.4.74.tar.gz",
-                     "sha256": "3c8fdf5a89826797a8060e6f3455ca22db9ae49576cfcda1c78e3e2ce59af0f1"
+                     "url": "https://dri.freedesktop.org/libdrm/libdrm-2.4.75.tar.gz",
+                     "sha256": "a411bff814b4336c8908dcbd045cd89fdc7afedc75b795d897d462e467cbb01d"
                  }
             ]
         },
