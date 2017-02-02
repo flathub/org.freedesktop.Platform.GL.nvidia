@@ -1,0 +1,69 @@
+{
+    "app-id": "org.freedesktop.GlxInfo",
+    "branch": "@@SDK_BRANCH@@",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "@@SDK_RUNTIME_VERSION@@",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "glxinfo",
+    "finish-args": [
+        "--device=dri",
+        "--socket=x11",
+        "--socket=wayland",
+        "--share=ipc"
+    ],
+    "build-options" : {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g",
+        "env": {
+            "V": "1"
+        }
+    },
+    "cleanup": ["*.la", "*.a", "/include"],
+    "modules": [
+        {
+            "name": "glu",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://mesa.freedesktop.org/archive/glu/glu-9.0.0.tar.bz2",
+                    "sha256": "1f7ad0d379a722fcbd303aa5650c6d7d5544fde83196b42a73d1193568a4df12"
+                }
+            ]
+        },
+        {
+            "name": "glew",
+            "no-autogen": true,
+            "make-args": ["GLEW_DEST=/app", "GLEW_PREFIX=/app", "LIBDIR=/app/lib"],
+            "make-install-args": ["GLEW_DEST=/app", "GLEW_PREFIX=/app", "LIBDIR=/app/lib"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://downloads.sourceforge.net/project/glew/glew/2.0.0/glew-2.0.0.tgz",
+                    "sha256": "c572c30a4e64689c342ba1624130ac98936d7af90c3103f9ce12b8a0c5736764"
+                }
+            ]
+        },
+        {
+            "name": "freeglut",
+            "buildsystem": "cmake",
+            "config-opts": [ "-DCMAKE_INSTALL_LIBDIR=lib" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://prdownloads.sourceforge.net/freeglut/freeglut-3.0.0.tar.gz",
+                    "sha256": "2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1f375f1ff999f76a2"
+                }
+            ]
+        },
+        {
+            "name": "mesa-demos",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://mesa.freedesktop.org/archive/demos/8.3.0/mesa-demos-8.3.0.tar.bz2",
+                    "sha256": "c173154bbd0d5fb53d732471984def42fb1b14ac85fcb834138fb9518b3e0bef"
+                }
+            ]
+        }
+    ]
+}

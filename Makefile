@@ -11,7 +11,7 @@ SDK_BRANCH=1.4
 SDK_RUNTIME_VERSION=1.4
 
 # Canned recipe for generating metadata
-SUBST_FILES=org.freedesktop.Sdk.json os-release org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml
+SUBST_FILES=org.freedesktop.Sdk.json org.freedesktop.GlxInfo.json os-release org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml
 define subst-metadata
 	@echo -n "Generating files: ${SUBST_FILES}... ";
 	@for file in ${SUBST_FILES}; do 					\
@@ -24,7 +24,16 @@ define subst-metadata
 	@echo "Done.";
 endef
 
-all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
+all: runtimes
+	echo DONE
+
+glxinfo: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
+	$(call subst-metadata)
+	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
+                        --subject="build of org.freedesktop.GlxInfo, `date`" \
+                        ${EXPORT_ARGS} glxinfo org.freedesktop.GlxInfo.json
+
+runtimes: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
                         --subject="build of org.freedesktop.Sdk, `date`" \
