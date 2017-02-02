@@ -1125,6 +1125,7 @@
             "name": "vulkan",
             "cmake": true,
             "config-opts": [
+                "-DCMAKE_INSTALL_LIBDIR=lib",
                 "-DCMAKE_BUILD_TYPE=Release",
                 "-DCMAKE_SKIP_RPATH:BOOL=yes",
                 "-DBUILD_VKJSON=OFF",
