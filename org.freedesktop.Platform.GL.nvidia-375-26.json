@@ -1,5 +1,5 @@
 {
-    "id": "org.freedesktop.Platform.GL",
+    "id": "org.freedesktop.Platform.GL.nvidia-375-26",
     "branch": "1.4",
     "runtime": "org.freedesktop.Platform",
     "build-extension": true,
@@ -14,7 +14,7 @@
     "modules": [
         {
             "name": "nvidia",
-            "config-opts": [ "NVIDIA-Linux-x86_64-375.26-no-compat32.run" ],
+            "make-args": [ "NVIDIA_VERSION=375-26" ],
             "no-autogen": true,
             "sources": [
                 {

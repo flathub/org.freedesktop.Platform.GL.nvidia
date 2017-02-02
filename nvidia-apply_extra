@@ -1,19 +1,15 @@
 #!/bin/sh
 
-echo HEEEEEEEEEEEEEEEEEEEEEEEEEEELO!
-
 FILE=$(echo NVIDIA-Linux*.run)
 DIR=$(basename $FILE .run)
 VERSION=$(echo $FILE | awk -F - "{ print \$4 }")
-
-set -x
 
 mkdir tls
 mkdir -p vulkan/icd.d
 mkdir -p glvnd/egl_vendor.d
 
 chmod a+x $FILE
-./$FILE -a -x
+./$FILE -a -x &> /dev/null
 rm $FILE
 
 cd $DIR

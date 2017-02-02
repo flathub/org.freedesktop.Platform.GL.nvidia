@@ -2,8 +2,8 @@ all:
 	true
 
 install:
-	mkdir -p /usr/lib/GL/bin
-	cp nvidia-apply_extra /usr/lib/GL/bin/apply_extra
-	ln -s extra /usr/lib/GL/lib
-	ln -s extra/glvnd /usr/lib/GL/glvnd
-	ln -s extra/vulkan /usr/lib/GL/vulkan
+	mkdir -p ${FLATPAK_DEST}/bin
+	cp nvidia-apply_extra ${FLATPAK_DEST}/bin/apply_extra
+	ln -s extra ${FLATPAK_DEST}/lib
+	ln -s extra/glvnd ${FLATPAK_DEST}/glvnd
+	ln -s extra/vulkan ${FLATPAK_DEST}/vulkan
