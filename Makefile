@@ -25,19 +25,37 @@ define subst-metadata
 endef
 
 all: runtimes
-	echo DONE
+	true
+
+extra: glxinfo gl-drivers-${ARCH}
+	true
 
 glxinfo: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
-                        --subject="build of org.freedesktop.GlxInfo, `date`" \
-                        ${EXPORT_ARGS} glxinfo org.freedesktop.GlxInfo.json
+	    --subject="build of org.freedesktop.GlxInfo, `date`" \
+	    ${EXPORT_ARGS} glxinfo org.freedesktop.GlxInfo.json
+
+gl-drivers-${ARCH}:
+	true
+
+gl-drivers-x86_64: org.freedesktop.Platform.GL.nvidia.json.in
+	sed -e 's/@@SDK_BRANCH@@/${SDK_BRANCH}/g'				\
+	    -e 's/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g'		\
+	    -e 's/@@NVIDIA_VERSION@@/375-26/g'					\
+	    -e 's/@@NVIDIA_SHA256@@/9cc4abadd47165a17a4f9475e90e91d1b63de63fcc28c4e2e30e10dee845b4b2/g'					\
+	    -e 's/@@NVIDIA_SIZE@@/42693150/g'					\
+	    -e 's%@@NVIDIA_URL@@%http://http.download.nvidia.com/XFree86/Linux-x86_64/375.26/NVIDIA-Linux-x86_64-375.26-no-compat32.run%g'					\
+	      org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia.json.tmp && mv org.freedesktop.Platform.GL.nvidia.json.tmp org.freedesktop.Platform.GL.nvidia.json || exit 1;
+	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
+	    --subject="build of , org.freedesktop.Platform.GL.nvidia `date`" \
+	    ${EXPORT_ARGS} nv org.freedesktop.Platform.GL.nvidia.json
 
 runtimes: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
-                        --subject="build of org.freedesktop.Sdk, `date`" \
-                        ${EXPORT_ARGS} sdk org.freedesktop.Sdk.json
+		--subject="build of org.freedesktop.Sdk, `date`" \
+		${EXPORT_ARGS} sdk org.freedesktop.Sdk.json
 
 ${REPO}:
 	ostree  init --mode=archive-z2 --repo=${REPO}
