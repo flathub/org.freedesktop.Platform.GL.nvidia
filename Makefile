@@ -25,10 +25,8 @@ define subst-metadata
 endef
 
 all: runtimes
-	true
 
 extra: glxinfo gl-drivers-${ARCH}
-	true
 
 glxinfo: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
@@ -37,7 +35,6 @@ glxinfo: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	    ${EXPORT_ARGS} glxinfo org.freedesktop.GlxInfo.json
 
 gl-drivers-${ARCH}:
-	true
 
 gl-drivers-x86_64: org.freedesktop.Platform.GL.nvidia.json.in
 	sed -e 's/@@SDK_BRANCH@@/${SDK_BRANCH}/g'				\
