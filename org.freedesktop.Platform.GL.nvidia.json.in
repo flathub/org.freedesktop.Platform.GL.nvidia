@@ -1,0 +1,32 @@
+{
+    "id": "org.freedesktop.Platform.GL.nvidia-@@NVIDIA_VERSION@@",
+    "branch": "@@SDK_BRANCH@@",
+    "runtime": "org.freedesktop.Platform",
+    "build-extension": true,
+    "sdk": "org.freedesktop.Sdk",
+    "runtime-version": "@@SDK_BRANCH@@",
+    "sdk-extensions": [],
+    "separate-locales": false,
+    "cleanup": [ ],
+    "finish-args": [
+        "--extra-data=:@@NVIDIA_SHA256@@:@@NVIDIA_SIZE@@::@@NVIDIA_URL@@"
+    ],
+    "modules": [
+        {
+            "name": "nvidia",
+            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@" ],
+            "no-autogen": true,
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "nvidia-Makefile",
+                    "dest-filename": "makefile"
+                },
+                {
+                    "type": "file",
+                    "path": "nvidia-apply_extra"
+                }
+            ]
+        }
+    ]
+}
