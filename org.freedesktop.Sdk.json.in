@@ -50,6 +50,11 @@
                           "/share/gir-1.0",
                           "/lib/python*/test"
                         ],
+    "cleanup-platform-commands": [ "touch -d @0 /usr/share/fonts",
+                                   "touch -d @0 /usr/share/fonts/*",
+                                   "fc-cache -fs",
+                                   "ldconfig -C /usr/etc/ld.so.cache"
+                                 ],
     "build-options" : {
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
