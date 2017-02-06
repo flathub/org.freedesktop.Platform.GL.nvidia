@@ -1,0 +1,29 @@
+#!/bin/sh
+
+FILE=$(echo NVIDIA-Linux*.run)
+DIR=$(basename $FILE .run)
+VERSION=$(echo $FILE | awk -F - "{ print \$4 }")
+
+mkdir tls
+
+chmod a+x $FILE
+./$FILE -a -x &> /dev/null
+rm $FILE
+
+cd $DIR
+
+# Simple wildcard install of libs
+mv lib*.so.$VERSION ..
+if [ -d tls ]; then
+   mv tls/lib*.so.$VERSION ../tls/
+fi
+
+cd ..
+
+rm -rf $DIR
+
+
+for lib in $( find . -name lib\*.$VERSION ) ; do
+  ln -s ${lib##*/} ${lib%.$VERSION}
+  ln -s ${lib##*/} ${lib%.$VERSION}.1
+done

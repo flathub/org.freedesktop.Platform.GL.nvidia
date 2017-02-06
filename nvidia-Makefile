@@ -3,7 +3,7 @@ all:
 
 install:
 	mkdir -p ${FLATPAK_DEST}/bin
-	cp nvidia-apply_extra ${FLATPAK_DEST}/bin/apply_extra
+	cp apply_extra ${FLATPAK_DEST}/bin/apply_extra
 	ln -s extra ${FLATPAK_DEST}/lib
 	ln -s extra/glvnd ${FLATPAK_DEST}/glvnd
 	ln -s extra/vulkan ${FLATPAK_DEST}/vulkan

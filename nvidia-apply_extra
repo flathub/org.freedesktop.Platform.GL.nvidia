@@ -21,7 +21,7 @@ rm libEGL.so*
 # Simple wildcard install of libs
 mv lib*.so.$VERSION ..
 if [ -d tls ]; then
-   mv tls/lib*.so.$VERSION ..
+   mv tls/lib*.so.$VERSION ../tls/
 fi
 
 mv nvidia_icd.json ../vulkan/icd.d/

@@ -24,7 +24,8 @@
                 },
                 {
                     "type": "file",
-                    "path": "nvidia-apply_extra"
+                    "path": "nvidia-@@NVIDIA_OLD@@apply_extra",
+                    "dest-filename": "apply_extra"
                 }
             ]
         }
