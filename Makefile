@@ -11,7 +11,7 @@ SDK_BRANCH=1.4
 SDK_RUNTIME_VERSION=1.4
 
 # Canned recipe for generating metadata
-SUBST_FILES=org.freedesktop.Sdk.json org.freedesktop.GlxInfo.json os-release org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml
+SUBST_FILES=org.freedesktop.Sdk.json org.freedesktop.GlxInfo.json os-release org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml org.freedesktop.Platform.GL.mesa-git.json
 define subst-metadata
 	@echo -n "Generating files: ${SUBST_FILES}... ";
 	@for file in ${SUBST_FILES}; do 					\
@@ -86,6 +86,13 @@ nvidia-x86_64-304-134: NVIDIA_SHA256=42213765cd28078314657d3c1ba382584f09e5e5759
 nvidia-x86_64-304-134: NVIDIA_SIZE=42217254
 nvidia-x86_64-304-134: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/304.134/NVIDIA-Linux-x86_64-304.134-no-compat32.run
 nvidia-x86_64-304-134: NVIDIA_OLD=old-
+
+mesa-git:
+	$(call subst-metadata)
+	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
+		--subject="build of org.freedesktop.Platform.GL.mesa-git, `date`" \
+		${EXPORT_ARGS} mesa org.freedesktop.Platform.GL.mesa-git.json
+
 
 runtimes: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
