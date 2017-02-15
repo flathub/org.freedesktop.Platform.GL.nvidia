@@ -53,6 +53,9 @@
     "cleanup-platform-commands": [ "touch -d @0 /usr/share/fonts",
                                    "touch -d @0 /usr/share/fonts/*",
                                    "fc-cache -fs",
+                                   /* Work around gst-python issue */
+                                   "ln -s libpython2.7.so.1.0 /usr/lib/libpython2.7.so",
+                                   "ln -s libpython3.4m.so.1.0 /usr/lib/libpython3.4m.so",
                                    "ldconfig -C /usr/etc/ld.so.cache"
                                  ],
     "build-options" : {
