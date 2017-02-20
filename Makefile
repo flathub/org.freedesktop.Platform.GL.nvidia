@@ -50,6 +50,9 @@ gl-drivers-x86_64-nvidia: \
 	nvidia-x86_64-340-102 nvidia-x86_64-340-101 \
 	nvidia-x86_64-304-135 nvidia-x86_64-304-134
 
+# Ensure the NVidia builds don't run in parallel
+.NOTPARALLEL:
+
 nvidia-%:
 	sed -e 's/@@SDK_BRANCH@@/${SDK_BRANCH}/g'				\
 	    -e 's/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g'		\
