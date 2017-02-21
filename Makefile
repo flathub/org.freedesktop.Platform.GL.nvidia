@@ -43,7 +43,9 @@ gl-drivers-i386: gl-drivers-i386-nvidia
 gl-drivers-x86_64: gl-drivers-x86_64-nvidia
 
 gl-drivers-i386-nvidia: \
-	nvidia-i386-375-39 nvidia-i386-375-26
+	nvidia-i386-375-39 nvidia-i386-375-26 nvidia-i386-370-28 \
+	nvidia-i386-340-102 nvidia-i386-340-101 \
+	nvidia-i386-304-135 nvidia-i386-304-134
 
 gl-drivers-x86_64-nvidia: \
 	nvidia-x86_64-375-39 nvidia-x86_64-375-26 nvidia-x86_64-370-28 \
@@ -75,6 +77,35 @@ nvidia-i386-375-26: NVIDIA_VERSION=375-26
 nvidia-i386-375-26: NVIDIA_SHA256=7c79cfaae5512f34ff14cf0fe76632c7c720600d4bbae71d90ff73f1674e617b
 nvidia-i386-375-26: NVIDIA_SIZE=44541069
 nvidia-i386-375-26: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/375.26/NVIDIA-Linux-x86-375.26.run
+
+nvidia-i386-370-28: NVIDIA_VERSION=370-28
+nvidia-i386-370-28: NVIDIA_SHA256=6323254ccf2a75d7ced1374a76ca56778689d0d8a9819e4ee5378ea3347b9835
+nvidia-i386-370-28: NVIDIA_SIZE=44189522
+nvidia-i386-370-28: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/370.28/NVIDIA-Linux-x86-370.28.run
+
+nvidia-i386-340-102: NVIDIA_VERSION=340-102
+nvidia-i386-340-102: NVIDIA_SHA256=61b13d5dae0f6f5d788a4d8c4c98e8d971d19cb90b606058060d007946248828
+nvidia-i386-340-102: NVIDIA_SIZE=38779756
+nvidia-i386-340-102: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/340.102/NVIDIA-Linux-x86-340.102.run
+nvidia-i386-340-102: NVIDIA_OLD=old-
+
+nvidia-i386-340-101: NVIDIA_VERSION=340-101
+nvidia-i386-340-101: NVIDIA_SHA256=5f5eda9c3d9bf53b56ef4f546dd1be5317eed46df425edbdd2c34023fb9eb062
+nvidia-i386-340-101: NVIDIA_SIZE=38932143
+nvidia-i386-340-101: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/340.101/NVIDIA-Linux-x86-340.101.run
+nvidia-i386-340-101: NVIDIA_OLD=old-
+
+nvidia-i386-304-135: NVIDIA_VERSION=304-135
+nvidia-i386-304-135: NVIDIA_SHA256=5cb0a191ddca7b4c72b3c26cd57b7d719878ce628d24b5b026a0e5c8d3a00d93
+nvidia-i386-304-135: NVIDIA_SIZE=41202842
+nvidia-i386-304-135: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/304.135/NVIDIA-Linux-x86-304.135.run
+nvidia-i386-304-135: NVIDIA_OLD=old-
+
+nvidia-i386-304-134: NVIDIA_VERSION=304-134
+nvidia-i386-304-134: NVIDIA_SHA256=84f7891af131bb9f9a8a34401dfef4288218019406dfa4ae57b6d52b14e81c9d
+nvidia-i386-304-134: NVIDIA_SIZE=41201159
+nvidia-i386-304-134: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/304.134/NVIDIA-Linux-x86-304.134.run
+nvidia-i386-304-134: NVIDIA_OLD=old-
 
 nvidia-x86_64-375-39: NVIDIA_VERSION=375-39
 nvidia-x86_64-375-39: NVIDIA_SHA256=95a3221292f357fbd77697b9bb78d1694def5761202f695ef2065c61efb2ddd8
