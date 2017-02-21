@@ -8,6 +8,8 @@ install:
 	install os-release ${DESTDIR}/usr/lib
 	mkdir -p ${DESTDIR}/etc
 	ln -s ../usr/lib/os-release ${DESTDIR}/etc/os-release
+	install issue ${DESTDIR}/etc
+	install issue.net ${DESTDIR}/etc
 	mkdir -p ${DESTDIR}/usr/share/appdata
 	install org.freedesktop.Platform.appdata.xml ${DESTDIR}/usr/share/appdata
 	install org.freedesktop.Sdk.appdata.xml ${DESTDIR}/usr/share/appdata

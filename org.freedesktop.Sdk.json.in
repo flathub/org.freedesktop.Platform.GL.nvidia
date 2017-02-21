@@ -2166,6 +2166,14 @@
                 },
                 {
                     "type": "file",
+                    "path": "issue"
+                },
+                {
+                    "type": "file",
+                    "path": "issue.net"
+                },
+                {
+                    "type": "file",
                     "path": "org.freedesktop.Sdk.appdata.xml"
                 },
                 {
