@@ -44,12 +44,12 @@ gl-drivers-x86_64: gl-drivers-x86_64-nvidia
 
 gl-drivers-i386-nvidia: \
 	nvidia-i386-375-39 nvidia-i386-375-26 nvidia-i386-370-28 \
-	nvidia-i386-340-102 nvidia-i386-340-101 \
+	nvidia-i386-367-57 nvidia-i386-340-102 nvidia-i386-340-101 \
 	nvidia-i386-304-135 nvidia-i386-304-134
 
 gl-drivers-x86_64-nvidia: \
 	nvidia-x86_64-375-39 nvidia-x86_64-375-26 nvidia-x86_64-370-28 \
-	nvidia-x86_64-340-102 nvidia-x86_64-340-101 \
+	nvidia-x86_64-367-57 nvidia-x86_64-340-102 nvidia-x86_64-340-101 \
 	nvidia-x86_64-304-135 nvidia-x86_64-304-134
 
 # Ensure the NVidia builds don't run in parallel
@@ -82,6 +82,12 @@ nvidia-i386-370-28: NVIDIA_VERSION=370-28
 nvidia-i386-370-28: NVIDIA_SHA256=6323254ccf2a75d7ced1374a76ca56778689d0d8a9819e4ee5378ea3347b9835
 nvidia-i386-370-28: NVIDIA_SIZE=44189522
 nvidia-i386-370-28: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/370.28/NVIDIA-Linux-x86-370.28.run
+
+nvidia-i386-367-57: NVIDIA_VERSION=367-57
+nvidia-i386-367-57: NVIDIA_SHA256=43d4e926f71ac6c581018badf467458709822e97a7564ed9f1b521b7b63d88bb
+nvidia-i386-367-57: NVIDIA_SIZE=44731570
+nvidia-i386-367-57: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/367.57/NVIDIA-Linux-x86-367.57.run
+nvidia-i386-367-57: NVIDIA_OLD=old-
 
 nvidia-i386-340-102: NVIDIA_VERSION=340-102
 nvidia-i386-340-102: NVIDIA_SHA256=61b13d5dae0f6f5d788a4d8c4c98e8d971d19cb90b606058060d007946248828
@@ -121,6 +127,12 @@ nvidia-x86_64-370-28: NVIDIA_VERSION=370-28
 nvidia-x86_64-370-28: NVIDIA_SHA256=f498bcf4ddf05725792bd4a1ca9720a88ade81de27bd27f2f3c313723f11444c
 nvidia-x86_64-370-28: NVIDIA_SIZE=43511970
 nvidia-x86_64-370-28: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/370.28/NVIDIA-Linux-x86_64-370.28-no-compat32.run
+
+nvidia-x86_64-367-57: NVIDIA_VERSION=367-57
+nvidia-x86_64-367-57: NVIDIA_SHA256=b94a8ab6a1da464b44ba9bbb25e1e220441ae8340221de3bd159df00445dd6e4
+nvidia-x86_64-367-57: NVIDIA_SIZE=42984178
+nvidia-x86_64-367-57: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/367.57/NVIDIA-Linux-x86_64-367.57-no-compat32.run
+nvidia-x86_64-367-57: NVIDIA_OLD=old-
 
 nvidia-x86_64-340-102: NVIDIA_VERSION=340-102
 nvidia-x86_64-340-102: NVIDIA_SHA256=6a36bd9a0033769ecd11ce2aa60aeb41b50b20616c43fd19c55e027c451f585e
