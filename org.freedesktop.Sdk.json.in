@@ -1278,8 +1278,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://mesa.freedesktop.org/archive/13.0.4/mesa-13.0.4.tar.xz",
-                    "sha256": "a95d7ce8f7bd5f88585e4be3144a341236d8c0fc91f6feaec59bb8ba3120e726"
+                    "url": "https://mesa.freedesktop.org/archive/13.0.5/mesa-13.0.5.tar.xz",
+                    "sha256": "bfcea7e2c801525a60895c8aff11aa68457ee9aa35d01a4638e1f310a3f5ef87"
                 },
                 {
                     "type": "patch",
