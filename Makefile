@@ -63,10 +63,10 @@ nvidia-%:
 	    -e 's/@@NVIDIA_SIZE@@/${NVIDIA_SIZE}/g'					\
 	    -e 's%@@NVIDIA_URL@@%${NVIDIA_URL}%g'					\
 	    -e 's%@@NVIDIA_OLD@@%${NVIDIA_OLD}%g'					\
-	      org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia.json.tmp && mv org.freedesktop.Platform.GL.nvidia.json.tmp org.freedesktop.Platform.GL.nvidia.json || exit 1;
+	      org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia.json.tmp && mv org.freedesktop.Platform.GL.nvidia.json.tmp org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}.json || exit 1;
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
 	    --subject="build of , org.freedesktop.Platform.GL.nvidia `date`" \
-	    ${EXPORT_ARGS} nv org.freedesktop.Platform.GL.nvidia.json
+	    ${EXPORT_ARGS} nv org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}.json
 
 nvidia-i386-375-39: NVIDIA_VERSION=375-39
 nvidia-i386-375-39: NVIDIA_SHA256=7f33f6572c5c5c57df71531749c7339309a2097918375685ea8018826cf19456
