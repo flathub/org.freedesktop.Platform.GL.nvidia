@@ -62,7 +62,6 @@ nvidia-%:
 	    -e 's/@@NVIDIA_SHA256@@/${NVIDIA_SHA256}/g'					\
 	    -e 's/@@NVIDIA_SIZE@@/${NVIDIA_SIZE}/g'					\
 	    -e 's%@@NVIDIA_URL@@%${NVIDIA_URL}%g'					\
-	    -e 's%@@NVIDIA_OLD@@%${NVIDIA_OLD}%g'					\
 	      org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia.json.tmp && mv org.freedesktop.Platform.GL.nvidia.json.tmp org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}.json || exit 1;
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
 	    --subject="build of , org.freedesktop.Platform.GL.nvidia `date`" \
@@ -87,31 +86,26 @@ nvidia-i386-367-57: NVIDIA_VERSION=367-57
 nvidia-i386-367-57: NVIDIA_SHA256=43d4e926f71ac6c581018badf467458709822e97a7564ed9f1b521b7b63d88bb
 nvidia-i386-367-57: NVIDIA_SIZE=44731570
 nvidia-i386-367-57: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/367.57/NVIDIA-Linux-x86-367.57.run
-nvidia-i386-367-57: NVIDIA_OLD=old-
 
 nvidia-i386-340-102: NVIDIA_VERSION=340-102
 nvidia-i386-340-102: NVIDIA_SHA256=61b13d5dae0f6f5d788a4d8c4c98e8d971d19cb90b606058060d007946248828
 nvidia-i386-340-102: NVIDIA_SIZE=38779756
 nvidia-i386-340-102: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/340.102/NVIDIA-Linux-x86-340.102.run
-nvidia-i386-340-102: NVIDIA_OLD=old-
 
 nvidia-i386-340-101: NVIDIA_VERSION=340-101
 nvidia-i386-340-101: NVIDIA_SHA256=5f5eda9c3d9bf53b56ef4f546dd1be5317eed46df425edbdd2c34023fb9eb062
 nvidia-i386-340-101: NVIDIA_SIZE=38932143
 nvidia-i386-340-101: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/340.101/NVIDIA-Linux-x86-340.101.run
-nvidia-i386-340-101: NVIDIA_OLD=old-
 
 nvidia-i386-304-135: NVIDIA_VERSION=304-135
 nvidia-i386-304-135: NVIDIA_SHA256=5cb0a191ddca7b4c72b3c26cd57b7d719878ce628d24b5b026a0e5c8d3a00d93
 nvidia-i386-304-135: NVIDIA_SIZE=41202842
 nvidia-i386-304-135: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/304.135/NVIDIA-Linux-x86-304.135.run
-nvidia-i386-304-135: NVIDIA_OLD=old-
 
 nvidia-i386-304-134: NVIDIA_VERSION=304-134
 nvidia-i386-304-134: NVIDIA_SHA256=84f7891af131bb9f9a8a34401dfef4288218019406dfa4ae57b6d52b14e81c9d
 nvidia-i386-304-134: NVIDIA_SIZE=41201159
 nvidia-i386-304-134: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/304.134/NVIDIA-Linux-x86-304.134.run
-nvidia-i386-304-134: NVIDIA_OLD=old-
 
 nvidia-x86_64-375-39: NVIDIA_VERSION=375-39
 nvidia-x86_64-375-39: NVIDIA_SHA256=95a3221292f357fbd77697b9bb78d1694def5761202f695ef2065c61efb2ddd8
@@ -132,31 +126,26 @@ nvidia-x86_64-367-57: NVIDIA_VERSION=367-57
 nvidia-x86_64-367-57: NVIDIA_SHA256=b94a8ab6a1da464b44ba9bbb25e1e220441ae8340221de3bd159df00445dd6e4
 nvidia-x86_64-367-57: NVIDIA_SIZE=42984178
 nvidia-x86_64-367-57: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/367.57/NVIDIA-Linux-x86_64-367.57-no-compat32.run
-nvidia-x86_64-367-57: NVIDIA_OLD=old-
 
 nvidia-x86_64-340-102: NVIDIA_VERSION=340-102
 nvidia-x86_64-340-102: NVIDIA_SHA256=6a36bd9a0033769ecd11ce2aa60aeb41b50b20616c43fd19c55e027c451f585e
 nvidia-x86_64-340-102: NVIDIA_SIZE=38598444
 nvidia-x86_64-340-102: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/340.102/NVIDIA-Linux-x86_64-340.102-no-compat32.run
-nvidia-x86_64-340-102: NVIDIA_OLD=old-
 
 nvidia-x86_64-340-101: NVIDIA_VERSION=340-101
 nvidia-x86_64-340-101: NVIDIA_SHA256=5ef62e073ba18d4ca745dcaa53c5fbf3d1de4b84cc1739a6cc3f7f746a77c752
 nvidia-x86_64-340-101: NVIDIA_SIZE=38664384
 nvidia-x86_64-340-101: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/340.101/NVIDIA-Linux-x86_64-340.101-no-compat32.run
-nvidia-x86_64-340-101: NVIDIA_OLD=old-
 
 nvidia-x86_64-304-135: NVIDIA_VERSION=304-135
 nvidia-x86_64-304-135: NVIDIA_SHA256=352f4a4d5ef692b26383e2cf9ec866f6973f905d53eb6bc9f2161b6ba2afae5a
 nvidia-x86_64-304-135: NVIDIA_SIZE=42205949
 nvidia-x86_64-304-135: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/304.135/NVIDIA-Linux-x86_64-304.135-no-compat32.run
-nvidia-x86_64-304-135: NVIDIA_OLD=old-
 
 nvidia-x86_64-304-134: NVIDIA_VERSION=304-134
 nvidia-x86_64-304-134: NVIDIA_SHA256=42213765cd28078314657d3c1ba382584f09e5e57598240596021f4f76c0c443
 nvidia-x86_64-304-134: NVIDIA_SIZE=42217254
 nvidia-x86_64-304-134: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/304.134/NVIDIA-Linux-x86_64-304.134-no-compat32.run
-nvidia-x86_64-304-134: NVIDIA_OLD=old-
 
 mesa-git:
 	$(call subst-metadata)

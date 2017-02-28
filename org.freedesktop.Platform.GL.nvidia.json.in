@@ -8,13 +8,39 @@
     "sdk-extensions": [],
     "separate-locales": false,
     "cleanup": [ ],
+    "build-options" : {
+        "cflags": "-O2 -g -I/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/include",
+        "cxxflags": "-O2 -g",
+        "prefix": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@",
+        "env": {
+            "V": "1",
+            "LDFLAGS": "-L/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib"
+        }
+    },
     "finish-args": [
-        "--extra-data=:@@NVIDIA_SHA256@@:@@NVIDIA_SIZE@@::@@NVIDIA_URL@@"
+        "--extra-data=:@@NVIDIA_SHA256@@:@@NVIDIA_SIZE@@::@@NVIDIA_URL@@",
+        "--metadata=Extra Data=NoRuntime"
     ],
     "modules": [
         {
+            "cleanup": ["/include", "/share"],
+            "name": "libarchive",
+            "config-opts": [ "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
+                             "--without-bz2lib", "--without-iconv", "--without-lz4", "--without-lzo2", "--without-nettle",
+                             "--without-openssl", "--without-xml2", "--without-expat", "--disable-bsdcat", "--disable-bsdcpio",
+                             "--disable-bsdtar"
+                           ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://www.libarchive.org/downloads/libarchive-3.2.2.tar.gz",
+                    "sha256": "691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f"
+                }
+            ]
+        },
+        {
             "name": "nvidia",
-            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@" ],
+            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@", "NVIDIA_URL=@@NVIDIA_URL@@" ],
             "no-autogen": true,
             "sources": [
                 {
@@ -24,8 +50,7 @@
                 },
                 {
                     "type": "file",
-                    "path": "nvidia-@@NVIDIA_OLD@@apply_extra",
-                    "dest-filename": "apply_extra"
+                    "path": "nvidia-apply-extra.c"
                 }
             ]
         }

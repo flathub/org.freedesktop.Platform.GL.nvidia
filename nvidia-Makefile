@@ -1,9 +1,10 @@
 all:
-	true
+	gcc -o apply_extra -Wall -static -DNVIDIA_VERSION='"'$(subst -,.,${NVIDIA_VERSION})'"' -DNVIDIA_BASENAME='"'$(notdir ${NVIDIA_URL})'"' nvidia-apply-extra.c $(CFLAGS) ${LDFLAGS} -larchive -lz -llzma
 
 install:
 	mkdir -p ${FLATPAK_DEST}/bin
-	cp apply_extra ${FLATPAK_DEST}/bin/apply_extra
+	install -s apply_extra ${FLATPAK_DEST}/bin/apply_extra
+	rm -rf ${FLATPAK_DEST}/lib
 	ln -s extra ${FLATPAK_DEST}/lib
 	ln -s extra/glvnd ${FLATPAK_DEST}/glvnd
 	ln -s extra/vulkan ${FLATPAK_DEST}/vulkan
