@@ -11,7 +11,7 @@ SDK_BRANCH=1.4
 SDK_RUNTIME_VERSION=1.4
 
 # Canned recipe for generating metadata
-SUBST_FILES=org.freedesktop.Sdk.json org.freedesktop.GlxInfo.json os-release issue issue.net org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml org.freedesktop.Platform.GL.mesa-git.json
+SUBST_FILES=org.freedesktop.Sdk.json org.freedesktop.GlxInfo.json os-release issue issue.net org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml org.freedesktop.Platform.GL.mesa-git.json org.freedesktop.Platform.GL.mesa-17.json
 define subst-metadata
 	@echo -n "Generating files: ${SUBST_FILES}... ";
 	@for file in ${SUBST_FILES}; do 					\
@@ -163,6 +163,12 @@ mesa-git:
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
 		--subject="build of org.freedesktop.Platform.GL.mesa-git, `date`" \
 		${EXPORT_ARGS} mesa org.freedesktop.Platform.GL.mesa-git.json
+
+mesa-17:
+	$(call subst-metadata)
+	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
+		--subject="build of org.freedesktop.Platform.GL.mesa-17, `date`" \
+		${EXPORT_ARGS} mesa org.freedesktop.Platform.GL.mesa-17.json
 
 
 runtimes: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))

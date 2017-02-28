@@ -1,0 +1,91 @@
+{
+    "id": "org.freedesktop.Platform.GL.mesa-17",
+    "branch": "@@SDK_BRANCH@@",
+    "runtime": "org.freedesktop.Platform",
+    "build-extension": true,
+    "sdk": "org.freedesktop.Sdk",
+    "runtime-version": "@@SDK_BRANCH@@",
+    "sdk-extensions": [],
+    "separate-locales": false,
+    "cleanup": [  "/include", "/share/man" ],
+    "build-options" : {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g",
+        "prefix": "/usr/lib/GL/mesa-17",
+        "env": {
+            "V": "1"
+        }
+    },
+    "modules": [
+        {
+            "name": "mesa",
+            "build-options" : {
+                "cxxflags": "-O2 -g -fno-rtti -fno-exceptions",
+		"arch" : {
+		    "i386" : {
+			"config-opts" : [
+                            "--build=i586-unknown-linux-gnu",
+			    "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965",
+			    "--with-vulkan-drivers=intel"
+			]
+		    },
+		    "x86_64" : {
+			"config-opts" : [
+			    "--with-gallium-drivers=svga,swrast,nouveau,r600,r300,radeonsi",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200,i915,i965",
+			    "--with-vulkan-drivers=intel"
+			]
+		    },
+		    "arm" : {
+			"config-opts" : [
+			    "--with-gallium-drivers=svga,swrast,nouveau,freedreno,vc4",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200"
+			]
+		    },
+		    "aarch64" : {
+			"config-opts" : [
+			    "--with-gallium-drivers=svga,swrast,nouveau,freedreno,vc4",
+			    "--with-dri-drivers=swrast,nouveau,radeon,r200"
+			]
+		    }
+		}
+            },
+            "config-opts": [
+                "--enable-libglvnd",
+                "--disable-selinux",
+                "--disable-osmesa",
+                "--enable-egl",
+                "--disable-gles1",
+                "--enable-gles2",
+                "--disable-xvmc",
+                "--with-egl-platforms=x11,drm,surfaceless,wayland",
+                "--enable-shared-glapi",
+                "--enable-gbm",
+                "--disable-opencl",
+                "--enable-glx-tls",
+                "--enable-texture-float=yes",
+                "--enable-gallium-llvm",
+                "--enable-llvm-shared-libs",
+                "--enable-dri",
+                "--enable-sysfs"
+            ],
+            "make-args": [ "MKDEP=/bin/true"],
+            "post-install": [
+                /* Set the default driver to mesa */
+                "ln -s libEGL_mesa.so /usr/lib/GL/mesa-17/lib/libEGL_indirect.so",
+                "ln -s libEGL_mesa.so.0 /usr/lib/GL/mesa-17/lib/libEGL_indirect.so.0",
+                "ln -s libGLX_mesa.so /usr/lib/GL/mesa-17/lib/libGLX_indirect.so",
+                "ln -s libGLX_mesa.so.0 /usr/lib/GL/mesa-17/lib/libGLX_indirect.so.0",
+                "mv /usr/lib/GL/mesa-17/share/vulkan /usr/lib/GL/mesa-17/vulkan"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://mesa.freedesktop.org/archive/17.0.0/mesa-17.0.0.tar.xz",
+                    "sha256": "39db3d59700159add7f977307d12a7dfe016363e760ad82280ac4168ea668481"
+                }
+            ]
+        }
+    ]
+}
