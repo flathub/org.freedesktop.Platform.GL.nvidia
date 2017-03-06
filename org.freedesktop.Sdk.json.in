@@ -11,7 +11,7 @@
         "--extension=org.freedesktop.Platform.GL=directory=lib/GL",
         "--extension=org.freedesktop.Platform.GL=subdirectories=true",
         "--extension=org.freedesktop.Platform.GL=no-autodownload=true",
-        "--extension=org.freedesktop.Platform.GL=autodelete=true",
+        "--extension=org.freedesktop.Platform.GL=autodelete=false",
         "--extension=org.freedesktop.Platform.GL=add-ld-path=lib",
         "--extension=org.freedesktop.Platform.GL=merge-dirs=vulkan/icd.d;glvnd/egl_vendor.d",
         "--extension=org.freedesktop.Platform.GL=download-if=active-gl-driver",
