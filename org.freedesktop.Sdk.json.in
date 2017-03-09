@@ -1270,6 +1270,8 @@
             ],
             "make-args": [ "MKDEP=/bin/true"],
             "post-install": [
+                /* Strip the dri drivers to avoid breaking the hardlinks when extracting debuginfo */
+                "for i in /usr/lib/vdpau/*.so.1.0.0 /usr/lib/dri/*.so; do cp $i $i.tmp; eu-strip $i.tmp; mv $i.tmp $i; done",
                 /* Set the default driver to mesa */
                 "ln -s libEGL_mesa.so /usr/lib/libEGL_indirect.so",
                 "ln -s libEGL_mesa.so.0 /usr/lib/libEGL_indirect.so.0",
