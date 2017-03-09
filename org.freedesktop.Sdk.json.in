@@ -28,6 +28,7 @@
                  "/man",
                  "/share/doc",
                  "/share/man",
+                 "/share/gtk-doc/html",
                  "/share/devhelp",
                  "/lib/systemd",
                  "/lib/opkg",
