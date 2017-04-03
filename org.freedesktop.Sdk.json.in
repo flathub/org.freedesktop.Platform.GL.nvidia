@@ -1692,7 +1692,7 @@
             "sources": [
                  {
                      "type": "archive",
-                     "url": "https://fedorahosted.org/releases/l/i/liberation-fonts/liberation-fonts-ttf-2.00.1.tar.gz",
+                     "url": "http://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-2.00.1.tar.gz",
                      "sha256": "7890278a6cd17873c57d9cd785c2d230d9abdea837e96516019c5885dd271504"
                  },
                  {
