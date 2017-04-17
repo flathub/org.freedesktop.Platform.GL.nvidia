@@ -43,13 +43,13 @@ gl-drivers-i386: gl-drivers-i386-nvidia
 gl-drivers-x86_64: gl-drivers-x86_64-nvidia
 
 gl-drivers-i386-nvidia: \
-	nvidia-i386-378-13 \
+	nvidia-i386-381-09 nvidia-i386-378-13 \
 	nvidia-i386-375-39 nvidia-i386-375-26 nvidia-i386-370-28 \
 	nvidia-i386-367-57 nvidia-i386-340-102 nvidia-i386-340-101 \
 	nvidia-i386-304-135 nvidia-i386-304-134
 
 gl-drivers-x86_64-nvidia: \
-	nvidia-x86_64-378-13 \
+	nvidia-x86_64-381-09 nvidia-x86_64-378-13 \
 	nvidia-x86_64-375-39 nvidia-x86_64-375-26 nvidia-x86_64-370-28 \
 	nvidia-x86_64-367-57 nvidia-x86_64-340-102 nvidia-x86_64-340-101 \
 	nvidia-x86_64-304-135 nvidia-x86_64-304-134
@@ -68,6 +68,11 @@ nvidia-%:
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
 	    --subject="build of , org.freedesktop.Platform.GL.nvidia `date`" \
 	    ${EXPORT_ARGS} nv org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}.json
+
+nvidia-i386-381-09: NVIDIA_VERSION=381-09
+nvidia-i386-381-09: NVIDIA_SHA256=c39805e6610f710d16acf57c9d09cb5504d33c557e634e632079d46f18da4268
+nvidia-i386-381-09: NVIDIA_SIZE=44942491
+nvidia-i386-381-09: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/381.09/NVIDIA-Linux-x86-381.09.run
 
 nvidia-i386-378-13: NVIDIA_VERSION=378-13
 nvidia-i386-378-13: NVIDIA_SHA256=05e62a6098aac7373438ee381072253a861d56522f74948c2b714e20e69a46b1
@@ -113,6 +118,11 @@ nvidia-i386-304-134: NVIDIA_VERSION=304-134
 nvidia-i386-304-134: NVIDIA_SHA256=84f7891af131bb9f9a8a34401dfef4288218019406dfa4ae57b6d52b14e81c9d
 nvidia-i386-304-134: NVIDIA_SIZE=41201159
 nvidia-i386-304-134: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/304.134/NVIDIA-Linux-x86-304.134.run
+
+nvidia-x86_64-381-09: NVIDIA_VERSION=381-09
+nvidia-x86_64-381-09: NVIDIA_SHA256=ff433aa127a602a3cdf6d308faab841a64e02f32a750caf0dc3999f0a3b70120
+nvidia-x86_64-381-09: NVIDIA_SIZE=44228227
+nvidia-x86_64-381-09: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/381.09/NVIDIA-Linux-x86_64-381.09-no-compat32.run
 
 nvidia-x86_64-378-13: NVIDIA_VERSION=378-13
 nvidia-x86_64-378-13: NVIDIA_SHA256=a97a2ab047759a0b2c4abab5601e6f027230d355615ee745e24e738ee21cf5da
