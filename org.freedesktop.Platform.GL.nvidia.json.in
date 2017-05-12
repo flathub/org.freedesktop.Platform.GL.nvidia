@@ -4,7 +4,7 @@
     "runtime": "org.freedesktop.Platform",
     "build-extension": true,
     "sdk": "org.freedesktop.Sdk",
-    "runtime-version": "@@SDK_BRANCH@@",
+    "runtime-version": "@@SDK_RUNTIME_VERSION@@",
     "sdk-extensions": [],
     "separate-locales": false,
     "cleanup": [ ],

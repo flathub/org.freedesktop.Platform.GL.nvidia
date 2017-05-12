@@ -8,7 +8,7 @@ REPO   ?= repo
 # SDK_RUNTIME_VERSION: The org.freedesktop.BaseSdk and platform version to build against
 #
 SDK_BRANCH=1.4
-SDK_RUNTIME_VERSION=1.4
+SDK_RUNTIME_VERSION=1.6
 
 # Canned recipe for generating metadata
 SUBST_FILES=org.freedesktop.Sdk.json org.freedesktop.GlxInfo.json os-release issue issue.net org.freedesktop.Sdk.appdata.xml org.freedesktop.Platform.appdata.xml org.freedesktop.Platform.GL.mesa-git.json org.freedesktop.Platform.GL.mesa-17.json
