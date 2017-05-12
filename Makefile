@@ -24,15 +24,7 @@ define subst-metadata
 	@echo "Done.";
 endef
 
-all: runtimes
-
-extra: glxinfo gl-drivers-${ARCH}
-
-glxinfo: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
-	$(call subst-metadata)
-	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
-	    --subject="build of org.freedesktop.GlxInfo, `date`" \
-	    ${EXPORT_ARGS} glxinfo org.freedesktop.GlxInfo.json
+all: gl-drivers-${ARCH}
 
 gl-drivers: gl-drivers-${ARCH}
 
@@ -168,25 +160,6 @@ nvidia-x86_64-304-134: NVIDIA_VERSION=304-134
 nvidia-x86_64-304-134: NVIDIA_SHA256=42213765cd28078314657d3c1ba382584f09e5e57598240596021f4f76c0c443
 nvidia-x86_64-304-134: NVIDIA_SIZE=42217254
 nvidia-x86_64-304-134: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/304.134/NVIDIA-Linux-x86_64-304.134-no-compat32.run
-
-mesa-git:
-	$(call subst-metadata)
-	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
-		--subject="build of org.freedesktop.Platform.GL.mesa-git, `date`" \
-		${EXPORT_ARGS} mesa org.freedesktop.Platform.GL.mesa-git.json
-
-mesa-17:
-	$(call subst-metadata)
-	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
-		--subject="build of org.freedesktop.Platform.GL.mesa-17, `date`" \
-		${EXPORT_ARGS} mesa org.freedesktop.Platform.GL.mesa-17.json
-
-
-runtimes: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
-	$(call subst-metadata)
-	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
-		--subject="build of org.freedesktop.Sdk, `date`" \
-		${EXPORT_ARGS} sdk org.freedesktop.Sdk.json
 
 ${REPO}:
 	ostree  init --mode=archive-z2 --repo=${REPO}
