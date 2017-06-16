@@ -24,9 +24,10 @@ define subst-metadata
 	@echo "Done.";
 endef
 
-all: gl-drivers-${ARCH}
+all: gl-drivers
 
 gl-drivers: gl-drivers-${ARCH}
+	flatpak build-update-repo ${EXPORT_ARGS} repo
 
 gl-drivers-${ARCH}:
 
@@ -60,6 +61,9 @@ nvidia-%:
 	flatpak-builder --force-clean --ccache --require-changes --repo=${REPO} --arch=${ARCH} \
 	    --subject="build of , org.freedesktop.Platform.GL.nvidia `date`" \
 	    ${EXPORT_ARGS} nv org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}.json
+	if test "${ARCH}" == "i386" ; then \
+	 flatpak build-commit-from --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} repo runtime/org.freedesktop.Platform.GL32.nvidia-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ; \
+       fi
 
 nvidia-i386-381-22: NVIDIA_VERSION=381-22
 nvidia-i386-381-22: NVIDIA_SHA256=7b7dd6ee1c871dc5367fc207bba65077c3820a683decbfe6126fc70c0d1b9d08
