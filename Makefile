@@ -62,7 +62,7 @@ nvidia-%:
 	    --subject="build of , org.freedesktop.Platform.GL.nvidia `date`" \
 	    ${EXPORT_ARGS} nv org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}.json
 	if test "${ARCH}" == "i386" ; then \
-	 flatpak build-commit-from --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ; \
+	 flatpak build-commit-from  ${EXPORT_ARGS} --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ; \
        fi
 
 nvidia-i386-381-22: NVIDIA_VERSION=381-22
