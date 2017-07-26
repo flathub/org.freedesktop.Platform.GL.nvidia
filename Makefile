@@ -38,7 +38,7 @@ gl-drivers-x86_64: gl-drivers-x86_64-nvidia
 gl-drivers-i386-nvidia: \
 	nvidia-i386-384-59 nvidia-i386-384-47	\
 	nvidia-i386-381-22 nvidia-i386-381-09 nvidia-i386-378-13	\
-	nvidia-i386-375-66 nvidia-i386-375-39 nvidia-i386-375-26	\
+	nvidia-i386-375-82 nvidia-i386-375-66 nvidia-i386-375-39 nvidia-i386-375-26	\
 	nvidia-i386-370-28 nvidia-i386-367-57 nvidia-i386-340-102	\
 	nvidia-i386-340-101 nvidia-i386-304-135 nvidia-i386-304-134
 
@@ -46,7 +46,7 @@ gl-drivers-x86_64-nvidia: \
 	nvidia-x86_64-384-59 nvidia-x86_64-384-47	\
 	nvidia-x86_64-381-22 nvidia-x86_64-381-09	\
 	nvidia-x86_64-378-13 nvidia-x86_64-375-66	\
-	nvidia-x86_64-375-39 nvidia-x86_64-375-26	\
+	nvidia-x86_64-375-82 nvidia-x86_64-375-39 nvidia-x86_64-375-26	\
 	nvidia-x86_64-370-28 nvidia-x86_64-367-57	\
 	nvidia-x86_64-340-102 nvidia-x86_64-340-101	\
 	nvidia-x86_64-304-135 nvidia-x86_64-304-134
@@ -93,6 +93,11 @@ nvidia-i386-378-13: NVIDIA_VERSION=378-13
 nvidia-i386-378-13: NVIDIA_SHA256=05e62a6098aac7373438ee381072253a861d56522f74948c2b714e20e69a46b1
 nvidia-i386-378-13: NVIDIA_SIZE=44397547
 nvidia-i386-378-13: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/378.13/NVIDIA-Linux-x86-378.13.run
+
+nvidia-i386-375-82: NVIDIA_VERSION=375-82
+nvidia-i386-375-82: NVIDIA_SHA256=620629a35b1773e7eefddb9ea7982a4a75ecf65c1ea6f7ba83b94a84b269f561
+nvidia-i386-375-82: NVIDIA_SIZE=44633335
+nvidia-i386-375-82: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/375.82/NVIDIA-Linux-x86-375.82.run
 
 nvidia-i386-375-66: NVIDIA_VERSION=375-66
 nvidia-i386-375-66: NVIDIA_SHA256=29220e249a308f89c2a6fa48be6a0009d58f082d07d3fedfbf4ab0015559f14c
@@ -163,6 +168,11 @@ nvidia-x86_64-378-13: NVIDIA_VERSION=378-13
 nvidia-x86_64-378-13: NVIDIA_SHA256=a97a2ab047759a0b2c4abab5601e6f027230d355615ee745e24e738ee21cf5da
 nvidia-x86_64-378-13: NVIDIA_SIZE=42773114
 nvidia-x86_64-378-13: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/378.13/NVIDIA-Linux-x86_64-378.13-no-compat32.run
+
+nvidia-x86_64-375-82: NVIDIA_VERSION=375-82
+nvidia-x86_64-375-82: NVIDIA_SHA256=bfbff9d4bf567b62d5298d36c7981abfc3344b9dedc1f463c96055997f2b6c4e
+nvidia-x86_64-375-82: NVIDIA_SIZE=43910513
+nvidia-x86_64-375-82: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86_64/375.82/NVIDIA-Linux-x86_64-375.82-no-compat32.run
 
 nvidia-x86_64-375-66: NVIDIA_VERSION=375-66
 nvidia-x86_64-375-66: NVIDIA_SHA256=26f3133dd053835c35fb27b04fccd3a3bb4f18bbbacb5e4bf89c40d142cab397
