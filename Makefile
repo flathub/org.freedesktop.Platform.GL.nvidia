@@ -36,14 +36,14 @@ gl-drivers-i386: gl-drivers-i386-nvidia
 gl-drivers-x86_64: gl-drivers-x86_64-nvidia
 
 gl-drivers-i386-nvidia: \
-	nvidia-i386-384-69 nvidia-i386-384-59 nvidia-i386-384-47	\
+	nvidia-i386-384-90 nvidia-i386-384-69 nvidia-i386-384-59 nvidia-i386-384-47	\
 	nvidia-i386-381-22 nvidia-i386-381-09 nvidia-i386-378-13	\
 	nvidia-i386-375-82 nvidia-i386-375-66 nvidia-i386-375-39 nvidia-i386-375-26	\
 	nvidia-i386-370-28 nvidia-i386-367-57 nvidia-i386-340-102	\
 	nvidia-i386-340-101 nvidia-i386-304-135 nvidia-i386-304-134
 
 gl-drivers-x86_64-nvidia: \
-	nvidia-x86_64-384-69 nvidia-x86_64-384-59 nvidia-x86_64-384-47	\
+	nvidia-x86_64-384-90 nvidia-x86_64-384-69 nvidia-x86_64-384-59 nvidia-x86_64-384-47	\
 	nvidia-x86_64-381-22 nvidia-x86_64-381-09	\
 	nvidia-x86_64-378-13 nvidia-x86_64-375-66	\
 	nvidia-x86_64-375-82 nvidia-x86_64-375-39 nvidia-x86_64-375-26	\
@@ -68,6 +68,11 @@ nvidia-%:
 	if test "${ARCH}" == "i386" ; then \
 	 flatpak build-commit-from  ${EXPORT_ARGS} --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ; \
        fi
+
+nvidia-i386-384-90: NVIDIA_VERSION=384-90
+nvidia-i386-384-90: NVIDIA_SHA256=97a667de9fd7fdaa2f47b75d4049394224788931c2df2848de3f5553de810057
+nvidia-i386-384-90: NVIDIA_SIZE=46518269
+nvidia-i386-384-90: NVIDIA_URL=http://us.download.nvidia.com/XFree86/Linux-x86/384.90/NVIDIA-Linux-x86-384.90.run
 
 nvidia-i386-384-69: NVIDIA_VERSION=384-69
 nvidia-i386-384-69: NVIDIA_SHA256=3b70587582220ab1102bcb8386f206f89e6b146856af41f16eaa5910e54ef8fd
@@ -148,6 +153,11 @@ nvidia-i386-304-134: NVIDIA_VERSION=304-134
 nvidia-i386-304-134: NVIDIA_SHA256=84f7891af131bb9f9a8a34401dfef4288218019406dfa4ae57b6d52b14e81c9d
 nvidia-i386-304-134: NVIDIA_SIZE=41201159
 nvidia-i386-304-134: NVIDIA_URL=http://http.download.nvidia.com/XFree86/Linux-x86/304.134/NVIDIA-Linux-x86-304.134.run
+
+nvidia-x86_64-384-90: NVIDIA_VERSION=384-90
+nvidia-x86_64-384-90: NVIDIA_SHA256=2b96394931d3caf635aeb5c1b02244c76de9be54f4af944b8f7743eae570302a
+nvidia-x86_64-384-90: NVIDIA_SIZE=45727294
+nvidia-x86_64-384-90: NVIDIA_URL=http://us.download.nvidia.com/XFree86/Linux-x86_64/384.90/NVIDIA-Linux-x86_64-384.90-no-compat32.run
 
 nvidia-x86_64-384-69: NVIDIA_VERSION=384-69
 nvidia-x86_64-384-69: NVIDIA_SHA256=1011b9a9db903d243ff722fc7982da7b91dc91f4b82c60227d89b812aa67257f
