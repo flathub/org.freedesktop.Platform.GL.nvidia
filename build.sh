@@ -29,7 +29,7 @@ for VER in $DRIVER_VERSIONS; do
     flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \
                     --user --install-deps-from=flathub \
                     --arch=${ARCH} \
-                    --repo=repo --subject="build of, org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION `date`" \
+                    --subject="build of, org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION `date`" \
                     ${EXTRA_ARGS} builddir org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
     rm org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 done

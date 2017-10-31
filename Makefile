@@ -3,7 +3,7 @@ ARCH   ?= $(shell flatpak --default-arch)
 REPO   ?= repo
 
 all: ${REPO}
-	./build.sh "${ARCH}" "${EXPORT_ARGS}"
+	./build.sh "${ARCH}" "--repo=${REPO} ${EXPORT_ARGS}"
 
 
 ${REPO}:
