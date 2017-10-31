@@ -18,7 +18,7 @@
         }
     },
     "finish-args": [
-        "--extra-data=:@@NVIDIA_SHA256@@:@@NVIDIA_SIZE@@::@@NVIDIA_URL@@",
+        "--extra-data=@@EXTRA_DATA@@",
         "--metadata=Extra Data=NoRuntime"
     ],
     "modules": [
