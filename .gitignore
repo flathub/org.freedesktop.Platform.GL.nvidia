@@ -2,7 +2,4 @@
 sdk
 platform
 repo
-org.freedesktop.Sdk.json
-org.freedesktop.Sdk.appdata.xml
-org.freedesktop.GlxInfo.json
-org.freedesktop.Platform.appdata.xml
+org.freedesktop.Platform.GL.nvidia-*.json
