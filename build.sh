@@ -3,7 +3,8 @@
 source ./versions.sh
 
 ARCH=$1
-EXTRA_ARGS=$2
+REPO=$2
+EXTRA_ARGS=$3
 
 set -e
 set -x
@@ -29,8 +30,13 @@ for VER in $DRIVER_VERSIONS; do
         org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 
     flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \
-                    --arch=${ARCH} \
+                    --arch=${ARCH} --repo=${REPO} \
                     --subject="build of, org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION `date`" \
                     ${EXTRA_ARGS} builddir org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
+
+    if test "${ARCH}" = "i386" ; then \
+        flatpak build-commit-from  ${EXTRA_ARGS} --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ;
+    fi
+
     rm org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 done
