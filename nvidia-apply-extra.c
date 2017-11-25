@@ -108,6 +108,10 @@ should_extract (struct archive_entry *entry)
        has_prefix (path, "libEGL.so")))
     return 0;
 
+  /* Skip these as we don't ship nvidia-settings */
+  if (has_prefix (path, "libnvidia-gtk"))
+    return 0;
+
   if ((has_prefix (path, "lib") ||
        has_prefix (path, "tls/lib"))&&
       has_suffix (path, ".so." NVIDIA_VERSION))
