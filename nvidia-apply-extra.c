@@ -307,5 +307,7 @@ main (int argc, char *argv[])
       symlink ("libGLESv2.so." NVIDIA_VERSION, "libGLESv2.so.1");
     }
 
+  symlink ("libvdpau_nvidia.so." NVIDIA_VERSION, "libvdpau_nvidia.so");
+
   return 0;
 }
