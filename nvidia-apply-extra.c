@@ -117,7 +117,7 @@ should_extract (struct archive_entry *entry)
       has_suffix (path, ".so." NVIDIA_VERSION))
     return 1;
 
-  if (strcmp (path, "nvidia_icd.json") == 0)
+  if (strcmp (path, "nvidia_icd.json") == 0 || strcmp (path, "nvidia_icd.json.template") == 0)
     {
       archive_entry_set_pathname (entry, "./vulkan/icd.d/nvidia_icd.json");
       return 1;
@@ -265,6 +265,60 @@ find_line_offset (int fd, int skip_lines)
   return 0;
 }
 
+static void
+replace_string_in_file (const char *path,
+                        const char *string,
+                        const char *replacement)
+{
+  char *buffer, *p;
+  size_t len;
+  long fsize;
+  FILE *f;
+
+  if ((f = fopen (path, "r+")) == NULL)
+    die_with_error ("reading file %s", path);
+
+  fseek (f, 0, SEEK_END);
+  fsize = ftell (f);
+  fseek (f, 0, SEEK_SET);
+
+  if ((buffer = malloc (fsize + 1)) == NULL)
+    die ("out of memory");
+
+  if ((len = fread (buffer, 1, fsize, f)) != fsize)
+    die ("failed to read file %s", path);
+  buffer[len] = '\0';
+
+  if ((p = strstr (buffer, string)) != NULL)
+    {
+      char *new_buffer;
+      size_t new_len, idx;
+
+      new_len = len - strlen (string) + strlen (replacement) + 1;
+      if ((new_buffer = malloc (new_len)) == NULL)
+        die ("out of memory");
+
+      idx = p - buffer;
+      memmove (new_buffer, buffer, idx);
+      new_buffer[idx] = '\0';
+
+      strcat (new_buffer, replacement);
+      idx += strlen (string);
+
+      strcat (new_buffer, buffer + idx);
+
+      fseek (f, 0, SEEK_SET);
+      if (fwrite (new_buffer, 1, new_len - 1, f) != new_len - 1)
+        die ("failed to write file %s", path);
+
+      free (new_buffer);
+    }
+
+  free (buffer);
+  fclose (f);
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -312,6 +366,9 @@ main (int argc, char *argv[])
     }
 
   symlink ("libvdpau_nvidia.so." NVIDIA_VERSION, "libvdpau_nvidia.so");
+
+  replace_string_in_file ("vulkan/icd.d/nvidia_icd.json",
+                          "__NV_VK_ICD__", "libGLX_nvidia.so.0");
 
   return 0;
 }
