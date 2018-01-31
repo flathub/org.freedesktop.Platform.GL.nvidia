@@ -318,6 +318,20 @@ replace_string_in_file (const char *path,
   fclose (f);
 }
 
+static void create_file_with_content(const char *path,
+                                     const char *string)
+{
+  FILE *f;
+
+  if ((f = fopen (path, "w+")) == NULL)
+    die_with_error ("creating file %s", path);
+
+  if (fprintf(f, "%s\n", string) != strlen(string) + 1)
+    die ("failed to write to file %s", path);
+
+  fclose (f);
+}
+
 
 int
 main (int argc, char *argv[])
@@ -370,6 +384,8 @@ main (int argc, char *argv[])
   symlink ("libnvidia-encode.so." NVIDIA_VERSION, "libnvidia-encode.so.1");
   symlink ("libnvcuvid.so." NVIDIA_VERSION, "libnvcuvid.so.1");
   symlink ("libnvidia-opencl.so." NVIDIA_VERSION, "libnvidia-opencl.so");
+
+  create_file_with_content ("OpenCL/vendors/nvidia.icd", "libnvidia-opencl.so");
 
   if (nvidia_major_version > 340)
     replace_string_in_file ("vulkan/icd.d/nvidia_icd.json",
