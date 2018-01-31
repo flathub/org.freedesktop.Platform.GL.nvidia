@@ -369,6 +369,7 @@ main (int argc, char *argv[])
   symlink ("libcuda.so." NVIDIA_VERSION, "libcuda.so.1");
   symlink ("libnvidia-encode.so." NVIDIA_VERSION, "libnvidia-encode.so.1");
   symlink ("libnvcuvid.so." NVIDIA_VERSION, "libnvcuvid.so.1");
+  symlink ("libnvidia-opencl.so." NVIDIA_VERSION, "libnvidia-opencl.so");
 
   if (nvidia_major_version > 340)
     replace_string_in_file ("vulkan/icd.d/nvidia_icd.json",
