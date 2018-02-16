@@ -368,6 +368,7 @@ main (int argc, char *argv[])
       symlink ("libEGL_nvidia.so." NVIDIA_VERSION, "libEGL_nvidia.so.0");
       symlink ("libGLESv2_nvidia.so." NVIDIA_VERSION, "libGLESv2_nvidia.so.2");
       symlink ("libGLX_nvidia.so." NVIDIA_VERSION, "libGLX_nvidia.so.0");
+      symlink ("libnvidia-ptxjitcompiler.so." NVIDIA_VERSION, "libnvidia-ptxjitcompiler.so.1");
     }
   else
     {
