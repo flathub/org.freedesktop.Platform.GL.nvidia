@@ -386,6 +386,8 @@ main (int argc, char *argv[])
   symlink ("libnvcuvid.so." NVIDIA_VERSION, "libnvcuvid.so.1");
   symlink ("libnvidia-opencl.so." NVIDIA_VERSION, "libnvidia-opencl.so");
 
+  mkdir ("OpenCL", 0755);
+  mkdir ("OpenCL/vendors", 0755);
   create_file_with_content ("OpenCL/vendors/nvidia.icd", "libnvidia-opencl.so");
 
   if (nvidia_major_version > 340)
