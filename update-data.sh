@@ -17,6 +17,13 @@ for VER in $DRIVER_VERSIONS; do
             SUFFIX=
         fi
 
+        MAJOR_VER=(${VER//./ }[0])
+
+        # Nvidia dropped 32bit support after 390 series
+        if [ $ARCH == i386 ] && [ $MAJOR_VER -gt 390 ]; then
+          continue
+        fi
+
         echo Generating $F
 
         rm -f dl
