@@ -15,13 +15,6 @@ SDK_BRANCH=1.4
 SDK_RUNTIME_VERSION=1.6
 
 for VER in $DRIVER_VERSIONS; do
-    MAJOR_VER=(${VER//./ }[0])
-    # Nvidia dropped 32bit support after 390 series
-    if [ $ARCH == i386 ] && [ $MAJOR_VER -gt 390 ]; then
-        echo "Skipping $VER on unsupported arch $ARCH"
-        continue
-    fi
-
     F="data/nvidia-$VER-$ARCH.data"
     if [ ! -f $F ]; then
         echo WARNING, no data file for $VER $ARCH

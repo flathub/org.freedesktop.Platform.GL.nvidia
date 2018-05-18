@@ -19,9 +19,10 @@ for VER in $DRIVER_VERSIONS; do
 
         MAJOR_VER=(${VER//./ }[0])
 
-        # Nvidia dropped 32bit support after 390 series
+        # Nvidia dropped 32bit support after 390 series but 64bit contains
+        # 32bit compat libs
         if [ $ARCH == i386 ] && [ $MAJOR_VER -gt 390 ]; then
-          continue
+          NVIDIA_ARCH=x86_64
         fi
 
         echo Generating $F

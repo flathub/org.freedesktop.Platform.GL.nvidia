@@ -98,9 +98,33 @@ static int
 should_extract (struct archive_entry *entry)
 {
   const char *path = archive_entry_pathname (entry);
+  int is_compat32 = 0;
 
   if (has_prefix (path, "./"))
     path += 2;
+
+  if (strcmp (path, "nvidia_icd.json") == 0 || strcmp (path, "nvidia_icd.json.template") == 0)
+    {
+      archive_entry_set_pathname (entry, "./vulkan/icd.d/nvidia_icd.json");
+      return 1;
+    }
+  if (strcmp (path, "10_nvidia.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./glvnd/egl_vendor.d/10_nvidia.json");
+      return 1;
+    }
+
+#ifdef __i386__
+  /* Nvidia no longer has 32bit drivers so we are getting
+   * the 32bit compat libs from the 64bit drivers */
+  if (nvidia_major_version > 390)
+    {
+      if (!has_prefix (path, "32/"))
+        return 0;
+      is_compat32 = 1;
+      path += 3;
+    }
+#endif
 
   /* Skip these as we're using GLVND on majod > 367*/
   if (nvidia_major_version > 367 &&
@@ -115,16 +139,9 @@ should_extract (struct archive_entry *entry)
   if ((has_prefix (path, "lib") ||
        has_prefix (path, "tls/lib"))&&
       has_suffix (path, ".so." NVIDIA_VERSION))
-    return 1;
-
-  if (strcmp (path, "nvidia_icd.json") == 0 || strcmp (path, "nvidia_icd.json.template") == 0)
     {
-      archive_entry_set_pathname (entry, "./vulkan/icd.d/nvidia_icd.json");
-      return 1;
-    }
-  if (strcmp (path, "10_nvidia.json") == 0)
-    {
-      archive_entry_set_pathname (entry, "./glvnd/egl_vendor.d/10_nvidia.json");
+      if (is_compat32)
+        archive_entry_set_pathname (entry, path);
       return 1;
     }
 
