@@ -28,10 +28,10 @@ for VER in $DRIVER_VERSIONS; do
         echo Generating $F
 
         rm -f dl
-        URL=http://http.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
+        URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
 
         if ! curl -f -o dl $URL; then
-            URL=http://us.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
+            URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
             if ! curl -f -o dl $URL; then
                 echo "Unable to find URL for version $VER, arch $ARCH"
                 exit 1
