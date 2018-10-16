@@ -22,14 +22,13 @@ for VER in $DRIVER_VERSIONS; do
         # Nvidia dropped 32bit support after 390 series but 64bit contains
         # 32bit compat libs
         if [ $ARCH == i386 ] && [ $MAJOR_VER -gt 390 ]; then
-          NVIDIA_ARCH=x86_64
+            NVIDIA_ARCH=x86_64
         fi
 
         echo Generating $F
 
         rm -f dl
-        URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
-
+        URL=https://us.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
         if ! curl -f -o dl $URL; then
             URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
             if ! curl -f -o dl $URL; then
