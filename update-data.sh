@@ -28,12 +28,21 @@ for VER in $DRIVER_VERSIONS; do
         echo Generating $F
 
         rm -f dl
-        URL=https://us.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
-        if ! curl -f -o dl $URL; then
-            URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
-            if ! curl -f -o dl $URL; then
+        if [ ${#VER} -gt 6 ]; then
+            VULKAN_VER=${VER//./}
+            URL=https://developer.nvidia.com/vulkan-beta-${VULKAN_VER}-linux
+            if ! curl -f -L -o dl $URL; then
                 echo "Unable to find URL for version $VER, arch $ARCH"
                 exit 1
+            fi
+        else
+            URL=https://us.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
+            if ! curl -f -o dl $URL; then
+                URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
+                if ! curl -f -o dl $URL; then
+                    echo "Unable to find URL for version $VER, arch $ARCH"
+                    exit 1
+                fi
             fi
         fi
         SHA256=$(sha256sum dl | awk "{print \$1}")
