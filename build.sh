@@ -20,7 +20,7 @@ for VER in $DRIVER_VERSIONS; do
         echo WARNING, no data file for $VER $ARCH
         continue
     fi
-    NVIDIA_VERSION=$(echo $VER | sed "s/\./-/")
+    NVIDIA_VERSION=$(echo $VER | sed "s/\./-/;s/\./-/")
     EXTRA_DATA=$(cat $F)
     NVIDIA_URL=$(cat $F | sed "s/:[^:]*:[^:]*:[^:]*://")
     rm -f org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
