@@ -6,6 +6,9 @@ VULKAN_VERSIONS="418.52.14 418.52.10 418.52.07 418.52.05 418.52.03 418.49.04 418
 SHORT_LIVED_VERSIONS="415.27 415.25 415.23 415.22 415.18 396.54 396.51 396.45 396.24"
 LONG_LIVED_VERSIONS="430.34 430.26 430.14 418.74 418.56 418.43 410.104 410.93 410.78 410.73 410.66 410.57"
 LEGACY_VERSIONS="340.107 340.106 340.104 340.102 340.101 304.137 304.135 304.134"
+
+# See this for current tesla versions: https://docs.nvidia.com/datacenter/tesla/index.html
+# If a version already exists on any other list, please don't include it here
 TESLA_VERSIONS="418.67 418.40.04 410.79 410.72"
 
 # TODO: When do we drop these?
