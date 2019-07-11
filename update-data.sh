@@ -28,7 +28,14 @@ for VER in $DRIVER_VERSIONS; do
         echo Generating $F
 
         rm -f dl
-        if [ ${#VER} -gt 6 ]; then
+        if [[ $TESLA_VERSIONS == *$VER* ]]; then
+            URL=http://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+            if ! curl -f -o dl $URL; then
+                echo "Unable to find URL for version $VER, arch $ARCH"
+                echo $URL
+                exit 1
+            fi
+        elif [ ${#VER} -gt 6 ]; then
             VULKAN_VER=${VER//./}
             URL=https://developer.nvidia.com/vulkan-beta-${VULKAN_VER}-linux
             if ! curl -f -L -o dl $URL; then
