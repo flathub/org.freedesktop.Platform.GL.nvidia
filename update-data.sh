@@ -35,7 +35,7 @@ for VER in $DRIVER_VERSIONS; do
                 echo $URL
                 exit 1
             fi
-        elif [ ${#VER} -gt 6 ]; then
+        elif [[ $VULKAN_VERSIONS == *$VER* ]]; then
             VULKAN_VER=${VER//./}
             URL=https://developer.nvidia.com/vulkan-beta-${VULKAN_VER}-linux
             if ! curl -f -L -o dl $URL; then
