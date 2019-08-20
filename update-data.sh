@@ -29,7 +29,7 @@ for VER in $DRIVER_VERSIONS; do
 
         rm -f dl
         if [[ $TESLA_VERSIONS == *$VER* ]]; then
-            URL=http://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+            URL=https://us.download.nvidia.com/tesla/${VER/%.00/}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
             if ! curl -f -o dl $URL; then
                 echo "Unable to find URL for version $VER, arch $ARCH"
                 echo $URL
