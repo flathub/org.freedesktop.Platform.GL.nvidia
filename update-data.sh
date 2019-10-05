@@ -17,7 +17,7 @@ for VER in $DRIVER_VERSIONS; do
             SUFFIX=
         fi
 
-        MAJOR_VER=(${VER//./ }[0])
+        MAJOR_VER=${VER%%.*}
 
         # Nvidia dropped 32bit support after 390 series but 64bit contains
         # 32bit compat libs
@@ -29,7 +29,11 @@ for VER in $DRIVER_VERSIONS; do
 
         rm -f dl
         if [[ $TESLA_VERSIONS == *$VER* ]]; then
-            URL=https://us.download.nvidia.com/tesla/${VER/%.00/}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+            if [ ${VER:4:2} -lt 87 ]; then
+                URL=https://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+            else
+                URL=https://us.download.nvidia.com/tesla/${VER%.*}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+            fi
             if ! curl -f -o dl $URL; then
                 echo "Unable to find URL for version $VER, arch $ARCH"
                 echo $URL
