@@ -404,6 +404,7 @@ main (int argc, char *argv[])
   symlink ("libnvcuvid.so." NVIDIA_VERSION, "libnvcuvid.so.1");
   symlink ("libnvidia-opencl.so." NVIDIA_VERSION, "libnvidia-opencl.so");
   symlink ("libnvidia-ml.so." NVIDIA_VERSION, "libnvidia-ml.so.1");
+  symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
 
   mkdir ("OpenCL", 0755);
   mkdir ("OpenCL/vendors", 0755);
