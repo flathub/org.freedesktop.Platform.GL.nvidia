@@ -397,6 +397,11 @@ main (int argc, char *argv[])
       symlink ("libGLESv2.so." NVIDIA_VERSION, "libGLESv2.so.1");
     }
 
+  if (nvidia_major_version > 396)
+    {
+      symlink ("libnvoptix.so." NVIDIA_VERSION, "libnvoptix.so.1");
+    }
+
   symlink ("libvdpau_nvidia.so." NVIDIA_VERSION, "libvdpau_nvidia.so");
   symlink ("libcuda.so." NVIDIA_VERSION, "libcuda.so.1");
   symlink ("libcuda.so.1", "libcuda.so");
