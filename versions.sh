@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # See this for current versions: https://www.nvidia.com/object/unix.html
 BETA_VERSIONS="460.27.04 455.23.04 450.51 440.26 435.17 430.09 418.30 415.13 410.57 396.18"
