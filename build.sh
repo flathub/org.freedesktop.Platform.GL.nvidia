@@ -40,7 +40,7 @@ for VER in $DRIVER_VERSIONS; do
         flatpak build-commit-from  ${EXPORT_ARGS} --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ;
     fi
 
-    # rm org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
+    rm org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 
     # From here for CN Server
     NVIDIA_URL_CN=$(echo $NVIDIA_URL | sed s/us.download.nvidia.com/cn.download.nvidia.cn/g)
@@ -59,6 +59,6 @@ for VER in $DRIVER_VERSIONS; do
         flatpak build-commit-from  ${EXPORT_ARGS} --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-cn-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-cn-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ;
     fi
 
-    # rm org.freedesktop.Platform.GL.nvidia-cn-$NVIDIA_VERSION.json
+    rm org.freedesktop.Platform.GL.nvidia-cn-$NVIDIA_VERSION.json
     # CN Server End
 done
