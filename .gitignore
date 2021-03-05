@@ -3,3 +3,5 @@ sdk
 platform
 repo
 org.freedesktop.Platform.GL.nvidia-*.json
+
+builddir/
