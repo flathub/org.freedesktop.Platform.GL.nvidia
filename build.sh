@@ -41,4 +41,24 @@ for VER in $DRIVER_VERSIONS; do
     fi
 
     rm org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
+
+    # From here for CN Server
+    NVIDIA_URL_CN=$(echo $NVIDIA_URL | sed s/us.download.nvidia.com/cn.download.nvidia.cn/g)
+    sed -e "s/@@SDK_BRANCH@@/${SDK_BRANCH}/g"			\
+        -e "s/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g"	\
+        -e "s/@@NVIDIA_VERSION@@/${NVIDIA_VERSION}/g"		\
+        -e "s=@@EXTRA_DATA@@=${EXTRA_DATA}=g" \
+        -e "s=@@NVIDIA_URL@@=${NVIDIA_URL_CN}=g" \
+        org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia-cn-$NVIDIA_VERSION.json
+    # Build for CN Server
+    flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \
+                    --arch=${ARCH} --repo=${REPO} \
+                    --subject="${SUBJECT}" \
+                    ${FB_ARGS} ${EXPORT_ARGS} builddir org.freedesktop.Platform.GL.nvidia-cn-$NVIDIA_VERSION.json
+    if test "${ARCH}" = "i386" ; then \
+        flatpak build-commit-from  ${EXPORT_ARGS} --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-cn-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-cn-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ;
+    fi
+
+    rm org.freedesktop.Platform.GL.nvidia-cn-$NVIDIA_VERSION.json
+    # CN Server End
 done
