@@ -43,11 +43,12 @@ for VER in $DRIVER_VERSIONS; do
     rm org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 
     # From here for CN Server
-    NVIDIA_URL_CN=$(echo $NVIDIA_URL | sed s/us.download.nvidia.com/cn.download.nvidia.cn/g)
+    NVIDIA_URL_CN=$(echo $NVIDIA_URL | sed s/us.download.nvidia.com/cn.download.nvidia.cn/g )
+    EXTRA_DATA_CN=$(echo $EXTRA_DATA | sed s/us.download.nvidia.com/cn.download.nvidia.cn/g )
     sed -e "s/@@SDK_BRANCH@@/${SDK_BRANCH}/g"			\
         -e "s/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g"	\
         -e "s/@@NVIDIA_VERSION@@/cn-${NVIDIA_VERSION}/g"		\
-        -e "s=@@EXTRA_DATA@@=${EXTRA_DATA}=g" \
+        -e "s=@@EXTRA_DATA@@=${EXTRA_DATA_CN}=g" \
         -e "s=@@NVIDIA_URL@@=${NVIDIA_URL_CN}=g" \
         org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia-cn-$NVIDIA_VERSION.json
     # Build for CN Server
