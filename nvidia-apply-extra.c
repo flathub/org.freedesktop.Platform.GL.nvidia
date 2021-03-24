@@ -108,6 +108,11 @@ should_extract (struct archive_entry *entry)
       archive_entry_set_pathname (entry, "./vulkan/icd.d/nvidia_icd.json");
       return 1;
     }
+  if (strcmp (path, "nvidia_layers.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./vulkan/implicit_layer.d/nvidia_layers.json");
+      return 1;
+    }
   if (strcmp (path, "10_nvidia.json") == 0)
     {
       archive_entry_set_pathname (entry, "./glvnd/egl_vendor.d/10_nvidia.json");
