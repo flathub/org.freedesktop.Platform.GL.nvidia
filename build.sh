@@ -12,7 +12,7 @@ set -e
 set -x
 
 SDK_BRANCH=1.4
-SDK_RUNTIME_VERSION=1.6
+SDK_RUNTIME_VERSION=21.08
 
 for VER in $DRIVER_VERSIONS; do
     F="data/nvidia-$VER-$ARCH.data"

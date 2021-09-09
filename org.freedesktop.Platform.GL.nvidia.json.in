@@ -9,19 +9,52 @@
     "separate-locales": false,
     "cleanup": [ ],
     "build-options" : {
-        "cflags": "-O2 -g -I/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/include",
         "cxxflags": "-O2 -g",
-        "prefix": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@",
         "env": {
             "V": "1",
-            "LDFLAGS": "-L/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib"
-        }
+        },
+        "arch": {
+            "x86_64": {
+                "cflags": "-O2 -g -I/usr/lib/x86_64-linux-gnu/GL/nvidia-@@NVIDIA_VERSION@@/include",
+                "ldflags": "-L/usr/lib/x86_64-linux-gnu/GL/nvidia-@@NVIDIA_VERSION@@/lib"
+                "prefix": "/usr/lib/x86_64-linux-gnu/GL/nvidia-@@NVIDIA_VERSION@@"
+            },
+            "i386": {
+                "cflags": "-O2 -g -I/usr/lib/i386-linux-gnu/GL/nvidia-@@NVIDIA_VERSION@@/include",
+                "ldflags": "-L/usr/lib/i386-linux-gnu/GL/nvidia-@@NVIDIA_VERSION@@/lib"
+                "prefix": "/usr/lib/i386-linux-gnu/GL/nvidia-@@NVIDIA_VERSION@@"
+            }
+	}
     },
     "finish-args": [
         "--extra-data=@@EXTRA_DATA@@",
         "--metadata=Extra Data=NoRuntime"
     ],
     "modules": [
+        {
+            "cleanup": ["*"],
+            "name": "zlib",
+            "config-opts": [ "--static" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://prdownloads.sourceforge.net/libpng/zlib-1.2.11.tar.gz?download",
+                    "sha256": "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1"
+                }
+            ]
+        },
+        {
+            "cleanup": ["*"],
+            "name": "lzma",
+            "config-opts": [ "--disable-shared" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://tukaani.org/xz/xz-5.2.5.tar.xz",
+                    "sha256": "3e1e518ffc912f86608a8cb35e4bd41ad1aec210df2a47aaa1f95e7f5576ef56"
+                }
+            ]
+        },
         {
             "cleanup": ["/include", "/share"],
             "name": "libarchive",
