@@ -417,6 +417,12 @@ main (int argc, char *argv[])
   symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
   symlink ("libnvidia-fbc.so." NVIDIA_VERSION, "libnvidia-fbc.so.1");
 
+  if (nvidia_major_version >= 495)
+    {
+      mkdir ("gbm", 0755);
+      symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
+    }
+
   mkdir ("OpenCL", 0755);
   mkdir ("OpenCL/vendors", 0755);
   create_file_with_content ("OpenCL/vendors/nvidia.icd", "libnvidia-opencl.so");
