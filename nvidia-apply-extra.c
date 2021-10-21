@@ -170,6 +170,14 @@ should_extract (struct archive_entry *entry)
       return 1;
     }
 
+  if (has_suffix (path, ".dll"))
+    {
+      char new_path[1024];
+      snprintf (new_path, sizeof new_path, "./nvidia/wine/%s", path);
+      archive_entry_set_pathname (entry, new_path);
+      return 1;
+    }
+
   return 0;
 }
 
