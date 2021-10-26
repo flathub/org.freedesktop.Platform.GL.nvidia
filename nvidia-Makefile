@@ -9,3 +9,4 @@ install:
 	ln -s extra/glvnd ${FLATPAK_DEST}/glvnd
 	ln -s extra/vulkan ${FLATPAK_DEST}/vulkan
 	ln -s extra/OpenCL ${FLATPAK_DEST}/OpenCL
+	ln -s extra/egl ${FLATPAK_DEST}/egl

@@ -118,6 +118,16 @@ should_extract (struct archive_entry *entry)
       archive_entry_set_pathname (entry, "./glvnd/egl_vendor.d/10_nvidia.json");
       return 1;
     }
+  if (strcmp (path, "10_nvidia_wayland.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/10_nvidia.json");
+      return 1;
+    }
+  if (strcmp (path, "15_nvidia_gbm.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/15_nvidia_gbm.json");
+      return 1;
+    }
 
 #ifdef __i386__
   /* Nvidia no longer has 32bit drivers so we are getting
