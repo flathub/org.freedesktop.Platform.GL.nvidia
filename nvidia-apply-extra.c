@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include <archive.h>
 #include <archive_entry.h>
 #include <sys/types.h>
@@ -150,6 +151,15 @@ should_extract (struct archive_entry *entry)
   /* Skip these as we don't ship nvidia-settings */
   if (has_prefix (path, "libnvidia-gtk"))
     return 0;
+
+  /* These are not versioned after the driver version */
+  if (strstr (path, "egl-wayland") ||
+      strstr (path, "egl-gbm"))
+    {
+      if (is_compat32)
+        archive_entry_set_pathname (entry, path);
+      return 1;
+    }
 
   if ((has_prefix (path, "lib") ||
        has_prefix (path, "tls/lib"))&&
@@ -371,6 +381,8 @@ main (int argc, char *argv[])
   int fd;
   int skip_lines;
   off_t tar_start;
+  DIR *extra_dir;
+  struct dirent *file_entry;
 
   nvidia_major_version = atoi (NVIDIA_VERSION);
 
@@ -426,6 +438,17 @@ main (int argc, char *argv[])
   symlink ("libnvidia-ml.so." NVIDIA_VERSION, "libnvidia-ml.so.1");
   symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
   symlink ("libnvidia-fbc.so." NVIDIA_VERSION, "libnvidia-fbc.so.1");
+
+  if ((extra_dir = opendir (".")) == NULL)
+    die ("Can't open current directory");
+  while ((file_entry = readdir(extra_dir)) != NULL)
+    {
+      if (has_prefix (file_entry->d_name, "libnvidia-egl-wayland.so.1."))
+       symlink (file_entry->d_name, "libnvidia-egl-wayland.so.1");
+      else if (has_prefix (file_entry->d_name, "libnvidia-egl-gbm.so.1."))
+       symlink (file_entry->d_name, "libnvidia-egl-gbm.so.1");
+    }
+  closedir(extra_dir);
 
   if (nvidia_major_version >= 495)
     {
