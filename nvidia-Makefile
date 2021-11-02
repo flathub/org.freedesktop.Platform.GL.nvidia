@@ -10,3 +10,5 @@ install:
 	ln -s extra/vulkan ${FLATPAK_DEST}/vulkan
 	ln -s extra/OpenCL ${FLATPAK_DEST}/OpenCL
 	ln -s extra/egl ${FLATPAK_DEST}/egl
+	mkdir -p ${FLATPAK_DEST}/share
+	ln -s ../extra/share/nvidia ${FLATPAK_DEST}/share/nvidia
