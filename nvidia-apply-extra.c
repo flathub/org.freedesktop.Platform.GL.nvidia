@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <linux/limits.h>
 
 int nvidia_major_version;
 
@@ -99,6 +100,7 @@ static int
 should_extract (struct archive_entry *entry)
 {
   const char *path = archive_entry_pathname (entry);
+  char new_path[PATH_MAX];
   int is_compat32 = 0;
 
   if (has_prefix (path, "./"))
@@ -127,6 +129,13 @@ should_extract (struct archive_entry *entry)
   if (strcmp (path, "15_nvidia_gbm.json") == 0)
     {
       archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/15_nvidia_gbm.json");
+      return 1;
+    }
+  if ((strcmp (path, "nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation") == 0) ||
+      (strcmp (path, "nvidia-application-profiles-" NVIDIA_VERSION "-rc") == 0))
+    {
+      snprintf (new_path, sizeof new_path, "./share/nvidia/%s", path);
+      archive_entry_set_pathname (entry, new_path);
       return 1;
     }
 
@@ -172,7 +181,6 @@ should_extract (struct archive_entry *entry)
 
   if (has_suffix (path, ".dll"))
     {
-      char new_path[1024];
       snprintf (new_path, sizeof new_path, "./nvidia/wine/%s", path);
       archive_entry_set_pathname (entry, new_path);
       return 1;
@@ -441,6 +449,11 @@ main (int argc, char *argv[])
       mkdir ("gbm", 0755);
       symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
     }
+
+  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
+           "share/nvidia/nvidia-application-profiles-key-documentation");
+  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
+           "share/nvidia/nvidia-application-profiles-rc");
 
   mkdir ("OpenCL", 0755);
   mkdir ("OpenCL/vendors", 0755);
