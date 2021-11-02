@@ -429,6 +429,11 @@ main (int argc, char *argv[])
       symlink ("libnvoptix.so." NVIDIA_VERSION, "libnvoptix.so.1");
     }
 
+  if (nvidia_major_version >= 470)
+    {
+      symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION, "libnvidia-vulkan-producer.so");
+    }
+
   symlink ("libvdpau_nvidia.so." NVIDIA_VERSION, "libvdpau_nvidia.so");
   symlink ("libcuda.so." NVIDIA_VERSION, "libcuda.so.1");
   symlink ("libcuda.so.1", "libcuda.so");
