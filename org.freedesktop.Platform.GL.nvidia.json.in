@@ -39,6 +39,13 @@
             ]
         },
         {
+            "name": "ldconfig",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -Dvm755 -t ${FLATPAK_DEST}/bin/ $(which ldconfig)"
+            ]
+        },
+        {
             "name": "nvidia",
             "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@", "NVIDIA_URL=@@NVIDIA_URL@@" ],
             "no-autogen": true,

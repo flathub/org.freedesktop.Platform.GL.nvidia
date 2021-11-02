@@ -2,11 +2,11 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
 #include <archive.h>
 #include <archive_entry.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <errno.h>
 
@@ -374,6 +374,20 @@ static void create_file_with_content(const char *path,
   fclose (f);
 }
 
+static int
+subprocess (char *const argv[])
+{
+  pid_t pid = fork ();
+  int status;
+  if (pid < 0)
+    die_with_error ("failed to fork");
+  else if (pid > 0)
+    waitpid (pid, &status, WAIT_MYPGRP);
+  else
+    if (execvp (argv[0], argv) == -1)
+      die_with_error ("exec failed: %s", argv[0]);
+  return status;
+}
 
 int
 main (int argc, char *argv[])
@@ -381,8 +395,6 @@ main (int argc, char *argv[])
   int fd;
   int skip_lines;
   off_t tar_start;
-  DIR *extra_dir;
-  struct dirent *file_entry;
 
   nvidia_major_version = atoi (NVIDIA_VERSION);
 
@@ -402,58 +414,17 @@ main (int argc, char *argv[])
 
   unlink (NVIDIA_BASENAME);
 
-  if (nvidia_major_version > 367)
-    {
-      /* GLVND */
-      /* Default to nvidia */
-      symlink ("libGLX_nvidia.so." NVIDIA_VERSION, "libGLX_indirect.so.0");
-
-      /* unversioned */
-      symlink ("libEGL_nvidia.so." NVIDIA_VERSION, "libEGL_nvidia.so.0");
-      symlink ("libGLESv2_nvidia.so." NVIDIA_VERSION, "libGLESv2_nvidia.so.2");
-      symlink ("libGLX_nvidia.so." NVIDIA_VERSION, "libGLX_nvidia.so.0");
-      symlink ("libnvidia-ptxjitcompiler.so." NVIDIA_VERSION, "libnvidia-ptxjitcompiler.so.1");
-    }
-  else
-    {
-      /* Non GLVND */
-
-      symlink ("libEGL.so." NVIDIA_VERSION, "libEGL.so.1");
-      symlink ("libGL.so." NVIDIA_VERSION, "libGL.so.1");
-      symlink ("libglx.so." NVIDIA_VERSION, "libglx.so.1");
-      symlink ("libGLESv2.so." NVIDIA_VERSION, "libGLESv2.so.1");
-    }
-
-  if (nvidia_major_version > 396)
-    {
-      symlink ("libnvoptix.so." NVIDIA_VERSION, "libnvoptix.so.1");
-    }
+  char *ldconfig_argv[] = {"ldconfig", "-n", ".", NULL};
+  if (subprocess (ldconfig_argv))
+    die ("running ldconfig failed");
 
   if (nvidia_major_version >= 470)
     {
       symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION, "libnvidia-vulkan-producer.so");
     }
 
-  symlink ("libvdpau_nvidia.so." NVIDIA_VERSION, "libvdpau_nvidia.so");
-  symlink ("libcuda.so." NVIDIA_VERSION, "libcuda.so.1");
   symlink ("libcuda.so.1", "libcuda.so");
-  symlink ("libnvidia-encode.so." NVIDIA_VERSION, "libnvidia-encode.so.1");
-  symlink ("libnvcuvid.so." NVIDIA_VERSION, "libnvcuvid.so.1");
-  symlink ("libnvidia-opencl.so." NVIDIA_VERSION, "libnvidia-opencl.so");
-  symlink ("libnvidia-ml.so." NVIDIA_VERSION, "libnvidia-ml.so.1");
   symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
-  symlink ("libnvidia-fbc.so." NVIDIA_VERSION, "libnvidia-fbc.so.1");
-
-  if ((extra_dir = opendir (".")) == NULL)
-    die ("Can't open current directory");
-  while ((file_entry = readdir(extra_dir)) != NULL)
-    {
-      if (has_prefix (file_entry->d_name, "libnvidia-egl-wayland.so.1."))
-       symlink (file_entry->d_name, "libnvidia-egl-wayland.so.1");
-      else if (has_prefix (file_entry->d_name, "libnvidia-egl-gbm.so.1."))
-       symlink (file_entry->d_name, "libnvidia-egl-gbm.so.1");
-    }
-  closedir(extra_dir);
 
   if (nvidia_major_version >= 495)
     {
