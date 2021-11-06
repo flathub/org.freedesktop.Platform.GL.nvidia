@@ -9,6 +9,18 @@ for VER in ${DRIVER_VERSIONS}; do
         F="data/nvidia-${VER}-${ARCH}.data"
         if [ -f ${F} ]; then continue; fi
 
+        # Parse version string
+        MAJOR_VER=${VER%%.*}
+        ### Check for build as part of VER
+        if [ ${VER#*.} == ${VER##*.} ]; then
+            MINOR_VER=${VER##*.}
+        else
+            partial=${VER#*.}
+            MINOR_VER=${partial%%.*}
+            BUILD=${VER##*.}
+        fi
+
+        # Additional URL parameters
         if [ ${ARCH} == x86_64 ]; then
             NVIDIA_ARCH=x86_64
             SUFFIX=-no-compat32
@@ -16,8 +28,6 @@ for VER in ${DRIVER_VERSIONS}; do
             NVIDIA_ARCH=x86
             SUFFIX=
         fi
-
-        MAJOR_VER=${VER%%.*}
 
         # Nvidia dropped 32bit support after 390 series but 64bit contains
         # 32bit compat libs
@@ -27,12 +37,13 @@ for VER in ${DRIVER_VERSIONS}; do
 
         echo "Generating ${F}"
 
+        # Setup URL string and download driver
         rm -f dl
         if [[ ${TESLA_VERSIONS} == *${VER}* ]]; then
-            if [ ${VER:0:3} -eq 410 ] && [ ${VER:4:3} -eq 129 ]; then
+            if [ ${MAJOR_VER} -eq 410 ] && [ ${MINOR_VER} -eq 129 ]; then
                 URL=https://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}-diagnostic.run
-            elif [ ${VER:0:3} -eq 418 ] && [ ${VER:4:2} -ge 87 ]; then
-                URL=https://us.download.nvidia.com/tesla/${VER%.*}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+            elif [ ${MAJOR_VER} -eq 418 ] && [ ${MINOR_VER} -ge 87 ]; then
+                URL=https://us.download.nvidia.com/tesla/${MAJOR_VER}.${MINOR_VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
             else
                 URL=https://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
             fi
@@ -58,11 +69,14 @@ for VER in ${DRIVER_VERSIONS}; do
                 fi
             fi
         fi
+
+        # Create output `.data` file and add it to git
         SHA256=$(sha256sum dl | awk "{print \$1}")
         SIZE=$(stat -c%s dl)
         rm -f dl
 
         echo :${SHA256}:${SIZE}::${URL} > ${F}
+
         git add ${F}
     done
 done
