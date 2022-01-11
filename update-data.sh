@@ -23,7 +23,11 @@ for VER in ${DRIVER_VERSIONS}; do
         # Additional URL parameters
         if [ ${ARCH} == x86_64 ]; then
             NVIDIA_ARCH=x86_64
-            SUFFIX=-no-compat32
+            if [ ${MAJOR_VER} -lt 470 ]; then
+                SUFFIX=-no-compat32
+            else
+                SUFFIX=
+            fi
         else
             NVIDIA_ARCH=x86
             SUFFIX=
