@@ -9,7 +9,7 @@ LEGACY_VERSIONS="340.108 340.107 340.106 340.104 340.102 340.101 304.137 304.135
 
 # See this for current tesla versions: https://docs.nvidia.com/datacenter/tesla/index.html
 # If a version already exists on any other list, please don't include it here
-TESLA_VERSIONS="450.142.00 450.119.04 450.51.06 450.51.05 440.118.02 440.95.01 440.64.00 440.33.01 418.211.00 418.197.02 418.181.07 418.152.00 418.126.02 418.116.00 418.87.01 418.87.00 418.67 418.40.04 410.129 410.79 410.72"
+TESLA_VERSIONS="450.172.01 450.142.00 450.119.04 450.51.06 450.51.05 440.118.02 440.95.01 440.64.00 440.33.01 418.211.00 418.197.02 418.181.07 418.152.00 418.126.02 418.116.00 418.87.01 418.87.00 418.67 418.40.04 410.129 410.79 410.72"
 
 # TODO: When do we drop these?
 # Probably never: https://ahayzen.com/direct/flathub_downloads_only_nvidia_runtimes.txt
