@@ -46,7 +46,7 @@ for VER in ${DRIVER_VERSIONS}; do
         if [[ ${TESLA_VERSIONS} == *${VER}* ]]; then
             if [ ${MAJOR_VER} -eq 410 ] && [ ${MINOR_VER} -eq 129 ]; then
                 URL=https://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}-diagnostic.run
-            elif [ ${MAJOR_VER} -eq 418 ] && [ ${MINOR_VER} -ge 87 ] && [ ${MINOR_VER} -lt 226 ]; then
+            elif [ ${MAJOR_VER} -eq 418 ] && [ ${MINOR_VER} -ge 87 ] && [ ${MINOR_VER} -lt 116 ]; then
                 URL=https://us.download.nvidia.com/tesla/${MAJOR_VER}.${MINOR_VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
             else
                 URL=https://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
