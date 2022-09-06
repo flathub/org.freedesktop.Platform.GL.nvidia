@@ -23,22 +23,27 @@ for VER in $DRIVER_VERSIONS; do
     NVIDIA_VERSION=$(echo $VER | sed "s/\./-/;s/\./-/")
     EXTRA_DATA=$(cat $F)
     NVIDIA_URL=$(cat $F | sed "s/:[^:]*:[^:]*:[^:]*://")
+    if test "${ARCH}" = "i386" ; then \
+        REF=org.freedesktop.Platform.GL32.nvidia
+	ARCH=x86_64
+    else
+	REF=org.freedesktop.Platform.GL.nvidia
+    fi
+
     rm -f org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
     sed -e "s/@@SDK_BRANCH@@/${SDK_BRANCH}/g"			\
         -e "s/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g"	\
         -e "s/@@NVIDIA_VERSION@@/${NVIDIA_VERSION}/g"		\
         -e "s=@@EXTRA_DATA@@=${EXTRA_DATA}=g" \
         -e "s=@@NVIDIA_URL@@=${NVIDIA_URL}=g" \
-        org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
+        -e "s=@@REF@@=${REF}=g" }
+        org.freedesktop.Platform.GL.nvidia.json.in > ${REF}-$NVIDIA_VERSION.json
 
     flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \
                     --arch=${ARCH} --repo=${REPO} \
                     --subject="${SUBJECT}" \
-                    ${FB_ARGS} ${EXPORT_ARGS} builddir org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
+                    ${FB_ARGS} ${EXPORT_ARGS} builddir ${REF}-$NVIDIA_VERSION.json
 
-    if test "${ARCH}" = "i386" ; then \
-        flatpak build-commit-from  ${EXPORT_ARGS} --src-ref=runtime/org.freedesktop.Platform.GL.nvidia-${NVIDIA_VERSION}/${ARCH}/${SDK_BRANCH} ${REPO} runtime/org.freedesktop.Platform.GL32.nvidia-${NVIDIA_VERSION}/x86_64/${SDK_BRANCH} ;
-    fi
 
     rm org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 done

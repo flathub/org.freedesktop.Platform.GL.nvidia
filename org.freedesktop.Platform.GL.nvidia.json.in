@@ -1,5 +1,5 @@
 {
-    "id": "org.freedesktop.Platform.GL.nvidia-@@NVIDIA_VERSION@@",
+    "id": "@@REF@@-@@NVIDIA_VERSION@@",
     "branch": "@@SDK_BRANCH@@",
     "runtime": "org.freedesktop.Platform",
     "build-extension": true,
