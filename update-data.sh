@@ -58,7 +58,7 @@ for VER in ${DRIVER_VERSIONS}; do
             fi
         elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
             VULKAN_VER=${VER//./}
-            URL=https://developer.nvidia.com/vulkan-beta-${VULKAN_VER}-linux
+            URL=https://developer.nvidia.com/downloads/vulkan-beta-${VULKAN_VER}-linux
             if ! curl -f -L -o dl ${URL}; then
                 echo "Unable to find URL for version ${VER}, arch ${ARCH}"
                 exit 1
