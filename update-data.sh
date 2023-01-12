@@ -5,7 +5,7 @@ source ./versions.sh
 set -e
 
 for VER in ${DRIVER_VERSIONS}; do
-    for ARCH in x86_64 i386; do
+    for ARCH in x86_64 i386 aarch64; do
         F="data/nvidia-${VER}-${ARCH}.data"
         if [ -f ${F} ]; then continue; fi
 
@@ -28,6 +28,9 @@ for VER in ${DRIVER_VERSIONS}; do
             else
                 SUFFIX=
             fi
+        elif [ ${ARCH} == aarch64 ]; then
+            NVIDIA_ARCH=aarch64
+            SUFFIX=
         else
             NVIDIA_ARCH=x86
             SUFFIX=
@@ -37,6 +40,24 @@ for VER in ${DRIVER_VERSIONS}; do
         # 32bit compat libs
         if [ ${ARCH} == i386 ] && [ ${MAJOR_VER} -gt 390 ]; then
             NVIDIA_ARCH=x86_64
+        fi
+
+        if [ ${ARCH} == aarch64 ]; then
+            if [ ${MAJOR_VER} -lt 470 ]; then
+                break
+            elif [[ ${TESLA_VERSIONS} == *${VER}* ]]; then
+                break
+            elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
+                break
+            else
+                if [ ${VER} == 510.39.01 ]; then
+                    break
+                elif [ ${VER} == 495.46 ]; then
+                    break
+                elif [ ${VER} == 470.94 ]; then
+                    break
+                fi
+            fi
         fi
 
         echo "Generating ${F}"
