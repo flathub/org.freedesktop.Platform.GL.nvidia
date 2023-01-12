@@ -44,18 +44,18 @@ for VER in ${DRIVER_VERSIONS}; do
 
         if [ ${ARCH} == aarch64 ]; then
             if [ ${MAJOR_VER} -lt 470 ]; then
-                break
+                continue
             elif [[ ${TESLA_VERSIONS} == *${VER}* ]]; then
-                break
+                continue
             elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
-                break
+                continue
             else
                 if [ ${VER} == 510.39.01 ]; then
-                    break
+                    continue
                 elif [ ${VER} == 495.46 ]; then
-                    break
+                    continue
                 elif [ ${VER} == 470.94 ]; then
-                    break
+                    continue
                 fi
             fi
         fi
