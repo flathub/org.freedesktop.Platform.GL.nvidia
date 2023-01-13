@@ -1,5 +1,5 @@
 {
     "skip-appstream-check": true,
-    "only-arches": ["x86_64","i386"],
+    "only-arches": ["x86_64","i386","aarch64"],
     "publish-delay-hours": 0
 }

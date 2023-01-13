@@ -5,7 +5,7 @@ source ./versions.sh
 set -e
 
 for VER in ${DRIVER_VERSIONS}; do
-    for ARCH in x86_64 i386; do
+    for ARCH in x86_64 i386 aarch64; do
         F="data/nvidia-${VER}-${ARCH}.data"
         if [ -f ${F} ]; then continue; fi
 
@@ -28,6 +28,9 @@ for VER in ${DRIVER_VERSIONS}; do
             else
                 SUFFIX=
             fi
+        elif [ ${ARCH} == aarch64 ]; then
+            NVIDIA_ARCH=aarch64
+            SUFFIX=
         else
             NVIDIA_ARCH=x86
             SUFFIX=
@@ -37,6 +40,16 @@ for VER in ${DRIVER_VERSIONS}; do
         # 32bit compat libs
         if [ ${ARCH} == i386 ] && [ ${MAJOR_VER} -gt 390 ]; then
             NVIDIA_ARCH=x86_64
+        fi
+
+        if [ ${ARCH} == aarch64 ]; then
+            if [ ${MAJOR_VER} -lt 470 ]; then
+                continue
+            elif [[ ${TESLA_VERSIONS} == *${VER}* ]]; then
+                continue
+            elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
+                continue
+            fi
         fi
 
         echo "Generating ${F}"
@@ -66,10 +79,13 @@ for VER in ${DRIVER_VERSIONS}; do
         else
             URL=https://us.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
             if ! curl -f -o dl ${URL}; then
-                URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
+                URL=https://us.download.nvidia.com/XFree86/${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
                 if ! curl -f -o dl ${URL}; then
-                    echo "Unable to find URL for version ${VER}, arch ${ARCH}"
-                    exit 1
+                    URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
+                    if ! curl -f -o dl ${URL}; then
+                        echo "Unable to find URL for version ${VER}, arch ${ARCH}"
+                        exit 1
+                    fi
                 fi
             fi
         fi
