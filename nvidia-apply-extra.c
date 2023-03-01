@@ -202,6 +202,7 @@ extract (int fd)
   archive_read_support_format_tar (a);
   archive_read_support_filter_xz (a);
   archive_read_support_filter_gzip (a);
+  archive_read_support_filter_zstd (a);
 
   if ((r = archive_read_open_fd (a, fd, 16*1024)))
     die_with_libarchive (a, "archive_read_open_fd: %s");

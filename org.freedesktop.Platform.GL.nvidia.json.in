@@ -7,8 +7,9 @@
     "runtime-version": "@@SDK_RUNTIME_VERSION@@",
     "sdk-extensions": [],
     "separate-locales": false,
-    "cleanup": [ ],
+    "cleanup": ["/include"],
     "build-options" : {
+        "append-ld-library-path": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib",
         "cflags": "-O2 -g -I/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/include",
         "cxxflags": "-O2 -g",
         "prefix": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@",
@@ -22,6 +23,25 @@
         "--metadata=Extra Data=NoRuntime"
     ],
     "modules": [
+        {
+            "name": "libzstd",
+            "no-autogen": true,
+            "subdir": "lib",
+            "make-args": [
+                "lib-mt"
+            ],
+            "make-install-args": [
+                "PREFIX=${FLATPAK_DEST}",
+                "LIBDIR=${FLATPAK_DEST}/lib"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/facebook/zstd/releases/download/v1.5.4/zstd-1.5.4.tar.gz",
+                    "sha256": "0f470992aedad543126d06efab344dc5f3e171893810455787d38347343a4424"
+                }
+            ]
+        },
         {
             "cleanup": ["/include", "/share"],
             "name": "libarchive",
