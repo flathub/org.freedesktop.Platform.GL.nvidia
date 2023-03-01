@@ -33,8 +33,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://www.libarchive.org/downloads/libarchive-3.2.2.tar.gz",
-                    "sha256": "691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f"
+                    "url": "https://www.libarchive.de/downloads/libarchive-3.6.2.tar.xz",
+                    "sha256": "9e2c1b80d5fbe59b61308fdfab6c79b5021d7ff4ff2489fb12daf0a96a83551d"
                 }
             ]
         },
