@@ -51,6 +51,16 @@ die (const char *format, ...)
   exit (1);
 }
 
+void
+checked_symlink (const char *target,
+                 const char *linkpath)
+{
+  int ret;
+
+  if ((ret = symlink (target, linkpath)))
+    die ("symlink failed: %s", strerror (ret));
+}
+
 static int
 has_prefix (const char *str,
             const char *prefix)
@@ -101,7 +111,6 @@ should_extract (struct archive_entry *entry)
 {
   const char *path = archive_entry_pathname (entry);
   char new_path[PATH_MAX];
-  int is_compat32 = 0;
 
   if (has_prefix (path, "./"))
     path += 2;
@@ -146,7 +155,6 @@ should_extract (struct archive_entry *entry)
     {
       if (!has_prefix (path, "32/"))
         return 0;
-      is_compat32 = 1;
       path += 3;
     }
 #endif
@@ -165,8 +173,8 @@ should_extract (struct archive_entry *entry)
   if (strstr (path, "egl-wayland") ||
       strstr (path, "egl-gbm"))
     {
-      if (is_compat32)
-        archive_entry_set_pathname (entry, path);
+      snprintf (new_path, sizeof new_path, "./lib/%s", path);
+      archive_entry_set_pathname (entry, new_path);
       return 1;
     }
 
@@ -174,14 +182,14 @@ should_extract (struct archive_entry *entry)
        has_prefix (path, "tls/lib"))&&
       has_suffix (path, ".so." NVIDIA_VERSION))
     {
-      if (is_compat32)
-        archive_entry_set_pathname (entry, path);
+      snprintf (new_path, sizeof new_path, "./lib/%s", path);
+      archive_entry_set_pathname (entry, new_path);
       return 1;
     }
 
   if (has_suffix (path, ".dll"))
-    {
-      snprintf (new_path, sizeof new_path, "./nvidia/wine/%s", path);
+    { 
+      snprintf (new_path, sizeof new_path, "./lib/nvidia/wine/%s", path);
       archive_entry_set_pathname (entry, new_path);
       return 1;
     }
@@ -412,12 +420,13 @@ main (int argc, char *argv[])
   int fd;
   int skip_lines;
   off_t tar_start;
+  const char *nvidia_installer_path = argv[1];
 
   nvidia_major_version = atoi (NVIDIA_VERSION);
 
-  fd = open (NVIDIA_BASENAME, O_RDONLY);
+  fd = open (nvidia_installer_path, O_RDONLY);
   if (fd == -1)
-    die_with_error ("open extra data");
+    die_with_error ("opening installer");
 
   skip_lines = find_skip_lines (fd);
   tar_start = find_line_offset (fd, skip_lines);
@@ -429,31 +438,29 @@ main (int argc, char *argv[])
 
   close (fd);
 
-  unlink (NVIDIA_BASENAME);
-
   char *ldconfig_argv[] = {"ldconfig", "-n", ".", NULL};
   if (subprocess (ldconfig_argv))
     die ("running ldconfig failed");
 
   if (nvidia_major_version >= 470)
     {
-      symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION, "libnvidia-vulkan-producer.so");
+      checked_symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION, "libnvidia-vulkan-producer.so");
     }
 
-  symlink ("libcuda.so.1", "libcuda.so");
-  symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
-  symlink ("libnvidia-opencl.so.1", "libnvidia-opencl.so");
-  symlink ("libvdpau_nvidia.so.1", "libvdpau_nvidia.so");
+  checked_symlink ("libcuda.so.1", "libcuda.so");
+  checked_symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
+  checked_symlink ("libnvidia-opencl.so.1", "libnvidia-opencl.so");
+  checked_symlink ("libvdpau_nvidia.so.1", "libvdpau_nvidia.so");
 
   if (nvidia_major_version >= 495)
     {
       mkdir ("gbm", 0755);
-      symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
+      checked_symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
     }
 
-  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
+  checked_symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
            "share/nvidia/nvidia-application-profiles-key-documentation");
-  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
+  checked_symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
            "share/nvidia/nvidia-application-profiles-rc");
 
   mkdir ("OpenCL", 0755);

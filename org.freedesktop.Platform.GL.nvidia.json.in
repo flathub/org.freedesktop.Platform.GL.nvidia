@@ -1,83 +1,29 @@
 {
     "id": "org.freedesktop.Platform.GL.nvidia-@@NVIDIA_VERSION@@",
-    "branch": "@@SDK_BRANCH@@",
+    "branch": "1.4",
     "runtime": "org.freedesktop.Platform",
     "build-extension": true,
     "sdk": "org.freedesktop.Sdk",
-    "runtime-version": "@@SDK_RUNTIME_VERSION@@",
+    "runtime-version": "22.08",
     "sdk-extensions": [],
     "separate-locales": false,
-    "cleanup": ["/include"],
-    "build-options" : {
-        "append-ld-library-path": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib",
-        "cflags": "-O2 -g -I/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/include",
-        "cxxflags": "-O2 -g",
-        "prefix": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@",
-        "env": {
-            "V": "1",
-            "LDFLAGS": "-L/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib"
-        }
-    },
-    "finish-args": [
-        "--extra-data=@@EXTRA_DATA@@",
-        "--metadata=Extra Data=NoRuntime"
-    ],
     "modules": [
         {
-            "name": "libzstd",
-            "no-autogen": true,
-            "subdir": "lib",
-            "make-args": [
-                "lib-mt"
-            ],
-            "make-install-args": [
-                "PREFIX=${FLATPAK_DEST}",
-                "LIBDIR=${FLATPAK_DEST}/lib"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/facebook/zstd/releases/download/v1.5.4/zstd-1.5.4.tar.gz",
-                    "sha256": "0f470992aedad543126d06efab344dc5f3e171893810455787d38347343a4424"
-                }
-            ]
-        },
-        {
-            "cleanup": ["/include", "/share"],
-            "name": "libarchive",
-            "config-opts": [ "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
-                             "--without-bz2lib", "--without-iconv", "--without-lz4", "--without-lzo2", "--without-nettle",
-                             "--without-openssl", "--without-xml2", "--without-expat", "--disable-bsdcat", "--disable-bsdcpio",
-                             "--disable-bsdtar"
-                           ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://www.libarchive.de/downloads/libarchive-3.6.2.tar.xz",
-                    "sha256": "9e2c1b80d5fbe59b61308fdfab6c79b5021d7ff4ff2489fb12daf0a96a83551d"
-                }
-            ]
-        },
-        {
-            "name": "ldconfig",
+            "name": "nvidia",
             "buildsystem": "simple",
             "build-commands": [
-                "install -Dvm755 -t ${FLATPAK_DEST}/bin/ $(which ldconfig)"
-            ]
-        },
-        {
-            "name": "nvidia",
-            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@", "NVIDIA_URL=@@NVIDIA_URL@@" ],
-            "no-autogen": true,
+                "make NVIDIA_VERSION=@@NVIDIA_VERSION@@",
+                "cd $FLATPAK_DEST && $FLATPAK_BUILDER_BUILDDIR/nvidia-extract $FLATPAK_BUILDER_BUILDDIR/NVIDIA-Linux-*.run"
+            ],
             "sources": [
                 {
-                    "type": "file",
-                    "path": "nvidia-Makefile",
-                    "dest-filename": "makefile"
+                    "type": "dir",
+                    "path": "nvidia-extractor"
                 },
                 {
                     "type": "file",
-                    "path": "nvidia-apply-extra.c"
+                    "url": "@@NVIDIA_URL@@",
+                    "sha256": "@@NVIDIA_SHA256@@"
                 }
             ]
         }

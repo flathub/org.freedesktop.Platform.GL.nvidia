@@ -11,9 +11,6 @@ SUBJECT=${5:-"org.freedesktop.Platform.GL.nvidia `git rev-parse HEAD`"}
 set -e
 set -x
 
-SDK_BRANCH=1.4
-SDK_RUNTIME_VERSION=1.6
-
 for VER in $DRIVER_VERSIONS; do
     F="data/nvidia-$VER-$ARCH.data"
     if [ ! -f $F ]; then
@@ -21,14 +18,12 @@ for VER in $DRIVER_VERSIONS; do
         continue
     fi
     NVIDIA_VERSION=$(echo $VER | sed "s/\./-/;s/\./-/")
-    EXTRA_DATA=$(cat $F)
+    NVIDIA_SHA256=$(cat $F | pcregrep -o1 "^:([^:]*):")
     NVIDIA_URL=$(cat $F | sed "s/:[^:]*:[^:]*:[^:]*://")
     rm -f org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
-    sed -e "s/@@SDK_BRANCH@@/${SDK_BRANCH}/g"			\
-        -e "s/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g"	\
-        -e "s/@@NVIDIA_VERSION@@/${NVIDIA_VERSION}/g"		\
-        -e "s=@@EXTRA_DATA@@=${EXTRA_DATA}=g" \
+    sed -e "s/@@NVIDIA_VERSION@@/${NVIDIA_VERSION}/g"		\
         -e "s=@@NVIDIA_URL@@=${NVIDIA_URL}=g" \
+        -e "s=@@NVIDIA_SHA256@@=${NVIDIA_SHA256}=g" \
         org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 
     flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \
