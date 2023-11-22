@@ -241,7 +241,15 @@ extract (int fd)
 static int
 find_skip_lines (int fd)
 {
-  char buffer[1024];
+  /*
+   * CUDA drivers use makeself v2.1.4, which doesn't have a skip= line at the
+   * beginning of the file. Instead, there's an
+   * offset=`head -n "$skip" "$0" | wc -c | tr -d " "`
+   * after all of the `--help` text, at approx the 14k byte offset.
+   *
+   * See https://github.com/megastep/makeself/commit/0d093c01e06ee76643ba2cffabf2ca07282d3af1
+   */
+  char buffer[16*1024];
   ssize_t size;
   char *line_start, *line_end, *buffer_end;
   char *skip_str = NULL;
@@ -270,6 +278,16 @@ find_skip_lines (int fd)
         {
           skip_str = line_start + 5;
           break;
+        }
+      else if (has_prefix (line_start, "offset=`head -n "))
+        /* makeself v2 removed the skip= line, then added it back in v2.4.2 */
+        {
+          skip_str = line_start + 16;
+          skip_lines = atoi (skip_str);
+          if (skip_lines == 0)
+            die ("Can't parse offset=`head -n %s", skip_str);
+
+          return skip_lines + 1;
         }
 
       line_start = line_end;
