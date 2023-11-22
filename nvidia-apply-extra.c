@@ -186,6 +186,11 @@ should_extract (struct archive_entry *entry)
       return 1;
     }
 
+  /* this tar is only a container that stores the actual driver .run file */
+  if (strcmp (path, "builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run") == 0) {
+    return 1;
+  }
+
   return 0;
 }
 
@@ -448,6 +453,12 @@ main (int argc, char *argv[])
   close (fd);
 
   unlink (NVIDIA_BASENAME);
+
+  /* check if this container is just a wrapper over the real driver container */
+  if (rename ("./builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run", NVIDIA_BASENAME) == 0)
+    return main (argc, argv);
+  else if (errno != ENOENT)
+    die_with_error ("rename ./builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run failed");
 
   char *ldconfig_argv[] = {"ldconfig", "-n", ".", NULL};
   if (subprocess (ldconfig_argv))
