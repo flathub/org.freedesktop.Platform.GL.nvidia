@@ -29,6 +29,7 @@ for VER in $DRIVER_VERSIONS; do
         -e "s/@@NVIDIA_VERSION@@/${NVIDIA_VERSION}/g"		\
         -e "s=@@EXTRA_DATA@@=${EXTRA_DATA}=g" \
         -e "s=@@NVIDIA_URL@@=${NVIDIA_URL}=g" \
+        -e "s=@@ARCH@@=${ARCH}=g" \
         org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 
     flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \

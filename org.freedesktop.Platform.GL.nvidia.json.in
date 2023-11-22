@@ -67,7 +67,7 @@
         },
         {
             "name": "nvidia",
-            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@", "NVIDIA_URL=@@NVIDIA_URL@@" ],
+            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@", "NVIDIA_URL=@@NVIDIA_URL@@", "ARCH=@@ARCH@@" ],
             "no-autogen": true,
             "sources": [
                 {
