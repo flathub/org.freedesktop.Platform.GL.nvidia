@@ -88,7 +88,7 @@ copy_archive (struct archive *ar,
       if (r == ARCHIVE_EOF)
         break;
       if (r != ARCHIVE_OK)
-        die_with_libarchive (ar, "archive_write_data_block: %s");
+        die_with_libarchive (ar, "archive_read_data_block: %s");
 
       r = archive_write_data_block (aw, buff, size, offset);
       if (r != ARCHIVE_OK)
