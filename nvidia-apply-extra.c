@@ -469,6 +469,11 @@ main (int argc, char *argv[])
       symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION, "libnvidia-vulkan-producer.so");
     }
 
+  if (nvidia_major_version >= 550)
+    {
+      symlink ("libnvidia-gpucomp.so." NVIDIA_VERSION, "libnvidia-gpucomp.so");
+    }
+
   symlink ("libcuda.so.1", "libcuda.so");
   symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
   symlink ("libnvidia-opencl.so.1", "libnvidia-opencl.so");
