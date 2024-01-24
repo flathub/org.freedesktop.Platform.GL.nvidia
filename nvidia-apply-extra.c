@@ -464,7 +464,7 @@ main (int argc, char *argv[])
   if (subprocess (ldconfig_argv))
     die ("running ldconfig failed");
 
-  if (nvidia_major_version >= 470)
+  if (nvidia_major_version >= 470 && nvidia_major_version < 550)
     {
       symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION, "libnvidia-vulkan-producer.so");
     }
