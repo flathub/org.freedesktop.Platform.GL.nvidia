@@ -500,10 +500,13 @@ main (int argc, char *argv[])
       symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
     }
 
-  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
-           "share/nvidia/nvidia-application-profiles-key-documentation");
-  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
-           "share/nvidia/nvidia-application-profiles-rc");
+  if (nvidia_major_version >= 319)
+    {
+      symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
+               "share/nvidia/nvidia-application-profiles-key-documentation");
+      symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
+               "share/nvidia/nvidia-application-profiles-rc");
+    }
 
   mkdir ("OpenCL", 0755);
   mkdir ("OpenCL/vendors", 0755);
