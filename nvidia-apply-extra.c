@@ -63,6 +63,16 @@ parse_driver_version (const char *version,
   return sscanf(version, "%d.%d.%d", major, minor, patch) < 2;
 }
 
+void
+checked_symlink (const char *target,
+                 const char *linkpath)
+{
+  if (symlink (target, linkpath) != 0)
+    die_with_error ("failed to symlink '%s' to '%s'", target, linkpath);
+  if (access (linkpath, F_OK) != 0 && errno == ENOENT)
+    die ("broken symlink: '%s' points to a missing file", linkpath);
+}
+
 static int
 has_prefix (const char *str,
             const char *prefix)
@@ -496,32 +506,32 @@ main (int argc, char *argv[])
       nvidia_major_version >= 495) && nvidia_major_version < 545 &&
       strcmp(ARCH, "i386") != 0)
     {
-      symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION,
-               "libnvidia-vulkan-producer.so");
+      checked_symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION,
+                       "libnvidia-vulkan-producer.so");
     }
 
   if (nvidia_major_version >= 550)
     {
-      symlink ("libnvidia-gpucomp.so." NVIDIA_VERSION, "libnvidia-gpucomp.so");
+      checked_symlink ("libnvidia-gpucomp.so." NVIDIA_VERSION, "libnvidia-gpucomp.so");
     }
 
-  symlink ("libcuda.so.1", "libcuda.so");
-  symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
-  symlink ("libnvidia-opencl.so.1", "libnvidia-opencl.so");
-  symlink ("libvdpau_nvidia.so.1", "libvdpau_nvidia.so");
+  checked_symlink ("libcuda.so.1", "libcuda.so");
+  checked_symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
+  checked_symlink ("libnvidia-opencl.so.1", "libnvidia-opencl.so");
+  checked_symlink ("libvdpau_nvidia.so.1", "libvdpau_nvidia.so");
 
   if (nvidia_major_version >= 495)
     {
       mkdir ("gbm", 0755);
-      symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
+      checked_symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
     }
 
   if (nvidia_major_version >= 319)
     {
-      symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
-               "share/nvidia/nvidia-application-profiles-key-documentation");
-      symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
-               "share/nvidia/nvidia-application-profiles-rc");
+      checked_symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
+                       "share/nvidia/nvidia-application-profiles-key-documentation");
+      checked_symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
+                       "share/nvidia/nvidia-application-profiles-rc");
     }
 
   mkdir ("OpenCL", 0755);
