@@ -14,6 +14,7 @@
 int nvidia_major_version = 0;
 int nvidia_minor_version = 0;
 int nvidia_patch_version = 0;
+int embedded_installer = 0;
 
 void
 die_with_error (const char *format, ...)
@@ -150,6 +151,14 @@ should_extract (struct archive_entry *entry)
       return 1;
     }
 
+  /* this tar is only a container that stores the actual driver .run file */
+  if (has_suffix (path, ".run"))
+    {
+      archive_entry_set_pathname (entry, "./embedded_installer.run");
+      embedded_installer = 1;
+      return 1;
+    }
+
 #ifdef __i386__
   /* Nvidia no longer has 32bit drivers so we are getting
    * the 32bit compat libs from the 64bit drivers */
@@ -196,11 +205,6 @@ should_extract (struct archive_entry *entry)
       archive_entry_set_pathname (entry, new_path);
       return 1;
     }
-
-  /* this tar is only a container that stores the actual driver .run file */
-  if (strcmp (path, "builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run") == 0) {
-    return 1;
-  }
 
   return 0;
 }
@@ -470,10 +474,19 @@ main (int argc, char *argv[])
   unlink (NVIDIA_BASENAME);
 
   /* check if this container is just a wrapper over the real driver container */
-  if (rename ("./builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run", NVIDIA_BASENAME) == 0)
-    return main (argc, argv);
-  else if (errno != ENOENT)
-    die_with_error ("rename ./builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run failed");
+  if (access ("embedded_installer.run", F_OK) == 0)
+    {
+      if (embedded_installer)
+        {
+          embedded_installer = 0;
+          argv[1] = "embedded_installer.run";
+          return main (argc, argv);
+        }
+      else
+        {
+          unlink ("embedded_installer.run");
+        }
+    }
 
   char *ldconfig_argv[] = {"ldconfig", "-n", ".", NULL};
   if (subprocess (ldconfig_argv))
