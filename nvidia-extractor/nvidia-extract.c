@@ -11,7 +11,10 @@
 #include <errno.h>
 #include <linux/limits.h>
 
-int nvidia_major_version;
+int nvidia_major_version = 0;
+int nvidia_minor_version = 0;
+int nvidia_patch_version = 0;
+int embedded_installer = 0;
 
 void
 die_with_error (const char *format, ...)
@@ -49,6 +52,25 @@ die (const char *format, ...)
   fprintf (stderr, "\n");
 
   exit (1);
+}
+
+int
+parse_driver_version (const char *version,
+                      int *major,
+                      int *minor,
+                      int *patch)
+{
+  return sscanf(version, "%d.%d.%d", major, minor, patch) < 2;
+}
+
+void
+checked_symlink (const char *target,
+                 const char *linkpath)
+{
+  if (symlink (target, linkpath) != 0)
+    die_with_error ("failed to symlink '%s' to '%s'", target, linkpath);
+  if (access (linkpath, F_OK) != 0 && errno == ENOENT)
+    die ("broken symlink: '%s' points to a missing file", linkpath);
 }
 
 static int
@@ -101,10 +123,17 @@ should_extract (struct archive_entry *entry)
 {
   const char *path = archive_entry_pathname (entry);
   char new_path[PATH_MAX];
-  int is_compat32 = 0;
 
   if (has_prefix (path, "./"))
     path += 2;
+
+  /* this tar is only a container that stores the actual driver .run file */
+  if (has_suffix (path, ".run"))
+    {
+      archive_entry_set_pathname (entry, "./embedded_installer.run");
+      embedded_installer = 1;
+      return 1;
+    }
 
   if (strcmp (path, "nvidia_icd.json") == 0 || strcmp (path, "nvidia_icd.json.template") == 0)
     {
@@ -139,17 +168,14 @@ should_extract (struct archive_entry *entry)
       return 1;
     }
 
-#ifdef __i386__
   /* Nvidia no longer has 32bit drivers so we are getting
    * the 32bit compat libs from the 64bit drivers */
-  if (nvidia_major_version > 390)
+  if (strcmp (NVIDIA_ARCH, "i386") == 0 && nvidia_major_version > 390)
     {
       if (!has_prefix (path, "32/"))
         return 0;
-      is_compat32 = 1;
       path += 3;
     }
-#endif
 
   /* Skip these as we're using GLVND on majod > 367*/
   if (nvidia_major_version > 367 &&
@@ -165,8 +191,8 @@ should_extract (struct archive_entry *entry)
   if (strstr (path, "egl-wayland") ||
       strstr (path, "egl-gbm"))
     {
-      if (is_compat32)
-        archive_entry_set_pathname (entry, path);
+      snprintf (new_path, sizeof new_path, "./lib/%s", path);
+      archive_entry_set_pathname (entry, new_path);
       return 1;
     }
 
@@ -174,22 +200,17 @@ should_extract (struct archive_entry *entry)
        has_prefix (path, "tls/lib"))&&
       has_suffix (path, ".so." NVIDIA_VERSION))
     {
-      if (is_compat32)
-        archive_entry_set_pathname (entry, path);
+      snprintf (new_path, sizeof new_path, "./lib/%s", path);
+      archive_entry_set_pathname (entry, new_path);
       return 1;
     }
 
   if (has_suffix (path, ".dll"))
     {
-      snprintf (new_path, sizeof new_path, "./nvidia/wine/%s", path);
+      snprintf (new_path, sizeof new_path, "./lib/nvidia/wine/%s", path);
       archive_entry_set_pathname (entry, new_path);
       return 1;
     }
-
-  /* this tar is only a container that stores the actual driver .run file */
-  if (strcmp (path, "builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run") == 0) {
-    return 1;
-  }
 
   return 0;
 }
@@ -436,11 +457,22 @@ main (int argc, char *argv[])
   int skip_lines;
   off_t tar_start;
 
-  nvidia_major_version = atoi (NVIDIA_VERSION);
+  if (argc < 2)
+    {
+      fprintf (stderr, "usage: ./%s <path to NVIDIA installer>\n", argv[0]);
+      return 1;
+    }
+  const char *nvidia_installer_path = argv[1];
 
-  fd = open (NVIDIA_BASENAME, O_RDONLY);
+  if (parse_driver_version (NVIDIA_VERSION,
+                            &nvidia_major_version,
+                            &nvidia_minor_version,
+                            &nvidia_patch_version))
+    die ("failed to parse driver version '%s'.", NVIDIA_VERSION);
+
+  fd = open (nvidia_installer_path, O_RDONLY);
   if (fd == -1)
-    die_with_error ("open extra data");
+    die_with_error ("opening installer");
 
   skip_lines = find_skip_lines (fd);
   tar_start = find_line_offset (fd, skip_lines);
@@ -452,43 +484,57 @@ main (int argc, char *argv[])
 
   close (fd);
 
-  unlink (NVIDIA_BASENAME);
-
   /* check if this container is just a wrapper over the real driver container */
-  if (rename ("./builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run", NVIDIA_BASENAME) == 0)
-    return main (argc, argv);
-  else if (errno != ENOENT)
-    die_with_error ("rename ./builds/NVIDIA-Linux-" ARCH "-" NVIDIA_VERSION ".run failed");
+  if (access ("embedded_installer.run", F_OK) == 0)
+    {
+      if (embedded_installer)
+        {
+          /* marks it for deletion after it gets extracted */
+          embedded_installer = 0;
+          argv[1] = "embedded_installer.run";
+          return main (argc, argv);
+        }
+      else
+        {
+          unlink ("embedded_installer.run");
+        }
+    }
 
-  char *ldconfig_argv[] = {"ldconfig", "-n", ".", NULL};
+  char *ldconfig_argv[] = {"ldconfig", "-n", "lib", NULL};
   if (subprocess (ldconfig_argv))
     die ("running ldconfig failed");
 
-  if (nvidia_major_version >= 470 && nvidia_major_version < 550)
+  if (((nvidia_major_version == 470 && nvidia_minor_version >= 63) ||
+      nvidia_major_version >= 495) && nvidia_major_version < 545 &&
+      strcmp(NVIDIA_ARCH, "i386") != 0)
     {
-      symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION, "libnvidia-vulkan-producer.so");
+      checked_symlink ("libnvidia-vulkan-producer.so." NVIDIA_VERSION,
+                       "lib/libnvidia-vulkan-producer.so");
     }
 
   if (nvidia_major_version >= 550)
     {
-      symlink ("libnvidia-gpucomp.so." NVIDIA_VERSION, "libnvidia-gpucomp.so");
+      checked_symlink ("libnvidia-gpucomp.so." NVIDIA_VERSION, "lib/libnvidia-gpucomp.so");
     }
 
-  symlink ("libcuda.so.1", "libcuda.so");
-  symlink ("libnvidia-ml.so.1", "libnvidia-ml.so");
-  symlink ("libnvidia-opencl.so.1", "libnvidia-opencl.so");
-  symlink ("libvdpau_nvidia.so.1", "libvdpau_nvidia.so");
+  checked_symlink ("libcuda.so.1", "lib/libcuda.so");
+  checked_symlink ("libnvidia-ml.so.1", "lib/libnvidia-ml.so");
+  checked_symlink ("libnvidia-opencl.so.1", "lib/libnvidia-opencl.so");
+  checked_symlink ("libvdpau_nvidia.so.1", "lib/libvdpau_nvidia.so");
 
   if (nvidia_major_version >= 495)
     {
-      mkdir ("gbm", 0755);
-      symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
+      mkdir ("lib/gbm", 0755);
+      checked_symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "lib/gbm/nvidia-drm_gbm.so");
     }
 
-  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
-           "share/nvidia/nvidia-application-profiles-key-documentation");
-  symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
-           "share/nvidia/nvidia-application-profiles-rc");
+  if (nvidia_major_version >= 319)
+    {
+      checked_symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
+                       "share/nvidia/nvidia-application-profiles-key-documentation");
+      checked_symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-rc",
+                       "share/nvidia/nvidia-application-profiles-rc");
+    }
 
   mkdir ("OpenCL", 0755);
   mkdir ("OpenCL/vendors", 0755);
