@@ -13,6 +13,7 @@ set -x
 
 SDK_BRANCH=1.4
 SDK_RUNTIME_VERSION=1.6
+echo $DRIVER_VERSIONS
 
 for VER in $DRIVER_VERSIONS; do
     F="data/nvidia-$VER-$ARCH.data"
@@ -32,7 +33,7 @@ for VER in $DRIVER_VERSIONS; do
         -e "s=@@ARCH@@=${ARCH}=g" \
         org.freedesktop.Platform.GL.nvidia.json.in > org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
 
-    flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \
+    flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs --install --user \
                     --arch=${ARCH} --repo=${REPO} \
                     --subject="${SUBJECT}" \
                     ${FB_ARGS} ${EXPORT_ARGS} builddir org.freedesktop.Platform.GL.nvidia-$NVIDIA_VERSION.json
