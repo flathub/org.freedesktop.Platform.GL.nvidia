@@ -76,6 +76,12 @@ for VER in ${DRIVER_VERSIONS}; do
                 echo "Unable to find URL for version ${VER}, arch ${ARCH}"
                 exit 1
             fi
+        elif [[ ${CUDA_VERSIONS} == *${VER}* ]]; then
+            URL=https://github.com/flathub/org.freedesktop.Platform.GL.nvidia/releases/download/cuda/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+            if ! curl -f -L -o dl ${URL}; then
+                echo "Unable to find URL for version ${VER}, arch ${ARCH}"
+                exit 1
+            fi
         else
             URL=https://us.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
             if ! curl -f -o dl ${URL}; then
