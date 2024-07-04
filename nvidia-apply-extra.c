@@ -511,6 +511,12 @@ main (int argc, char *argv[])
                "share/nvidia/nvidia-application-profiles-rc");
     }
 
+  if (nvidia_major_version <= 390)
+    {
+      unlink ("libnvidia-tls.so." NVIDIA_VERSION);
+      symlink ("tls/libnvidia-tls.so." NVIDIA_VERSION, "libnvidia-tls.so." NVIDIA_VERSION);
+    }
+
   mkdir ("OpenCL", 0755);
   mkdir ("OpenCL/vendors", 0755);
   create_file_with_content ("OpenCL/vendors/nvidia.icd", "libnvidia-opencl.so");
