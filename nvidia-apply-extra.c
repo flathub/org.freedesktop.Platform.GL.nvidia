@@ -11,7 +11,9 @@
 #include <errno.h>
 #include <linux/limits.h>
 
-int nvidia_major_version;
+int nvidia_major_version = 0;
+int nvidia_minor_version = 0;
+int nvidia_patch_version = 0;
 
 void
 die_with_error (const char *format, ...)
@@ -49,6 +51,15 @@ die (const char *format, ...)
   fprintf (stderr, "\n");
 
   exit (1);
+}
+
+int
+parse_driver_version (const char *version,
+                      int *major,
+                      int *minor,
+                      int *patch)
+{
+  return sscanf(version, "%d.%d.%d", major, minor, patch) < 2;
 }
 
 static int
@@ -436,7 +447,11 @@ main (int argc, char *argv[])
   int skip_lines;
   off_t tar_start;
 
-  nvidia_major_version = atoi (NVIDIA_VERSION);
+  if (parse_driver_version (NVIDIA_VERSION,
+                            &nvidia_major_version,
+                            &nvidia_minor_version,
+                            &nvidia_patch_version))
+    die ("failed to parse driver version '%s'.", NVIDIA_VERSION);
 
   fd = open (NVIDIA_BASENAME, O_RDONLY);
   if (fd == -1)
