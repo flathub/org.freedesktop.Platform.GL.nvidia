@@ -4,41 +4,26 @@
     "runtime": "org.freedesktop.Platform",
     "build-extension": true,
     "sdk": "org.freedesktop.Sdk",
-    "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.nvidia-base"
-    ],
     "runtime-version": "@@SDK_RUNTIME_VERSION@@",
     "separate-locales": false,
-    "build-options": {
-        "prepend-ld-library-path": "/usr/lib/sdk/nvidia-base/lib",
-        "ldflags": "-L/usr/lib/sdk/nvidia-base/lib",
-        "prefix": "/usr/lib/@@ARCH@@-linux-gnu/GL/nvidia-@@NVIDIA_VERSION@@"
-    },
-    "finish-args": [
-        "--extra-data=@@EXTRA_DATA@@",
-        "--metadata=Extra Data=NoRuntime"
-    ],
     "modules": [
         {
-            "name": "ldconfig",
+            "name": "nvidia",
             "buildsystem": "simple",
             "build-commands": [
-                "install -Dvm755 -t ${FLATPAK_DEST}/bin/ $(which ldconfig)"
-            ]
-        },
-        {
-            "name": "nvidia",
-            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@", "NVIDIA_URL=@@NVIDIA_URL@@", "ARCH=@@TARGET_ARCH@@" ],
-            "no-autogen": true,
+                "make NVIDIA_VERSION=@@NVIDIA_VERSION@@ ARCH=@@ARCH@@",
+                "cd $FLATPAK_DEST && $FLATPAK_BUILDER_BUILDDIR/nvidia-extract $FLATPAK_BUILDER_BUILDDIR/*.run"
+            ],
             "sources": [
                 {
-                    "type": "file",
-                    "path": "nvidia-Makefile",
-                    "dest-filename": "makefile"
+                    "type": "dir",
+                    "path": "nvidia-extractor"
                 },
                 {
                     "type": "file",
-                    "path": "nvidia-apply-extra.c"
+                    "dest-filename": "installer-@@NVIDIA_VERSION@@.run",
+                    "url": "@@NVIDIA_URL@@",
+                    "sha256": "@@NVIDIA_SHA256@@"
                 }
             ]
         }
