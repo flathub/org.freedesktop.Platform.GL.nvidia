@@ -1,5 +1,5 @@
 {
-    "id": "org.freedesktop.Platform.GL.nvidia-@@NVIDIA_VERSION@@",
+    "id": "@@EXT_PREFIX@@-@@NVIDIA_VERSION@@",
     "branch": "@@SDK_BRANCH@@",
     "runtime": "org.freedesktop.Platform",
     "build-extension": true,
@@ -7,77 +7,24 @@
     "runtime-version": "@@SDK_RUNTIME_VERSION@@",
     "sdk-extensions": [],
     "separate-locales": false,
-    "cleanup": ["/include"],
-    "build-options" : {
-        "append-ld-library-path": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib",
-        "append-pkg-config-path": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib/pkgconfig",
-        "cflags": "-O2 -g -I/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/include",
-        "cxxflags": "-O2 -g",
-        "prefix": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@",
-        "env": {
-            "V": "1",
-            "LDFLAGS": "-L/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib"
-        }
-    },
-    "finish-args": [
-        "--extra-data=@@EXTRA_DATA@@",
-        "--metadata=Extra Data=NoRuntime"
-    ],
     "modules": [
         {
-            "name": "libzstd",
+            "name": "nvidia",
             "buildsystem": "simple",
-            "subdir": "lib",
-            "build-options": {
-                "cppflags": "-DZSTD_MULTITHREAD"
-            },
             "build-commands": [
-                "make -j ${FLATPAK_BUILDER_N_JOBS} PREFIX=${FLATPAK_DEST} install-static install-includes install-pc"
+                "make NVIDIA_VERSION=@@NVIDIA_VERSION@@ NVIDIA_ARCH=@@NVIDIA_ARCH@@",
+                "cd $FLATPAK_DEST && $FLATPAK_BUILDER_BUILDDIR/nvidia-extract $FLATPAK_BUILDER_BUILDDIR/*.run"
             ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://github.com/facebook/zstd/releases/download/v1.5.6/zstd-1.5.6.tar.gz",
-                    "sha256": "8c29e06cf42aacc1eafc4077ae2ec6c6fcb96a626157e0593d5e82a34fd403c1"
-                }
-            ]
-        },
-        {
-            "cleanup": ["/include", "/share"],
-            "name": "libarchive",
-            "config-opts": [ "--disable-dependency-tracking", "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
-                             "--without-bz2lib", "--without-iconv", "--without-lz4", "--without-lzo2", "--without-nettle",
-                             "--without-openssl", "--without-xml2", "--without-expat", "--disable-bsdcat", "--disable-bsdcpio",
-                             "--disable-bsdtar", "--disable-bsdunzip", "--without-libb2", "--without-cng", "--without-mbedtls"
-                           ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/libarchive/libarchive/releases/download/v3.7.5/libarchive-3.7.5.tar.xz",
-                    "sha256": "ca74ff8f99dd40ab8a8274424d10a12a7ec3f4428dd35aee9fdda8bdb861b570"
-                }
-            ]
-        },
-        {
-            "name": "ldconfig",
-            "buildsystem": "simple",
-            "build-commands": [
-                "install -Dvm755 -t ${FLATPAK_DEST}/bin/ $(which ldconfig)"
-            ]
-        },
-        {
-            "name": "nvidia",
-            "make-args": [ "NVIDIA_VERSION=@@NVIDIA_VERSION@@", "NVIDIA_URL=@@NVIDIA_URL@@", "ARCH=@@ARCH@@" ],
-            "no-autogen": true,
-            "sources": [
-                {
-                    "type": "file",
-                    "path": "nvidia-Makefile",
-                    "dest-filename": "makefile"
+                    "type": "dir",
+                    "path": "nvidia-extractor"
                 },
                 {
                     "type": "file",
-                    "path": "nvidia-apply-extra.c"
+                    "dest-filename": "installer-@@NVIDIA_VERSION@@.run",
+                    "url": "@@NVIDIA_URL@@",
+                    "sha256": "@@NVIDIA_SHA256@@"
                 }
             ]
         }
