@@ -152,6 +152,21 @@ should_extract (struct archive_entry *entry)
       archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/15_nvidia_gbm.json");
       return 1;
     }
+  if (strcmp (path, "20_nvidia_xcb.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/20_nvidia_xcb.json");
+      return 1;
+    }
+  if (strcmp (path, "20_nvidia_xlib.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/20_nvidia_xlib.json");
+      return 1;
+    }
+  if (strcmp (path, "nvidia_icd_vksc.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./vulkansc/icd.d/nvidia_icd_vksc.json");
+      return 1;
+    }
   if ((strcmp (path, "nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation") == 0) ||
       (strcmp (path, "nvidia-application-profiles-" NVIDIA_VERSION "-rc") == 0))
     {
@@ -184,7 +199,9 @@ should_extract (struct archive_entry *entry)
 
   /* These are not versioned after the driver version */
   if (strstr (path, "egl-wayland") ||
-      strstr (path, "egl-gbm"))
+      strstr (path, "egl-gbm") ||
+      strstr (path, "egl-xcb") ||
+      strstr (path, "egl-xlib"))
     {
       if (is_compat32)
         archive_entry_set_pathname (entry, path);
