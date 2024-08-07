@@ -17,4 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build
-        run: make
+        run: |
+          # Only build a single version to speed up CI.
+          echo 'DRIVER_VERSIONS="${BETA_VERSIONS%% *}"' >> versions.sh
+          make
