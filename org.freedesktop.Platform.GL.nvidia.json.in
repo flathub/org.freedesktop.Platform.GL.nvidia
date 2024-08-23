@@ -10,6 +10,7 @@
     "cleanup": ["/include"],
     "build-options" : {
         "append-ld-library-path": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib",
+        "append-pkg-config-path": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/lib/pkgconfig",
         "cflags": "-O2 -g -I/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@/include",
         "cxxflags": "-O2 -g",
         "prefix": "/usr/lib/GL/nvidia-@@NVIDIA_VERSION@@",
@@ -48,7 +49,7 @@
             "config-opts": [ "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
                              "--without-bz2lib", "--without-iconv", "--without-lz4", "--without-lzo2", "--without-nettle",
                              "--without-openssl", "--without-xml2", "--without-expat", "--disable-bsdcat", "--disable-bsdcpio",
-                             "--disable-bsdtar"
+                             "--disable-bsdtar", "--disable-bsdunzip", "--without-libb2", "--without-cng", "--without-mbedtls"
                            ],
             "sources": [
                 {
