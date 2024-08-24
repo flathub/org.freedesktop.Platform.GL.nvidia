@@ -28,7 +28,6 @@
             "name": "libzstd",
             "buildsystem": "simple",
             "subdir": "lib",
-            "cleanup": ["*"],
             "build-options": {
                 "cppflags": "-DZSTD_MULTITHREAD"
             },
