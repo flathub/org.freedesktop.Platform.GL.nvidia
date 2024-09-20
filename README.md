@@ -35,7 +35,7 @@ cd org.freedesktop.Platform.GL.nvidia
 echo 'DRIVER_VERSIONS="560.35.03"' >> versions.sh
 ```
 
-5\. Install the appropriate 1.6 Freedesktop Platform/SDK for your CPU architecture:
+**5\.** Install the appropriate 1.6 Freedesktop Platform/SDK for your CPU architecture:
 
 ```bash
 flatpak --user install --no-related flathub "org.freedesktop.Platform/$(flatpak --default-arch)/1.6"

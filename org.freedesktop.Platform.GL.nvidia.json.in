@@ -37,15 +37,15 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/facebook/zstd/releases/download/v1.5.4/zstd-1.5.4.tar.gz",
-                    "sha256": "0f470992aedad543126d06efab344dc5f3e171893810455787d38347343a4424"
+                    "url": "https://github.com/facebook/zstd/releases/download/v1.5.6/zstd-1.5.6.tar.gz",
+                    "sha256": "8c29e06cf42aacc1eafc4077ae2ec6c6fcb96a626157e0593d5e82a34fd403c1"
                 }
             ]
         },
         {
             "cleanup": ["/include", "/share"],
             "name": "libarchive",
-            "config-opts": [ "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
+            "config-opts": [ "--disable-dependency-tracking", "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
                              "--without-bz2lib", "--without-iconv", "--without-lz4", "--without-lzo2", "--without-nettle",
                              "--without-openssl", "--without-xml2", "--without-expat", "--disable-bsdcat", "--disable-bsdcpio",
                              "--disable-bsdtar", "--disable-bsdunzip", "--without-libb2", "--without-cng", "--without-mbedtls"
@@ -53,8 +53,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://www.libarchive.de/downloads/libarchive-3.7.4.tar.xz",
-                    "sha256": "f887755c434a736a609cbd28d87ddbfbe9d6a3bb5b703c22c02f6af80a802735"
+                    "url": "https://github.com/libarchive/libarchive/releases/download/v3.7.5/libarchive-3.7.5.tar.xz",
+                    "sha256": "ca74ff8f99dd40ab8a8274424d10a12a7ec3f4428dd35aee9fdda8bdb861b570"
                 }
             ]
         },
