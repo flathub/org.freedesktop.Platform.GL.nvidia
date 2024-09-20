@@ -45,7 +45,7 @@
         {
             "cleanup": ["/include", "/share"],
             "name": "libarchive",
-            "config-opts": [ "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
+            "config-opts": [ "--disable-dependency-tracking", "--disable-shared", "--enable-static", "--disable-xattr", "--disable-acl",
                              "--without-bz2lib", "--without-iconv", "--without-lz4", "--without-lzo2", "--without-nettle",
                              "--without-openssl", "--without-xml2", "--without-expat", "--disable-bsdcat", "--disable-bsdcpio",
                              "--disable-bsdtar", "--disable-bsdunzip", "--without-libb2", "--without-cng", "--without-mbedtls"
