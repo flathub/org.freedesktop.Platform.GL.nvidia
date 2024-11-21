@@ -14,7 +14,7 @@ TESLA_VERSIONS="550.90.12 550.54.15 535.216.01 535.183.06 535.183.01 535.161.08 
 # NVIDIA sometimes publishes separate drivers just for CUDA that aren't available anywhere else
 # You need to manually create an entry in `data/` for this version, since these drivers exist
 # only at https://developer.nvidia.com/cuda-toolkit-archive for a specific CUDA version
-CUDA_VERSIONS="555.42.06 545.23.08"
+CUDA_VERSIONS="560.35.05 555.42.06 545.23.08"
 
 # TODO: When do we drop these?
 # Probably never: https://ahayzen.com/direct/flathub_downloads_only_nvidia_runtimes.txt
