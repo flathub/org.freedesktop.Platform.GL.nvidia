@@ -201,7 +201,8 @@ should_extract (struct archive_entry *entry)
   if (strstr (path, "egl-wayland") ||
       strstr (path, "egl-gbm") ||
       strstr (path, "egl-xcb") ||
-      strstr (path, "egl-xlib"))
+      strstr (path, "egl-xlib") ||
+      strstr (path, "libnvidia-api"))
     {
       if (is_compat32)
         archive_entry_set_pathname (entry, path);
