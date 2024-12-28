@@ -175,17 +175,15 @@ should_extract (struct archive_entry *entry)
       return 1;
     }
 
-#ifdef __i386__
   /* Nvidia no longer has 32bit drivers so we are getting
    * the 32bit compat libs from the 64bit drivers */
-  if (nvidia_major_version > 390)
+  if (strcmp (ARCH, "i386") == 0 && nvidia_major_version > 390)
     {
       if (!has_prefix (path, "32/"))
         return 0;
       is_compat32 = 1;
       path += 3;
     }
-#endif
 
   /* Skip these as we're using GLVND on majod > 367*/
   if (nvidia_major_version > 367 &&
