@@ -54,12 +54,9 @@ for VER in $DRIVER_VERSIONS; do
 
     sed -e "s/@@SDK_BRANCH@@/${SDK_BRANCH}/g" \
       -e "s/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g" \
-      -e "s/@@ARCH@@/${ARCH}/g" \
-      -e "s/@@TARGET_ARCH@@/${TARGET_ARCH}/g" \
+      -e "s/@@ARCH@@/${TARGET_ARCH}/g" \
       -e "s/@@NVIDIA_VERSION@@/${NVIDIA_VERSION}/g" \
-      -e "s=@@EXTRA_DATA@@=${EXTRA_DATA}=g" \
       -e "s=@@NVIDIA_URL@@=${NVIDIA_URL}=g" \
-      -e "s/@@NVIDIA_ARCH@@/${TARGET_ARCH}/g" \
       -e "s/@@NVIDIA_SHA256@@/${NVIDIA_SHA256}/g" \
       "${EXT_PREFIX}.json.in" >"${EXT_PREFIX}-${NVIDIA_VERSION}.json"
 
