@@ -127,6 +127,10 @@ should_extract (struct archive_entry *entry)
   if (has_prefix (path, "./"))
     path += 2;
 
+  /* Ignore the '32' directory (32-bit only libraries) when extracting on non-GL32. */
+  if (strcmp (ARCH, "i386") != 0 && has_prefix (path, "32/"))
+    return 0;
+
   if (strcmp (path, "nvidia_icd.json") == 0 || strcmp (path, "nvidia_icd.json.template") == 0)
     {
       archive_entry_set_pathname (entry, "./vulkan/icd.d/nvidia_icd.json");
