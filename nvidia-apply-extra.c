@@ -182,6 +182,12 @@ should_extract (struct archive_entry *entry)
       archive_entry_set_pathname (entry, new_path);
       return 1;
     }
+  if (strcmp (path, "nvoptix.bin") == 0)
+    {
+      snprintf (new_path, sizeof new_path, "./share/nvidia/%s", path);
+      archive_entry_set_pathname (entry, new_path);
+      return 1;
+    }
 
 libs_only:
   /* Nvidia no longer has 32bit drivers so we are getting
