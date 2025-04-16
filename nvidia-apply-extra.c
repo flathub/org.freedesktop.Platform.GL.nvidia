@@ -131,10 +131,6 @@ should_extract (struct archive_entry *entry)
   if (strcmp (ARCH, "i386") != 0 && has_prefix (path, "32/"))
     return 0;
 
-  /* Extract just library files when on GL32. */
-  if (strcmp (ARCH, "i386") == 0)
-    goto libs_only;
-
   if (strcmp (path, "nvidia_icd.json") == 0 || strcmp (path, "nvidia_icd.json.template") == 0)
     {
       archive_entry_set_pathname (entry, "./vulkan/icd.d/nvidia_icd.json");
@@ -189,7 +185,6 @@ should_extract (struct archive_entry *entry)
       return 1;
     }
 
-libs_only:
   /* Nvidia no longer has 32bit drivers so we are getting
    * the 32bit compat libs from the 64bit drivers */
   if (strcmp (ARCH, "i386") == 0 && nvidia_major_version > 390)
@@ -544,7 +539,7 @@ main (int argc, char *argv[])
       checked_symlink ("../libnvidia-allocator.so." NVIDIA_VERSION, "gbm/nvidia-drm_gbm.so");
     }
 
-  if (strcmp (ARCH, "i386") != 0 && nvidia_major_version >= 319)
+  if (nvidia_major_version >= 319)
     {
       checked_symlink ("nvidia-application-profiles-" NVIDIA_VERSION "-key-documentation",
                        "share/nvidia/nvidia-application-profiles-key-documentation");
@@ -559,16 +554,13 @@ main (int argc, char *argv[])
                        "libnvidia-tls.so." NVIDIA_VERSION);
     }
 
-  if (strcmp (ARCH, "i386") != 0)
-    {
-      mkdir ("OpenCL", 0755);
-      mkdir ("OpenCL/vendors", 0755);
-      create_file_with_content ("OpenCL/vendors/nvidia.icd", "libnvidia-opencl.so");
+  mkdir ("OpenCL", 0755);
+  mkdir ("OpenCL/vendors", 0755);
+  create_file_with_content ("OpenCL/vendors/nvidia.icd", "libnvidia-opencl.so");
 
-      if (nvidia_major_version > 340)
-        replace_string_in_file ("vulkan/icd.d/nvidia_icd.json",
-                                "__NV_VK_ICD__", "libGLX_nvidia.so.0");
-    }
+  if (nvidia_major_version > 340)
+    replace_string_in_file ("vulkan/icd.d/nvidia_icd.json",
+                            "__NV_VK_ICD__", "libGLX_nvidia.so.0");
 
   return 0;
 }
