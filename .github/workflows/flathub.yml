@@ -69,7 +69,6 @@ jobs:
             ghcr.io/flathub-infra/flatpak-builder-lint:latest \
             /bin/bash -c '
               just prepare-env
-              export SUBJECT="$(just _get_build_subject)"
               make
             '
 
