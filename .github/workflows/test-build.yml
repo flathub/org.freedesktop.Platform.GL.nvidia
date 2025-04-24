@@ -1,5 +1,8 @@
-name: build
-on: [push, pull_request]
+name: Test build
+on:
+  pull_request:
+    branches:
+      - main
 defaults:
   run:
     shell: bash
