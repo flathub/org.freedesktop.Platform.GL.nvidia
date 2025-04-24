@@ -55,7 +55,7 @@ jobs:
             -e REF \
             ghcr.io/flathub-infra/flatpak-builder-lint:latest \
             /bin/bash -c '
-              just checkout ${{ github.repository }} ${{ github.ref }}
+              just checkout https://github.com/${{ github.repository }} ${{ github.ref }}
             '
 
       - name: Build flatpak
