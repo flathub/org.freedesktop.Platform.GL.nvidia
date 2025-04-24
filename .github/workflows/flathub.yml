@@ -1,0 +1,83 @@
+name: Flathub build
+
+concurrency:
+  group: flathub-build
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set variables
+        run: |
+          REPO_TOKEN="$(jq -r '.inputs.flat_manager_token' $GITHUB_EVENT_PATH)"
+          echo "::add-mask::$REPO_TOKEN"
+          echo "REPO_TOKEN=$REPO_TOKEN" >> $GITHUB_ENV
+
+      - name: Create work directory
+        run: |
+          mkdir -p ${GITHUB_WORKSPACE}/work
+          chmod 777 ${GITHUB_WORKSPACE}/work
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /opt/ghc /usr/local/.ghcup || true
+          sudo rm -rf /opt/hostedtoolcache/CodeQL || true
+          sudo rm -rf /swapfile || true
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/share/dotnet /usr/share/swift
+          sudo rm -rf /usr/local/share/boost /usr/local/share/powershell
+          sudo rm -rf /usr/lib/google-cloud-sdk /usr/lib/jvm
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Download justfile
+        run: |
+          docker run --rm --privileged \
+            --entrypoint="" \
+            -v "${GITHUB_WORKSPACE}/work:/work" \
+            -w /work \
+            ghcr.io/flathub-infra/flatpak-builder-lint:latest \
+            curl https://raw.githubusercontent.com/flathub-infra/vorarbeiter/refs/heads/main/justfile -o justfile
+
+      - name: Checkout repository
+        run: |
+          docker run --rm --privileged \
+            --entrypoint="" \
+            -v "${GITHUB_WORKSPACE}/work:/work" \
+            -w /work \
+            -e REPO \
+            -e REF \
+            ghcr.io/flathub-infra/flatpak-builder-lint:latest \
+            /bin/bash -c '
+              just checkout $REPO $REF
+            '
+
+      - name: Build flatpak
+        run: |
+          docker run --rm --privileged \
+            --entrypoint="" \
+            -v "${GITHUB_WORKSPACE}/work:/work" \
+            -w /work \
+            -e APP_ID \
+            -e BRANCH \
+            ghcr.io/flathub-infra/flatpak-builder-lint:latest \
+            /bin/bash -c '
+              just prepare-env
+              export SUBJECT="$(just _get_build_subject)"
+              make
+            '
+
+      - name: Generate deltas
+        run: |
+          docker run --rm --privileged \
+            --entrypoint="" \
+            -v "${GITHUB_WORKSPACE}/work:/work" \
+            -w /work \
+            ghcr.io/flathub-infra/flatpak-builder-lint:latest \
+            just generate-deltas
