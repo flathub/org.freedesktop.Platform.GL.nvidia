@@ -11,7 +11,7 @@ if DRIVER_VERSIONS is None:
 
 versions = DRIVER_VERSIONS.split(" ")
 num_batches = math.ceil(len(versions) // 50)
-batch_size = 50
+batch_size = 30
 
 matrix = []
 for i in range(num_batches):
