@@ -13,12 +13,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Set variables
-        run: |
-          REPO_TOKEN="$(jq -r '.inputs.flat_manager_token' $GITHUB_EVENT_PATH)"
-          echo "::add-mask::$REPO_TOKEN"
-          echo "REPO_TOKEN=$REPO_TOKEN" >> $GITHUB_ENV
-
       - name: Create work directory
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/work
@@ -80,3 +74,18 @@ jobs:
             -w /work \
             ghcr.io/flathub-infra/flatpak-builder-lint:latest \
             just generate-deltas
+
+      - name: Upload and publish build
+        run: |
+          docker run --rm --privileged \
+            --entrypoint="" \
+            -v "${GITHUB_WORKSPACE}/work:/work" \
+            -w /work \
+            -e REPO_TOKEN=${{ secrets.REPO_TOKEN }} \
+            ghcr.io/flathub-infra/flatpak-builder-lint:latest \
+            /bin/bash -c '
+               flat-manager-client create https://hub.flathub.org stable --build-log-url https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} > build_url
+               flat-manager-client push $(<build_url) repo
+               flat-manager-client commit $(<build_url)
+               flat-manager-client publish $(<build_url)
+            '
