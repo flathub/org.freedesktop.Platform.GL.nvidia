@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC1091
-source ./versions.sh
-
 ARCH=$1
 REPO=$2
 EXPORT_ARGS=$3

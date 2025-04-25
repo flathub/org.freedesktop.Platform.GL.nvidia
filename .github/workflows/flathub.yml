@@ -10,8 +10,28 @@ on:
       - master
 
 jobs:
-  build:
+  setup-matrix:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up build matrix
+        id: set-matrix
+        run: |
+          source versions.sh
+          export DRIVER_VERSIONS
+          python3 setup-matrix.py
+
+  build:
+    needs: setup-matrix
+    name: Build batch ${{ matrix.id }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
+      fail-fast: true
     steps:
       - name: Create work directory
         run: |
@@ -63,9 +83,9 @@ jobs:
             ghcr.io/flathub-infra/flatpak-builder-lint:latest \
             /bin/bash -c '
               just prepare-env
+              export DRIVER_VERSIONS="${{ matrix.versions }}"
               make
             '
-
       - name: Generate deltas
         run: |
           docker run --rm --privileged \
