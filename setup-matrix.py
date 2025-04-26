@@ -1,27 +1,23 @@
 #!/usr/bin/env python
 
 import json
-import math
 import os
+import sys
 
 DRIVER_VERSIONS = os.environ.get("DRIVER_VERSIONS")
 if DRIVER_VERSIONS is None:
     print("DRIVER_VERSIONS environment variable is not set")
-    exit(1)
+    sys.exit(1)
 
 versions = DRIVER_VERSIONS.split(" ")
-num_batches = math.ceil(len(versions) // 50)
 batch_size = 30
-
 matrix = []
-for i in range(num_batches):
-    start_idx = i * batch_size
-    end_idx = min(start_idx + batch_size, len(versions))
-    batch_versions = versions[start_idx:end_idx]
 
+for start_idx in range(0, len(versions), batch_size):
+    batch_versions = versions[start_idx : start_idx + batch_size]
     matrix.append(
         {
-            "id": i,
+            "id": start_idx // batch_size,
             "versions": " ".join(batch_versions),
         }
     )
