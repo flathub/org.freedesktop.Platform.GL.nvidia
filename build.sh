@@ -37,10 +37,13 @@ for VER in $DRIVER_VERSIONS; do
     NVIDIA_URL=$(awk -F '::' '{print $2}' <<<"${EXTRA_DATA}")
 
     if test -z "${SUBJECT}"; then
-      SUBJECT="${VER}"
       if test -d '.git'; then
-        SUBJECT="${SUBJECT} ($(git rev-parse --short HEAD))"
+        _SUBJECT="$(git log -1 --pretty='%s (%h)')"
+      else
+        _SUBJECT="${VER}"
       fi
+    else
+      _SUBJECT="${SUBJECT}"
     fi
 
     if test "${TARGET_ARCH}" = 'i386'; then
@@ -60,7 +63,7 @@ for VER in $DRIVER_VERSIONS; do
     flatpak-builder -v --force-clean --ccache --sandbox --delete-build-dirs \
       --arch="${ARCH}" \
       --repo="${REPO}" \
-      --subject="${SUBJECT}" \
+      --subject="${_SUBJECT}" \
       ${FB_ARGS} ${EXPORT_ARGS} builddir "${EXT_PREFIX}-${NVIDIA_VERSION}.json"
 
     if test "${TARGET_ARCH}" = 'i386'; then
