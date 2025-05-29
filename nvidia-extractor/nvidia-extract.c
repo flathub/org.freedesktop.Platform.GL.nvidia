@@ -217,7 +217,8 @@ should_extract (struct archive_entry *entry)
       strstr (path, "egl-gbm") ||
       strstr (path, "egl-xcb") ||
       strstr (path, "egl-xlib") ||
-      strstr (path, "libnvidia-api"))
+      strstr (path, "libnvidia-api") ||
+      strstr (path, "libnvidia-nvvm70"))
     {
       snprintf (new_path, sizeof new_path, "./lib/%s", path);
       archive_entry_set_pathname (entry, new_path);
