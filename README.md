@@ -53,34 +53,15 @@ echo 'DRIVER_VERSIONS="560.35.03"' >> versions.sh
 flatpak run --command=make --env=FLATPAK_USER_DIR=$HOME/.local/share/flatpak org.flatpak.Builder
 ```
 
-**8\.** Create a local Flatpak remote named `nvidia-local`, pointing to the `repo/` directory:
+**8\.** Install the built drivers from the `./repo` directory:
 
 ```bash
-flatpak --user remote-add --no-gpg-verify nvidia-local repo/
+flatpak --user install ./repo org.freedesktop.Platform.GL.nvidia-560-35-03
+flatpak --user install ./repo org.freedesktop.Platform.GL32.nvidia-560-35-03 # 32-bit driver (if you built on x86_64)
 ```
 
-**9\.** Check what drivers you have in the repository:
+**9\.** *(Optional)* To free disk space, you can delete the following directories (this is safe, and will not uninstall your drivers):
 
 ```bash
-flatpak --user remote-ls nvidia-local
-```
-
-**10\.** Install the drivers accordingly, for example:
-
-```bash
-flatpak --user install nvidia-local org.freedesktop.Platform.GL.nvidia-560-35-03
-flatpak --user install nvidia-local org.freedesktop.Platform.GL32.nvidia-560-35-03 # 32-bit driver (if you built on x86_64)
-```
-
-**11\.** *(Optional)* If you want to free disk space, you can then disable the `nvidia-local` repository and delete the `repo` directory (this is safe, and will not uninstall your drivers):
-
-```bash
-flatpak --user remote-modify --disable nvidia-local
-rm -rf repo/
-```
-
-To free even more disk space, you can also delete the `.flatpak-builder` and `builddir` directories (this is also safe):
-
-```bash
-rm -rf .flatpak-builder/ builddir/
+rm -rf .flatpak-builder/ builddir/ repo/
 ```
