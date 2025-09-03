@@ -10,7 +10,7 @@ if DRIVER_VERSIONS is None:
     sys.exit(1)
 
 versions = DRIVER_VERSIONS.split(" ")
-batch_size = 30
+batch_size = 15
 matrix = []
 
 # Generate batches of driver versions for x86_64 / i386
