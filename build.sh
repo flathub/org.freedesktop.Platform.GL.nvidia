@@ -11,7 +11,7 @@ set -x
 
 EXT_PREFIX='org.freedesktop.Platform.GL.nvidia'
 SDK_BRANCH=1.4
-SDK_RUNTIME_VERSION=24.08
+SDK_RUNTIME_VERSION=25.08
 
 for VER in $DRIVER_VERSIONS; do
   if test "${ARCH}" = 'x86_64'; then
