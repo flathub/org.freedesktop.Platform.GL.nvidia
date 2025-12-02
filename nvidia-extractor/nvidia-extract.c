@@ -174,6 +174,11 @@ should_extract (struct archive_entry *entry)
       archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/20_nvidia_xlib.json");
       return 1;
     }
+  if (strcmp (path, "99_nvidia_wayland2.json") == 0)
+    {
+      archive_entry_set_pathname (entry, "./egl/egl_external_platform.d/99_nvidia_wayland2.json");
+      return 1;
+    }
   if (strcmp (path, "nvidia_icd_vksc.json") == 0)
     {
       archive_entry_set_pathname (entry, "./vulkansc/icd.d/nvidia_icd_vksc.json");
