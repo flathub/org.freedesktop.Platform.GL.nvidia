@@ -45,7 +45,7 @@ for VER in ${DRIVER_VERSIONS}; do
         if [ ${ARCH} == aarch64 ]; then
             if [ ${MAJOR_VER} -lt 470 ]; then
                 continue
-            elif [[ ${TESLA_VERSIONS} == *${VER}* ]]; then
+            elif [[ ${TESLA_VERSIONS} == *${VER}* ]] && [ ${MAJOR_VER} -lt 525 ]; then
                 continue
             elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
                 continue
