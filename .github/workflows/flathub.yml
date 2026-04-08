@@ -104,14 +104,6 @@ jobs:
               export DRIVER_VERSIONS="${{ matrix.versions }}"
               make
             '
-      - name: Generate deltas
-        run: |
-          docker run --rm --privileged \
-            --entrypoint="" \
-            -v "${GITHUB_WORKSPACE}/work:/work" \
-            -w /work \
-            ghcr.io/flathub-infra/flatpak-builder-lint:latest \
-            just generate-deltas
 
       - name: Upload and publish build
         run: |
