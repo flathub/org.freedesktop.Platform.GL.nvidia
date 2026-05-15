@@ -264,6 +264,7 @@ extract (int fd)
 
   a = archive_read_new ();
   ext = archive_write_disk_new ();
+  archive_write_disk_set_options (ext, ARCHIVE_EXTRACT_SECURE_NODOTDOT | ARCHIVE_EXTRACT_SECURE_SYMLINKS);
   archive_read_support_format_tar (a);
   archive_read_support_filter_xz (a);
   archive_read_support_filter_gzip (a);
@@ -444,10 +445,10 @@ replace_string_in_file (const char *path,
       memmove (new_buffer, buffer, idx);
       new_buffer[idx] = '\0';
 
-      strcat (new_buffer, replacement);
+      strcat_s (new_buffer, new_len, replacement);
       idx += strlen (string);
 
-      strcat (new_buffer, buffer + idx);
+      strcat_s (new_buffer, new_len, buffer + idx);
 
       fseek (f, 0, SEEK_SET);
       if (fwrite (new_buffer, 1, new_len - 1, f) != new_len - 1)
