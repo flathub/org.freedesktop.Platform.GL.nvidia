@@ -445,10 +445,10 @@ replace_string_in_file (const char *path,
       memmove (new_buffer, buffer, idx);
       new_buffer[idx] = '\0';
 
-      strcat_s (new_buffer, new_len, replacement);
+      strcat (new_buffer, replacement);
       idx += strlen (string);
 
-      strcat_s (new_buffer, new_len, buffer + idx);
+      strcat (new_buffer, buffer + idx);
 
       fseek (f, 0, SEEK_SET);
       if (fwrite (new_buffer, 1, new_len - 1, f) != new_len - 1)
