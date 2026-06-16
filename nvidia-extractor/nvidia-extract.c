@@ -441,13 +441,14 @@ replace_string_in_file (const char *path,
         die ("out of memory");
 
       idx = p - buffer;
-      memmove (new_buffer, buffer, idx);
-      new_buffer[idx] = '\0';
+      size_t repl_len = strlen (replacement);
+      size_t str_len = strlen (string);
+      size_t tail_len = len - idx - str_len;
 
-      strcat (new_buffer, replacement);
-      idx += strlen (string);
-
-      strcat (new_buffer, buffer + idx);
+      memcpy (new_buffer, buffer, idx);
+      memcpy (new_buffer + idx, replacement, repl_len);
+      memcpy (new_buffer + idx + repl_len, buffer + idx + str_len, tail_len);
+      new_buffer[new_len - 1] = '\0';
 
       fseek (f, 0, SEEK_SET);
       if (fwrite (new_buffer, 1, new_len - 1, f) != new_len - 1)
