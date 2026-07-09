@@ -264,6 +264,7 @@ extract (int fd)
 
   a = archive_read_new ();
   ext = archive_write_disk_new ();
+  archive_write_disk_set_options (ext, ARCHIVE_EXTRACT_SECURE_NODOTDOT | ARCHIVE_EXTRACT_SECURE_SYMLINKS);
   archive_read_support_format_tar (a);
   archive_read_support_filter_xz (a);
   archive_read_support_filter_gzip (a);
