@@ -50,9 +50,9 @@ for VER in ${DRIVER_VERSIONS}; do
         if [ ${ARCH} == aarch64 ]; then
             if [ ${MAJOR_VER} -lt 470 ]; then
                 continue
-            elif [[ ${TESLA_VERSIONS} == *${VER}* ]] && [ ${MAJOR_VER} -lt 525 ]; then
+            elif [[ " ${TESLA_VERSIONS} " == *" ${VER} "* ]] && [ ${MAJOR_VER} -lt 525 ]; then
                 continue
-            elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
+            elif [[ " ${VULKAN_VERSIONS} " == *" ${VER} "* ]]; then
                 continue
             fi
         fi
@@ -61,7 +61,7 @@ for VER in ${DRIVER_VERSIONS}; do
 
         # Setup URL string and download driver
         rm -f dl
-        if [[ ${TESLA_VERSIONS} == *${VER}* ]]; then
+        if [[ " ${TESLA_VERSIONS} " == *" ${VER} "* ]]; then
             echo '(Tesla)'
             if [ ${MAJOR_VER} -eq 410 ] && [ ${MINOR_VER} -eq 129 ]; then
                 URL=https://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}-diagnostic.run
@@ -75,7 +75,7 @@ for VER in ${DRIVER_VERSIONS}; do
                 echo ${URL}
                 exit 1
             fi
-        elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
+        elif [[ " ${VULKAN_VERSIONS} " == *" ${VER} "* ]]; then
             echo '(Vulkan)'
             VULKAN_VER=${VER//./}
             URL=https://developer.nvidia.com/downloads/vulkan-beta-${VULKAN_VER}-linux
@@ -86,7 +86,7 @@ for VER in ${DRIVER_VERSIONS}; do
                     exit 1
                 fi
             fi
-        elif [[ ${CUDA_VERSIONS} == *${VER}* ]]; then
+        elif [[ " ${CUDA_VERSIONS} " == *" ${VER} "* ]]; then
             echo '(CUDA)'
             URL=https://github.com/flathub/org.freedesktop.Platform.GL.nvidia/releases/download/cuda/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
             if ! _curl ${URL}; then
