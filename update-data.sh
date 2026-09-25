@@ -4,6 +4,11 @@ source ./versions.sh
 
 set -e
 
+_curl () {
+    echo "Downloading: ${1}"
+    curl -f -L -o dl "${1}"
+}
+
 for VER in ${DRIVER_VERSIONS}; do
     for ARCH in x86_64 i386 aarch64; do
         F="data/nvidia-${VER}-${ARCH}.data"
@@ -64,7 +69,7 @@ for VER in ${DRIVER_VERSIONS}; do
             else
                 URL=https://us.download.nvidia.com/tesla/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
             fi
-            if ! curl -f -o dl ${URL}; then
+            if ! _curl ${URL}; then
                 echo "Unable to find URL for version ${VER}, arch ${ARCH}"
                 echo ${URL}
                 exit 1
@@ -72,26 +77,26 @@ for VER in ${DRIVER_VERSIONS}; do
         elif [[ ${VULKAN_VERSIONS} == *${VER}* ]]; then
             VULKAN_VER=${VER//./}
             URL=https://developer.nvidia.com/downloads/vulkan-beta-${VULKAN_VER}-linux
-            if ! curl -f -L -o dl ${URL}; then
+            if ! _curl ${URL}; then
                 URL=https://developer.nvidia.com/downloads/assets/gameworks/downloads/secure/Vulkan_Beta_Drivers/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
-                if ! curl -f -L -o dl ${URL}; then
+                if ! _curl ${URL}; then
                     echo "Unable to find URL for version ${VER}, arch ${ARCH}"
                     exit 1
                 fi
             fi
         elif [[ ${CUDA_VERSIONS} == *${VER}* ]]; then
             URL=https://github.com/flathub/org.freedesktop.Platform.GL.nvidia/releases/download/cuda/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
-            if ! curl -f -L -o dl ${URL}; then
+            if ! _curl ${URL}; then
                 echo "Unable to find URL for version ${VER}, arch ${ARCH}"
                 exit 1
             fi
         else
             URL=https://us.download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
-            if ! curl -f -o dl ${URL}; then
+            if ! _curl ${URL}; then
                 URL=https://us.download.nvidia.com/XFree86/${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
-                if ! curl -f -o dl ${URL}; then
+                if ! _curl ${URL}; then
                     URL=https://download.nvidia.com/XFree86/Linux-${NVIDIA_ARCH}/${VER}/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}${SUFFIX}.run
-                    if ! curl -f -o dl ${URL}; then
+                    if ! _curl ${URL}; then
                         echo "Unable to find URL for version ${VER}, arch ${ARCH}"
                         exit 1
                     fi
