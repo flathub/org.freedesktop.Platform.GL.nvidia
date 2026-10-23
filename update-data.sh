@@ -78,9 +78,9 @@ for VER in ${DRIVER_VERSIONS}; do
         elif [[ " ${VULKAN_VERSIONS} " == *" ${VER} "* ]]; then
             echo '(Vulkan)'
             VULKAN_VER=${VER//./}
-            URL=https://developer.nvidia.com/downloads/vulkan-beta-${VULKAN_VER}-linux
+            URL=https://developer.nvidia.com/downloads/assets/gameworks/downloads/secure/Vulkan_Beta_Drivers/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
             if ! _curl ${URL}; then
-                URL=https://developer.nvidia.com/downloads/assets/gameworks/downloads/secure/Vulkan_Beta_Drivers/NVIDIA-Linux-${NVIDIA_ARCH}-${VER}.run
+                URL=https://developer.nvidia.com/downloads/vulkan-beta-${VULKAN_VER}-linux
                 if ! _curl ${URL}; then
                     echo "Unable to find URL for version ${VER}, arch ${ARCH}"
                     exit 1
