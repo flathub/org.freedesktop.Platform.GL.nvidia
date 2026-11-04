@@ -228,6 +228,7 @@ should_extract (struct archive_entry *entry)
       strstr (path, "egl-xcb") ||
       strstr (path, "egl-xlib") ||
       strstr (path, "libnvidia-api") ||
+      strstr (path, "libnvidia-ngx-builtin-dlssd") ||
       strstr (path, "libnvidia-nvvm70"))
     {
       snprintf (new_path, sizeof new_path, "./lib/%s", path);
@@ -244,7 +245,7 @@ should_extract (struct archive_entry *entry)
       return 1;
     }
 
-  if (has_suffix (path, ".dll"))
+  if (has_suffix (path, ".dll") || has_suffix (path, ".exe"))
     {
       snprintf (new_path, sizeof new_path, "./lib/nvidia/wine/%s", path);
       archive_entry_set_pathname (entry, new_path);
